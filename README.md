@@ -1,0 +1,2 @@
+# ejik
+Ejik Game 
