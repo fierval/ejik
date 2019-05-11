@@ -18,12 +18,15 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ejikTransform != null)
+        if (ejikTransform is null)
         {
-            var floatX = Mathf.Clamp(ejikTransform.position.x, minX, maxX);
-            var floatY = Mathf.Clamp(ejikTransform.position.y, minY, maxY);
-            var clampedPos = new Vector2(floatX, floatY);
-            transform.position = Vector2.Lerp(transform.position, clampedPos, speed);
+            return;
         }
+
+        var floatX = Mathf.Clamp(ejikTransform.position.x, minX, maxX);
+        var floatY = Mathf.Clamp(ejikTransform.position.y, minY, maxY);
+
+        var clampedPos = new Vector2(floatX, floatY);
+        transform.position = Vector2.Lerp(transform.position, clampedPos, speed);
     }
 }
