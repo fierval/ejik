@@ -2,22 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : GameObjectWithHealth
 {
     public float speed = 5;
     Rigidbody2D rb;
     Vector2 moveAmount;
     Animator anim;
-    public float health;
-
-    public void TakeDamage(int damageAmount)
-    {
-        health -= damageAmount;
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // Start is called before the first frame update
     void Start()

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : GameObjectWithHealth
 {
-    public int health;
-
     [HideInInspector]
     public Transform player;
 
@@ -14,15 +12,6 @@ public class Enemy : MonoBehaviour
     public float speed;
 
     public int damage;
-
-    public void TakeDamage(int damageAmount)
-    {
-        health -= damageAmount;
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // Start is called before the first frame update
     protected void Start()
