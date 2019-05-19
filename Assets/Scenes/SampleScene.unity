@@ -299,7 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316758070}
   - component: {fileID: 316758071}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: right_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 435630387}
   - component: {fileID: 435630388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eye_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851315970}
   - component: {fileID: 851315971}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eye_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -951,7 +951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1009254454}
   - component: {fileID: 1009254455}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arm_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,7 +1150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1224052717}
   - component: {fileID: 1224052718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 1249913332}
   - component: {fileID: 1249913329}
   - component: {fileID: 1249913333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ejik
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1272,6 +1272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  health: 3
 --- !u!4 &1249913331
 Transform:
   m_ObjectHideFlags: 0
@@ -1355,7 +1356,7 @@ GameObject:
   - component: {fileID: 1406315005}
   - component: {fileID: 1406315004}
   - component: {fileID: 1406315006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Raven
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1461,8 +1462,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   player: {fileID: 0}
-  speed: 2
+  timeBetweenAttacks: 3
+  speed: 5
+  damage: 1
   stopDistance: 1
+  attackSpeed: 2
 --- !u!1 &1409700030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,7 +1477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1409700031}
   - component: {fileID: 1409700032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: left_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1483273566}
   - component: {fileID: 1483273567}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arm_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1633,7 +1637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1484858128}
   - component: {fileID: 1484858129}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1712,7 +1716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1513235529}
   - component: {fileID: 1513235530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: leg_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1822,7 +1826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1780939634}
   - component: {fileID: 1780939635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: leg_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1902,7 +1906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1790444066}
   - component: {fileID: 1790444067}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1981,7 +1985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1930221295}
   - component: {fileID: 1930221296}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966386464}
   - component: {fileID: 1966386465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ejik_shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2199,6 +2203,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 2084626702689614260, guid: 729c2e3fc5c0ce04e97864293db45908,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2084626702689614262, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2253,6 +2262,20 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277090714, guid: 729c2e3fc5c0ce04e97864293db45908, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084626701291151350, guid: 729c2e3fc5c0ce04e97864293db45908,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084626702767587618, guid: 729c2e3fc5c0ce04e97864293db45908,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 729c2e3fc5c0ce04e97864293db45908, type: 3}

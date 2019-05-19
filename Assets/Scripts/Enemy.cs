@@ -9,7 +9,11 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public Transform player;
 
+    public float timeBetweenAttacks;
+
     public float speed;
+
+    public int damage;
 
     public void TakeDamage(int damageAmount)
     {

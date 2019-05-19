@@ -8,6 +8,16 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Vector2 moveAmount;
     Animator anim;
+    public float health;
+
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
