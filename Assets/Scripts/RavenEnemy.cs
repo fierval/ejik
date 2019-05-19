@@ -34,10 +34,9 @@ public class RavenEnemy : Enemy
         Vector2 originalPosition = transform.position;
         Vector2 targetPosition = player.position;
 
-        float fraction = 0;
-        while(fraction < 1)
+        
+        for (float fraction = 0; fraction < 1; fraction += Mathf.Clamp(Time.deltaTime * attackSpeed, 0.0001f, 1f))
         {
-            fraction += Mathf.Clamp(Time.deltaTime * attackSpeed, 0.0001f, 1f);
             float amount = fraction * (1 - fraction) * 4;
 
             transform.position = Vector2.Lerp(originalPosition, targetPosition, amount);
