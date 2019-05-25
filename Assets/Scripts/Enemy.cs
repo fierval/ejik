@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,7 +60,16 @@ public class Enemy : GameObjectWithHealth
             yield return null;
         }
 
-        player.GetComponent<Player>().TakeDamage(damage);
+        // avoid taking damage for the dead player
+        try
+        {
+            player.GetComponent<Player>().TakeDamage(damage);
+        }
+        catch (Exception)
+        {
+
+        }
+
 
     }
 
