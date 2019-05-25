@@ -41,6 +41,10 @@ public class Enemy : GameObjectWithHealth
 
     IEnumerator Attack()
     {
+        if (player == null)
+        {
+            yield break;
+        }
 
         Vector2 originalPosition = transform.position;
         Vector2 targetPosition = player.position;
@@ -55,6 +59,7 @@ public class Enemy : GameObjectWithHealth
         }
 
         player.GetComponent<Player>().TakeDamage(damage);
+
     }
 
 
