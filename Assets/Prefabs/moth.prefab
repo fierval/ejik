@@ -95,6 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   player: {fileID: 0}
+  attackSpeed: 2
+  stopDistance: 2
   timeBetweenAttacks: 3
   speed: 2
   damage: 1
