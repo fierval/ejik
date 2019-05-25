@@ -1432,10 +1432,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   player: {fileID: 0}
-  attackSpeed: 2
+  attackSpeed: 0
   stopDistance: 1
   timeBetweenAttacks: 3
-  speed: 3
+  speed: 0
   damage: 1
 --- !u!1 &1409700030
 GameObject:
@@ -2322,7 +2322,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 617684428, guid: c28de4365656d9c4b9705eea72493cd0, type: 3}
       propertyPath: timeBetweenSummons
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 617684428, guid: c28de4365656d9c4b9705eea72493cd0, type: 3}
+      propertyPath: enemyToSummon
+      value: 
+      objectReference: {fileID: 330848231815353529, guid: 2fa8f27318941a84691882be08802ad1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c28de4365656d9c4b9705eea72493cd0, type: 3}

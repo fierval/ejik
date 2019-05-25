@@ -17,6 +17,7 @@ public class Enemy : GameObjectWithHealth
     public float speed;
 
     public int damage;
+    bool facedPlayer = false;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -62,5 +63,25 @@ public class Enemy : GameObjectWithHealth
 
     }
 
+    protected void FacePlayer()
+    {
+        if(player == null) { return; }
 
+        var direction = transform.position - player.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // if this is the first time we are doing this
+        // add to the current rotation in the direction of the player
+        if (!facedPlayer)
+        {
+            transform.Rotate(new Vector3(0f, 0f, 180 + angle));
+        }
+        // we need to adjust our angle, not do a full rotation
+        else
+        {
+            transform.rotation = Quaternion.AngleAxis(180 + angle, Vector3.forward);
+        }
+
+        facedPlayer = true;
+    }
 }

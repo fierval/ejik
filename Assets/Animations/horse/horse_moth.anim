@@ -206,14 +206,6 @@ AnimationClip:
   - time: 0.33333334
     functionName: Summon
     data: 
-    objectReferenceParameter: {fileID: -7501201644240826356, guid: 8da1d9e38f4c4f74387cac231ed5874a,
-      type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.33333334
-    functionName: Summon
-    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
