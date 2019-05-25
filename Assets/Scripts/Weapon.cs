@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
         var direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
 
-        if (Input.GetMouseButton(0) && Time.time >= shotTime)
+        if (Input.GetMouseButton(0) || Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space) && Time.time >= shotTime)
         {
             Instantiate(projectile, shotPoint.position, transform.rotation);
             shotTime = Time.time + timeBetweenShots;
