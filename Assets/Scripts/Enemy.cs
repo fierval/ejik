@@ -23,7 +23,7 @@ public class Enemy : GameObjectWithHealth
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = PlayerManager.Instance.player.transform;
     }
 
     protected virtual void Update()
