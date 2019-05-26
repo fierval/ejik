@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class RavenEnemy : Enemy
 {
-    bool facingRight = true;
+    bool facingRight;
 
     protected override void Start()
     {
         base.Start();
-        FlipTowardsPlayer();
+        facingRight = player.position.x - transform.position.x > 0;
+        if(!facingRight)
+        {
+            transform.Rotate(Vector3.up, 180);
+        }
     }
     // Start is called before the first frame update
     // Update is called once per frame
