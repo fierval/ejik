@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1277090715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084626701291151351}
   - component: {fileID: 2084626701291151344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2084626702689614262}
   - component: {fileID: 2084626702689614261}
-  m_Layer: 0
+  - component: {fileID: -8170200137989760774}
+  m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084626702689614260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6422639, y: -5.0706096, z: 0}
+  m_LocalPosition: {x: -1.634, y: -4.474, z: 0}
   m_LocalScale: {x: 2.5916083, y: 2.5916083, z: 2.5916083}
   m_Children:
   - {fileID: 2084626701291151351}
@@ -160,6 +161,25 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 1277090715}
   timeBetweenShots: 0.5
+  swingDamage: 2
+  explosion: {fileID: 4646980594309443587, guid: 818040096994f504580ef9dc16bf0971,
+    type: 3}
+--- !u!70 &-8170200137989760774
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084626702689614260}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02502398, y: 0.8624938}
+  m_Size: {x: 0.550048, y: 1.8174503}
+  m_Direction: 0
 --- !u!1 &2084626702767587618
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084626702767587619}
   - component: {fileID: 2084626702767587628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

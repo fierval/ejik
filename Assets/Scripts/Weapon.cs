@@ -8,13 +8,9 @@ public class Weapon : MonoBehaviour
     public Transform shotPoint;
     public float timeBetweenShots;
 
+    public int swingDamage;
     float shotTime = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public GameObject explosion;
 
     // Update is called once per frame
     void Update()
@@ -28,4 +24,14 @@ public class Weapon : MonoBehaviour
             shotTime = Time.time + timeBetweenShots;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(swingDamage);
+            Instantiate(explosion, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
+        }
+    }
+
 }

@@ -27,11 +27,11 @@ public class Projectile : MonoBehaviour
         Instantiate(explosion, transform.position, Quaternion.identity);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.gameObject.tag == "Enemy")
         {
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             DestroyProjectile();
         }
     }
