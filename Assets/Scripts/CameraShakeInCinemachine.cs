@@ -16,6 +16,8 @@ public class CameraShakeInCinemachine : MonoBehaviour {
     public CinemachineVirtualCamera VirtualCamera;
     private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
     float playerHealth;
+    GameObject player;
+
     // Use this for initialization
     void Start()
     {
@@ -24,18 +26,22 @@ public class CameraShakeInCinemachine : MonoBehaviour {
         {
             virtualCameraNoise = VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
-        playerHealth = PlayerManager.Instance.player.GetComponent<Player>().health;
+        player = PlayerManager.Instance.player;
+        playerHealth = player.GetComponent<Player>().health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerManager.Instance.player.GetComponent<Player>().health < playerHealth)
+        if (player != null && player.GetComponent<Player>().health < playerHealth)
         {
             ShakeElapsedTime = ShakeDuration;
         }
 
-        playerHealth = PlayerManager.Instance.player.GetComponent<Player>().health;
+        if (player != null)
+        {
+            playerHealth = PlayerManager.Instance.player.GetComponent<Player>().health;
+        }
 
         // If the Cinemachine componet is not set, avoid update
         if (VirtualCamera != null && virtualCameraNoise != null)
