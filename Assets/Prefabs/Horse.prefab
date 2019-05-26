@@ -96,6 +96,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   player: {fileID: 0}
+  attackSpeed: 0
+  stopDistance: 0
   timeBetweenAttacks: 2
   speed: 10
   damage: 1
@@ -104,7 +106,7 @@ MonoBehaviour:
   minY: -5
   maxY: 4
   timeBetweenSummons: 5
-  enemyToSummon: {fileID: 239669143360310374, guid: 2fa8f27318941a84691882be08802ad1,
+  enemyToSummon: {fileID: 330848231815353529, guid: 2fa8f27318941a84691882be08802ad1,
     type: 3}
 --- !u!95 &3504789952698871487
 Animator:
