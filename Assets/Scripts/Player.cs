@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : GameObjectWithHealth
 {
@@ -8,6 +9,10 @@ public class Player : GameObjectWithHealth
     Rigidbody2D rb;
     Vector2 moveAmount;
     Animator anim;
+
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite blackHeart;
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +33,27 @@ public class Player : GameObjectWithHealth
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveAmount * Time.fixedDeltaTime);
+    }
+
+    public override void TakeDamage(int damageAmount)
+    {
+        base.TakeDamage(damageAmount);
+        UpdateHealthUI();
+    }
+
+    void UpdateHealthUI()
+    {
+        for(int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = blackHeart;
+            }
+
+        }
     }
 }

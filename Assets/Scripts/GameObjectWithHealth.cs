@@ -9,7 +9,7 @@ public class GameObjectWithHealth : MonoBehaviour
 {
     public float health;
 
-    public void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
         if (health <= 0)
