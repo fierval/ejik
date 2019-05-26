@@ -9,17 +9,17 @@ public class RavenEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-        FaceTowardsPlayer();
+        FlipTowardsPlayer();
     }
     // Start is called before the first frame update
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        FaceTowardsPlayer();
+        FlipTowardsPlayer();
     }
 
-    void FaceTowardsPlayer()
+    void FlipTowardsPlayer()
     {
         if (player == null) { return; }
         var xDir = player.position.x - transform.position.x;
