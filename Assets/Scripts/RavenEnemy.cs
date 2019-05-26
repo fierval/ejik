@@ -26,8 +26,8 @@ public class RavenEnemy : Enemy
 
         if (xDir > 0 && !facingRight || xDir < 0 && facingRight)
         {
-            transform.eulerAngles = 
-                new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
+            transform.Rotate(Vector3.up, 180);
+                
             facingRight = !facingRight;
         }
     }
