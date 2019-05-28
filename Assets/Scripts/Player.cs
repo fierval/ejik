@@ -15,8 +15,9 @@ public class Player : GameObjectWithHealth
     public Sprite blackHeart;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }

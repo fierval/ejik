@@ -21,8 +21,9 @@ public class Enemy : GameObjectWithHealth
     bool facedPlayer = false;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         player = PlayerManager.Instance.player.transform;
     }
 
@@ -47,6 +48,10 @@ public class Enemy : GameObjectWithHealth
         {
             yield break;
         }
+        else
+        {
+            player.GetComponent<Player>().TakeDamage(damage);
+        }
 
         Vector2 originalPosition = transform.position;
         Vector2 targetPosition = player.position;
@@ -59,18 +64,6 @@ public class Enemy : GameObjectWithHealth
             transform.position = Vector2.Lerp(originalPosition, targetPosition, amount);
             yield return null;
         }
-
-        // avoid taking damage for the dead player
-        try
-        {
-            player.GetComponent<Player>().TakeDamage(damage);
-        }
-        catch (Exception)
-        {
-
-        }
-
-
     }
 
     protected void FacePlayer()

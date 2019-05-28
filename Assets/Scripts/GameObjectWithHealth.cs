@@ -8,6 +8,14 @@ using UnityEngine;
 public class GameObjectWithHealth : MonoBehaviour
 {
     public float health;
+    public AudioClip takeDamageSound;
+    AudioSource takeDamageSource;
+
+    protected virtual void Start()
+    {
+        takeDamageSource = GetComponent<AudioSource>();
+        takeDamageSource.clip = takeDamageSound;
+    }
 
     public virtual void TakeDamage(int damageAmount)
     {
@@ -22,6 +30,10 @@ public class GameObjectWithHealth : MonoBehaviour
                 Instantiate(PlayerManager.Instance.enemyDeathEffect, transform.position, transform.rotation);
             }
 
+        }
+        else
+        {
+            takeDamageSource.Play();
         }
     }
 
