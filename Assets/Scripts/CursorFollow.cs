@@ -6,7 +6,7 @@ public class CursorFollow : MonoBehaviour
 {
     private void Start()
     {
-        Cursor.visible = false;
+       Cursor.visible = false;
     }
     // Update is called once per frame
     void Update()
