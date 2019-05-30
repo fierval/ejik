@@ -7,7 +7,15 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance { get; private set; }
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public GameObject player;
