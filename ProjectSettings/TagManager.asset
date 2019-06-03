@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Death Effect
+  - Player Health Slider
   layers:
   - Default
   - TransparentFX

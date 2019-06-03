@@ -10,10 +10,6 @@ public class Player : GameObjectWithHealth
     Vector2 moveAmount;
     Animator anim;
 
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite blackHeart;
-
     Slider healthSlider;
 
     // Start is called before the first frame update

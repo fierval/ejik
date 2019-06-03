@@ -538,16 +538,6 @@ MonoBehaviour:
   health: 5
   takeDamageSound: {fileID: 8300000, guid: e4526951e00a26a498672018ddc3d746, type: 3}
   speed: 5
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fullHeart: {fileID: -3574820651616021983, guid: a7720366915d28c4e8c653868f3a3d83,
-    type: 3}
-  blackHeart: {fileID: -9160987577138628238, guid: 91b7020de7ec3ff4f90b1db29dd99bf8,
-    type: 3}
 --- !u!50 &5836981518115633360
 Rigidbody2D:
   serializedVersion: 4
