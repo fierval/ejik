@@ -14,12 +14,17 @@ public class Player : GameObjectWithHealth
     public Sprite fullHeart;
     public Sprite blackHeart;
 
+    Slider healthSlider;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();
+        healthSlider.maxValue = health;
+        healthSlider.value = health;
     }
 
     // Update is called once per frame
@@ -40,21 +45,15 @@ public class Player : GameObjectWithHealth
     {
         base.TakeDamage(damageAmount);
         UpdateHealthUI();
+        if (health <= 0)
+        {
+            Destroy(healthSlider.gameObject, 1f);
+        }
     }
 
     void UpdateHealthUI()
     {
-        for(int i = 0; i < hearts.Length; i++)
-        {
-            if (i < health)
-            {
-                hearts[i].sprite = fullHeart;
-            }
-            else
-            {
-                hearts[i].sprite = blackHeart;
-            }
-
-        }
+        if (healthSlider == null) { return; }
+        healthSlider.value = health;
     }
 }
