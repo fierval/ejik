@@ -1804,7 +1804,7 @@ MonoBehaviour:
   enemy: {fileID: 7272264471119542600, guid: eb2e203330ec65c42ae72c6d735b4201, type: 3}
   spawnTime: 3
   maxInstantiations: 50
-  numberOfSourcePoints: 20
+  numberOfSourcePoints: 63
 --- !u!4 &1107142470
 Transform:
   m_ObjectHideFlags: 0
@@ -2177,6 +2177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyRadius
       value: 2.3571572
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
+        type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
