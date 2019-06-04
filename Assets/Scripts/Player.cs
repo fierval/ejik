@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class Player : GameObjectWithHealth
 {
     public float speed = 5;
+
+    [Tooltip("Radius within which no enemy initially appears")]
+    public float enemyRadius = 1;
+
     Rigidbody2D rb;
     Vector2 moveAmount;
     Animator anim;
