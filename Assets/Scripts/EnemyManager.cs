@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
 
     public int maxInstantiations = -1;
 
-    [Range(1, 20)]
+    [Range(1, 100)]
     [Tooltip("How many spawning sources to have")]
     public int numberOfSourcePoints = 1;
 
