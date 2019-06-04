@@ -9,14 +9,9 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemy;
     public float spawnTime = 5f;
 
-    List<Vector2> spawnPoints;
     [Tooltip("Negative value means infinite instantiations")]
 
     public int maxInstantiations = -1;
-
-    [Range(1, 100)]
-    [Tooltip("How many spawning sources to have")]
-    public int numberOfSourcePoints = 1;
 
     int curInstance;
 
@@ -27,17 +22,13 @@ public class EnemyManager : MonoBehaviour
     {
         player = PlayerManager.Instance.player.GetComponent<Player>();
         curInstance = 0;
-        GenerateRandomSpawnPoints();
+        UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 
         InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
-    private void GenerateRandomSpawnPoints()
+    private Vector2 GenerateRandomSpawnPoint()
     {
-        spawnPoints = new List<Vector2>();
-        // random point generator
-        var range = Enumerable.Range(0, numberOfSourcePoints);
-
         // different ranges
         var minLeftX = player.transform.position.x - 3 * player.enemyRadius;
         var maxLeftX = player.transform.position.x - player.enemyRadius;
@@ -60,19 +51,13 @@ public class EnemyManager : MonoBehaviour
 
         var squareRadius = player.enemyRadius * player.enemyRadius;
         
-        // make sure we start from a differnt random seed each time
-        UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
+        var xDirection = UnityEngine.Random.Range(0, 2) * 2;
+        var yDirection = UnityEngine.Random.Range(0, 2) * 2;
 
-        foreach (var i in range)
-        {
-            var xDirection = UnityEngine.Random.Range(0, 2) * 2;
-            var yDirection = UnityEngine.Random.Range(0, 2) * 2;
+        Vector2 v = new Vector2(UnityEngine.Random.Range(choicesX[xDirection], choicesX[xDirection + 1]),
+            UnityEngine.Random.Range(choicesY[yDirection], choicesY[yDirection + 1]));
 
-            Vector2 v = new Vector2(UnityEngine.Random.Range(choicesX[xDirection], choicesX[xDirection + 1]),
-                UnityEngine.Random.Range(choicesY[yDirection], choicesY[yDirection + 1]));
-
-            spawnPoints.Add(v);
-        }
+        return v;
     }
 
     void Spawn()
@@ -83,8 +68,8 @@ public class EnemyManager : MonoBehaviour
             || (maxInstantiations > 0 && curInstance >= maxInstantiations)) { return; }
 
         curInstance++;
-        int spawnPointIdx = UnityEngine.Random.Range(0, spawnPoints.Count);
-        var spawnPoint = spawnPoints[spawnPointIdx];
+        var spawnPoint = GenerateRandomSpawnPoint();
+        
         var enemyPos = enemy.GetComponent<Transform>();
 
         // start with the enemy rotation
