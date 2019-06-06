@@ -1912,7 +1912,7 @@ PrefabInstance:
     - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
       propertyPath: enemyRadius
-      value: 4.40138
+      value: 5.7814984
       objectReference: {fileID: 0}
     - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
