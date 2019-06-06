@@ -1,19 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class RavenEnemy : Enemy
 {
-    bool facingRight;
-
     protected override void Start()
     {
         base.Start();
-        facingRight = player.position.x - transform.position.x > 0;
-        if(!facingRight)
-        {
-            transform.Rotate(Vector3.up, 180);
-        }
     }
     // Start is called before the first frame update
     // Update is called once per frame
@@ -26,13 +20,14 @@ public class RavenEnemy : Enemy
     void FlipTowardsPlayer()
     {
         if (player == null) { return; }
-        var xDir = player.position.x - transform.position.x;
 
-        if (xDir > 0 && !facingRight || xDir < 0 && facingRight)
+        if(aiPath.desiredVelocity.x >= 0.01f)
         {
-            transform.Rotate(Vector3.up, 180);
-                
-            facingRight = !facingRight;
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if(aiPath.desiredVelocity.x <= - 0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
     }
 

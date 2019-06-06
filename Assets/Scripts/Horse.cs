@@ -5,6 +5,8 @@ using UnityEngine;
 public class Horse : Enemy
 {
     public float minX, maxX, minY, maxY;
+    public float speed;
+
     Vector2 targetPosition;
     Vector2 curPosition;
     Animator anim;
