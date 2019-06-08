@@ -73,7 +73,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05401385, y: 1.1163921}
+  m_Offset: {x: -0.05401385, y: 0.2557397}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -84,7 +84,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3961031, y: 2.4857216}
+  m_Size: {x: 1.3961031, y: 3.1691809}
   m_EdgeRadius: 0
 --- !u!114 &617684428
 MonoBehaviour:
@@ -151,7 +151,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2.1271558
+  MinDistance: 1.8866792
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -268,12 +268,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 2
+  radius: 1.5
   height: 0.01
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 0
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -344,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 2868169665712350399}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.023, y: 0.0040000007, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.6, z: 0}
   m_Children: []
   m_Father: {fileID: 2868169665310911355}
   m_RootOrder: 0
