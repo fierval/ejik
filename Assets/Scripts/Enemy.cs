@@ -25,13 +25,12 @@ public class Enemy : GameObjectWithHealth
     {
         base.Start();
         player = PlayerManager.Instance.player.transform;
-        stopDistance = PlayerManager.Instance.player.GetComponent<Player>().enemyRadius;
 
         try
         {
             GetComponent<AIDestinationSetter>().target = player.transform;
             aiPath = GetComponent<AIPath>();
-            aiPath.endReachedDistance = stopDistance;
+            stopDistance = aiPath.endReachedDistance;
         }
         catch (Exception)
         {

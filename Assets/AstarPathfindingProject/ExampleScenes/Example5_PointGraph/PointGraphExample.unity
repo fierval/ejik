@@ -809,7 +809,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 244}
   - 114: {fileID: 497}
-  - 114: {fileID: 123}
   m_Layer: 0
   m_Name: A*
   m_TagString: Untagged
@@ -849,18 +848,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  guid: b00f325862001140-36b2d0455165d4f7
 --- !u!1 &124
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,8 +935,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: .500000119
-  height: 2
   repathRate: .5
   canSearch: 1
   canMove: 1
@@ -958,19 +943,16 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  centerOffsetCompatibility: NaN
-  orientation: 0
-  enableRotation: 1
+  centerOffset: 1
+  rotationIn2D: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: .699999988
   pickNextWaypointDist: 1
   endReachedDistance: .100000001
   alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 0
+  slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
-  constrainInsideGraph: 0
 --- !u!4 &129
 Transform:
   m_ObjectHideFlags: 0
@@ -3306,7 +3288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAIIezekW2JXwEAAEgCAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlkdtuwjAMhl8F5Xog6GEtux0M7WIMcXgAJ3GLRZtUScooiHdfwkEw7crWn9/2Z+fEjNaOvfVObA41+oSxlx5bd80l3yhy3VSVpHCwNqBsoU0dDLPN5yQYxllURMOcQzrMCj6K+5hlnGcwTniCSRyP2dm7LYIR2zWU154OyhJlaFPDYULWgRJhXOqVimpyNgD12MGHode6WzyG2AsNDXQCbOAuoLLoldZiNFlsO0vCPsluS2K3/Od+lpcgqQ010eA1D71RtMbSPhA50+IF0+6uSHuo2vDQTy8cunGe94gf2qwaMBZnBprto1D5xdG6uZZ43/PL5+EM71opFI60CocoW5J/J7A4HmUJHwuecJQIw36SRyDTPMdUpBxzyS4I5L+IoFqggsrdL6UbVE8Ut59daFLuSuhVaeBnRsda24eTVKFXwiCq72uH+8EsGj/EbyqnkpzfFp0jVYZSdjqz8y9QSwMEFAAACAgAAAgh7GIvmrFtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSM9BRUEovSizIKAYKGII4pZkpIHa0krGxoblJkmVykklSakpqooGuiYVRYoqphUWqabJpUqpFilIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeQH5mXok7yGyl2FoAUEsBAi0AFAAACAgAAAgh7N6RbYlfAQAASAIAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAgh7GIvmrFtAAAAeAAAAAkAJAAAAAAAAAAAAAAArAEAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABkAgAAAAA=
+    dataString: UEsDBBQAAAgIAAAIIewjyFmnOwEAAAUCAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlkctuwjAQRX8l8rqgNI8m6ZoWdUMRjw8Y25PEIrEj2wEC4t9rJ1RQdTXWmTt3rsZXopWy5D24khW06B5kpTiaFZ7IS0B2QzeyvRR2+JCVkDjfaZCmVLr1guX+a+EFRRaVUZhTSMOspK/xDLOM0gyKhCaYxHFBbk5tEDSrd1BNnhaqCrm3aeG8EMaCZH5d6kgjWmGNDxaQsyuhY8O9XnwNvKGGgYHx+UtoDDrSG4wW63owgpknbGvBDpt/6me8AS56PxPN33LvjazXRhx9Iqt7HGOawxTpCE3vG7N0zKE66/Je8FPpbQfa4FJDVz8Gq17wv4Mkjl+zhBaMJhQ5QjhL8gh4mueYspRizsnoLNzlBTRrlNDY3wOoDuXDXN4/bq2EtNNiR7mG01JcWmUeSiFLtWUaUX5PDuMdbj9QSwMEFAAACAgAAAgh7BYsDkltAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPUs9RRUEovSizIKAYKGII4pZkpIHa0krGxoblJkmVykklSakpqooGuiYVRYoqphUWqabJpUqpFilIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeQH5mXok7yGyl2FoAUEsBAi0AFAAACAgAAAgh7CPIWac7AQAABQIAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAgh7BYsDkltAAAAeAAAAAkAJAAAAAAAAAAAAAAAiAEAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABAAgAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -3326,7 +3308,7 @@ MonoBehaviour:
   prioritizeGraphs: 0
   prioritizeGraphsLimit: 1
   colorSettings:
-    _SolidColor: {r: .117647059, g: .400000006, b: .788235307, a: .899999976}
+    _NodeConnection: {r: 0, g: 1, b: 0, a: .5}
     _UnwalkableNode: {r: 1, g: 0, b: 0, a: .5}
     _BoundsHandles: {r: .289999992, g: .453999996, b: .740999997, a: .899999976}
     _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: .5}
@@ -3370,6 +3352,7 @@ MonoBehaviour:
   heuristicScale: 1
   threadCount: 0
   maxFrameTime: 1
+  minAreaSize: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: .200000003
   euclideanEmbedding:
@@ -3394,7 +3377,7 @@ MonoBehaviour:
   detailedGizmos: 1
   startEndModifier:
     addPoints: 0
-    exactStartPoint: 4
+    exactStartPoint: 1
     exactEndPoint: 4
     useRaycasting: 0
     mask:
@@ -3403,8 +3386,6 @@ MonoBehaviour:
     useGraphRaycasting: 0
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
 --- !u!114 &499
 MonoBehaviour:
   m_ObjectHideFlags: 0

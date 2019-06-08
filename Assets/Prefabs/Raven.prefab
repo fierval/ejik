@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 7333706749356646868}
   - component: {fileID: 1401648436557536733}
   - component: {fileID: 8244190582833665837}
+  - component: {fileID: 7530932540486976701}
   m_Layer: 9
   m_Name: Raven
   m_TagString: Enemy
@@ -423,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.55
+  radius: 0.7
   height: 0.8
   repathRate: 0.5
   canSearch: 1
@@ -460,6 +461,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!114 &7530932540486976701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7272264471119542600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  radiusBackingField: 0.5
+  heightBackingField: 2
+  centerBackingField: 1
+  locked: 0
+  lockWhenNotMoving: 0
+  agentTimeHorizon: 2
+  obstacleTimeHorizon: 2
+  maxNeighbours: 5
+  layer: 1
+  collidesWith: 3
+  wallAvoidForce: 1
+  wallAvoidFalloff: 1
+  priority: 0.819
+  debug: 0
 --- !u!1 &7272264471191666703
 GameObject:
   m_ObjectHideFlags: 0

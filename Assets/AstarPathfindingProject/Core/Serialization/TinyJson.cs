@@ -337,15 +337,12 @@ namespace Pathfinding.Serialization {
 				}
 			}
 
-			// Note: calling LoadAll with an empty string will make it load the whole resources folder, which is probably a bad idea.
-			if (!string.IsNullOrEmpty(name)) {
-				// Try to load from resources
-				UnityEngine.Object[] objs = Resources.LoadAll(name, type);
+			// Try to load from resources
+			UnityEngine.Object[] objs = Resources.LoadAll(name, type);
 
-				for (int i = 0; i < objs.Length; i++) {
-					if (objs[i].name == name || objs.Length == 1) {
-						return objs[i];
-					}
+			for (int i = 0; i < objs.Length; i++) {
+				if (objs[i].name == name || objs.Length == 1) {
+					return objs[i];
 				}
 			}
 

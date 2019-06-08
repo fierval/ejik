@@ -390,8 +390,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218485644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.2445962, y: 1.5018933, z: 1.966422}
+  m_LocalPosition: {x: 0, y: -0.221, z: 0}
+  m_LocalScale: {x: 3.2445962, y: 1.4448214, z: 1.966422}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -552,7 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACAn+vZuCO8aQIAAA8FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWRbQiht9YhpId8TGgnF18Ua401yJJHkgMkw3/vSjbYdU+I9/bj7dPKX0QoW0PutNkYwR81B/J9QvyZfJv05AMc2U6rrfiES8yb4K70QSzEvDInNOKRT7O6AmdE/kPtpA+mCDZKFNpUa76DVFtnES6YtICU0c5nK4S+JuSIP9OVTznhKV760yeeVnRyxmMOyoEZhEazFV0m89ubZD2lN13aJSmZLRbxMoqTeD2N5qFAo3LJqhq4n6avk8y71Kjto3DOLsLPlGsphe1EEneqgwkpq22DI2IAFwyHDsqiWYJACWJXOj/CMP25KCy4TqFhpzth0L22LvmpW0srZvetsg8mG99pEcVBVVv08T9+GgW6MLp6uPSNqO/hSpHvX9kpZ9YNPB/CdwPpwaADk3v2LuGtBPWkN0Y3iiPpTONTGwvxXf/3OlpaQr7v8VbqCGzq3nE6uis/wzlMf0ylqN49NZu3wFbq4HjYCzB4N79QcNga25VA1Kv4Y+E32w3XqyPuhbEOqW5K5eW968b4ULIOnvlpGpdqoyDAnegaFJPu9IJl3PgKR9yg7Yi5Z/4hdc077vI+RikB7uMpHVEv+nC9LFvqwyPY8rlxUijoRXviCX1KtVLthg09uaRtG1OwfJC2awT/d7XIkhbFbZEALOYJpxSmnMYUiryIV8ucsoiTsHtC4ZxMvrRCO3vw1lRfXOGeXb4vk41hddh2bthhIz4rPbBcqEJvcwOgntsKV+FgsAm+S77mAg3agnNChfsmXxmROt8Dz66FsjDp+ugMy/oqGanFh3YeyUgaPigZOZPzX1BLAwQUAAAICAAAgJ/rpQDoA2wAAAB3AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9Kz0FFQSi9KLMgoBgoYgjilmSkgdrSSuUFamkWacWqqqYlxioFBqm6KgZFBalpympGlebJBomGKUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACAn+vZuCO8aQIAAA8FAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACAn+ulAOgDbAAAAHcAAAAJACQAAAAAAAAAAAAAALYCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAbQMAAAAA
+    dataString: UEsDBBQAAAgIAACAn+sB4c84ngIAAHYFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFtVF1v2jAU/SvIzwPlA0rZ2waUbVJbVDbtYemDG98QC8eO/FGgFf99104gKZuEFHOO78c5vvY74dLUkFulV5qze8WAfB4QvyafBoQG7olarhCOEeFGVWA1z7/IrfB7IwSd5IXS1ZJtYa6MNQgXVBhASivroyVC7wNywM9w5kOOuEqmfvWGq1k0OOEyB2lB97bGo1k0Tce3N+lyGN20YeegdDSZJNM4SZPlMB6HBE7mglY1sA1/gy5POm5D46aORJntDq8pV0Jw0zZJ7LEOHsxpbRxKxA2MUxQdOotHKQIl8G1pvYR++GNRGLBth5oeF1yje01e8lXZ0ueqqNk1nb1S4XylSZyErpqk9//wwzjQhVbVt3PdOPI1bMnz3RM95tTYnud9eNFrPRi0p2JHXwT8LkE+qJVWTjIkrXY+1BlIFt3fi7R5Cfmuw5tWr0BXd45HV2flNZyC+sNc8OrFU6NxA2yECo6HuQCNZ/MdGw5TY9oUiPoufhn4Sbf98WqJO66NRapVKX17L8ppv5Usg2dejbNzpSUEuG26BkmFPa4xjb0+wiuuV/aKuaP+ArXFW+58P65CAtztj6Iraq323WEZ+OGqeq24tBugOi97+Uyp9vdgykdnBZfQKfLEA5o4V1I242f+E7ZxuqB5L8zCwToNC2ppuAbYE04J64eioSFCOiH8QAYVPvkfVOF/z97kkmJdEWDyoGS4QB++z34Qto6zj2NOplFR3BYpwGScsiiCIYuSCIq8SGbTPKIxI+EecImeU7FuTGuPCidIdlokzvz5GRusNK3DzWOa7lf8rVK94+eyUJtcA8jHJsNFLGgsgm8EWzKOMjdgLZdh9sh7RoTKd8CyS6IsGLs8WE2zLktGav6qrEcyMg+PW0ZO5PQXUEsDBBQAAAgIAACAn+trBYFUbAAAAHcAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jPSUVBKL0osyCgGChiCOKWZKSB2tJK5QVqaRZpxaqqpiXGKgUGqboqBkUFqWnKakaV5skGiYYpSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAICf6wHhzzieAgAAdgUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAICf62sFgVRsAAAAdwAAAAkAJAAAAAAAAAAAAAAA6wIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAACiAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -563,7 +563,7 @@ MonoBehaviour:
   debugFloor: 0
   debugRoof: 1
   manualDebugFloorRoof: 0
-  showSearchTree: 0
+  showSearchTree: 1
   unwalkableNodeDebugSize: 0.3
   logPathResults: 1
   maxNearestNodeDistance: 100
@@ -616,7 +616,7 @@ MonoBehaviour:
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
-  maxFrameTime: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   euclideanEmbedding:
@@ -666,7 +666,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504318048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.19693, y: 0.04868284, z: -7.187498}
+  m_LocalPosition: {x: 7.1969295, y: -0.13693365, z: -7.187498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917690193}
@@ -939,7 +939,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 63.09961}
+  m_AnchoredPosition: {x: 0, y: 134.6}
   m_SizeDelta: {x: 407, y: 86.599976}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &692324866
@@ -1327,8 +1327,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1670, y: -825.6536}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -1676.38, y: -817.2}
+  m_SizeDelta: {x: 87.25, y: 83.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005260830
 MonoBehaviour:
@@ -1584,6 +1584,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1138796643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138796645}
+  - component: {fileID: 1138796644}
+  m_Layer: 0
+  m_Name: RVOSimulator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1138796644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138796643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1764de1de43cc4d19af52679d3eaae06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  desiredSimulationFPS: 20
+  workerThreads: 4
+  doubleBuffering: 0
+  symmetryBreakingBias: 0.1
+  movementPlane: 1
+  drawObstacles: 0
+--- !u!4 &1138796645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138796643}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1249913328 stripped
 GameObject:

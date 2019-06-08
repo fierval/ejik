@@ -37,6 +37,12 @@ namespace Pathfinding {
 		/// Updated at scanning time
 		/// </summary>
 		public GridGraph gridGraph { get; private set; }
+
+		/// <summary>
+		/// Shortcut to the first LayerGridGraph.
+		/// Updated at scanning time.
+		/// </summary>
+		public LayerGridGraph layerGridGraph { get; private set; }
 #endif
 
 #if !ASTAR_NO_POINT_GRAPH
@@ -47,6 +53,11 @@ namespace Pathfinding {
 		public PointGraph pointGraph { get; private set; }
 #endif
 
+		/// <summary>
+		/// Shortcut to the first RecastGraph.
+		/// Updated at scanning time.
+		/// </summary>
+		public RecastGraph recastGraph { get; private set; }
 
 		/// <summary>
 		/// All supported graph types.
@@ -62,11 +73,13 @@ namespace Pathfinding {
 		public static readonly System.Type[] DefaultGraphTypes = new System.Type[] {
 #if !ASTAR_NO_GRID_GRAPH
 			typeof(GridGraph),
+			typeof(LayerGridGraph),
 #endif
 #if !ASTAR_NO_POINT_GRAPH
 			typeof(PointGraph),
 #endif
 			typeof(NavMeshGraph),
+			typeof(RecastGraph),
 		};
 #endif
 
@@ -236,11 +249,14 @@ namespace Pathfinding {
 
 #if !ASTAR_NO_GRID_GRAPH
 			gridGraph = (GridGraph)FindGraphOfType(typeof(GridGraph));
+			layerGridGraph = (LayerGridGraph)FindGraphOfType(typeof(LayerGridGraph));
 #endif
 
 #if !ASTAR_NO_POINT_GRAPH
 			pointGraph = (PointGraph)FindGraphOfType(typeof(PointGraph));
 #endif
+
+			recastGraph = (RecastGraph)FindGraphOfType(typeof(RecastGraph));
 		}
 
 		/// <summary>Load from data from <see cref="file_cachedStartup"/></summary>
@@ -377,8 +393,7 @@ namespace Pathfinding {
 			// the graphs with the correct graph indexes
 			sr.SetGraphIndexOffset(gr.Count);
 
-			if (graphTypes == null) FindGraphTypes();
-			gr.AddRange(sr.DeserializeGraphs(graphTypes));
+			gr.AddRange(sr.DeserializeGraphs());
 			graphs = gr.ToArray();
 
 			sr.DeserializeEditorSettingsCompatibility();
@@ -414,14 +429,7 @@ namespace Pathfinding {
 #if !ASTAR_FAST_NO_EXCEPTIONS && !UNITY_WINRT && !UNITY_WEBGL
 			var graphList = new List<System.Type>();
 			foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies()) {
-				System.Type[] types = null;
-				try {
-					types = assembly.GetTypes();
-				} catch {
-					// Ignore type load exceptions and things like that.
-					// We might not be able to read all assemblies for some reason, but hopefully the relevant types exist in the assemblies that we can read
-					continue;
-				}
+				var types = assembly.GetTypes();
 
 				foreach (var type in types) {
 #if NETFX_CORE && !UNITY_EDITOR
@@ -527,10 +535,7 @@ namespace Pathfinding {
 			return graph;
 		}
 
-		/// <summary>
-		/// Adds a graph of type type to the <see cref="graphs"/> array.
-		/// See: runtime-graphs (view in online documentation for working links)
-		/// </summary>
+		/// <summary>Adds a graph of type type to the <see cref="graphs"/> array</summary>
 		public NavGraph AddGraph (System.Type type) {
 			NavGraph graph = null;
 

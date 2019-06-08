@@ -33,8 +33,11 @@ namespace Pathfinding.Util {
 		}
 
 		public static void Release (ref T obj) {
-			obj.OnEnterPool();
+			// obj will be set to null so we need to copy the reference
+			var tmp = obj;
+
 			ObjectPoolSimple<T>.Release(ref obj);
+			tmp.OnEnterPool();
 		}
 	}
 
