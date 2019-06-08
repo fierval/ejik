@@ -7,21 +7,33 @@ using System;
 public class EnemyManager : MonoBehaviour
 {
     public GameObject enemy;
+    // we'll keep track of the enemies
+    List<GameObject> enemies;
+
     public float spawnTime = 5f;
 
-    [Tooltip("Negative value means infinite instantiations")]
+    [Tooltip("At which point to pause spawning.")]
+    [Range(0, 20)]
+    public int pause;
 
-    public int maxInstantiations = -1;
+    [Tooltip("Resume spawning when we reach this value")]
+    [Range(0, 20)]
+    public int resume;
 
-    int curInstance;
+    [Tooltip("Are we allowed to re-spawn again")]
+    public bool respawn = true;
+    bool hasSpawned;
 
     Player player;
+    private bool spawningPaused;
 
     // Start is called before the first frame update
     void Start()
     {
         player = PlayerManager.Instance.player.GetComponent<Player>();
-        curInstance = 0;
+        enemies = new List<GameObject>();
+        hasSpawned = false;
+
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 
         InvokeRepeating("Spawn", spawnTime, spawnTime);
@@ -50,7 +62,7 @@ public class EnemyManager : MonoBehaviour
         var center = new Vector2(player.transform.position.x, player.transform.position.y);
 
         var squareRadius = player.enemyRadius * player.enemyRadius;
-        
+
         var xDirection = UnityEngine.Random.Range(0, 2) * 2;
         var yDirection = UnityEngine.Random.Range(0, 2) * 2;
 
@@ -62,17 +74,37 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn()
     {
+        enemies = enemies.Where(e => e != null).ToList();
 
         // don't spawn if the player is dead or we have reached our limit
-        if(player.health <= 0f 
-            || (maxInstantiations > 0 && curInstance >= maxInstantiations)) { return; }
+        if (player.health <= 0f) { return; }
 
-        curInstance++;
+        if (!respawn && hasSpawned) { return; }
+
+        if (enemies.Count >= pause)
+        {
+            // this will ensure we'll never re-spawn again
+            // if this is a non-respawnable object
+            hasSpawned = true;
+
+            spawningPaused = true;
+            return;
+        }
+
+        // when we recover after having saturated the scene with enemies
+        // wait until their number drops down to "resume" value
+        // set resume >= pause to never re-spawn again
+        if(spawningPaused && enemies.Count >= resume)
+        {
+            spawningPaused = false;
+            return;
+        }
+
         var spawnPoint = GenerateRandomSpawnPoint();
-        
+
         var enemyPos = enemy.GetComponent<Transform>();
 
         // start with the enemy rotation
-        Instantiate(enemy, spawnPoint, enemyPos.rotation);
+        enemies.Add(Instantiate(enemy, spawnPoint, enemyPos.rotation));
     }
 }
