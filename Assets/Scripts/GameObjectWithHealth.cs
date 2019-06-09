@@ -9,7 +9,7 @@ public class GameObjectWithHealth : MonoBehaviour
 {
     public float health;
     public AudioClip takeDamageSound;
-    AudioSource takeDamageSource;
+    protected AudioSource takeDamageSource;
 
     protected virtual void Start()
     {
@@ -24,9 +24,9 @@ public class GameObjectWithHealth : MonoBehaviour
         health -= damageAmount;
         if (health <= 0)
         {
-            Destroy(gameObject);
             if (deathEffect)
             {
+                Destroy(gameObject);
                 Instantiate(PlayerManager.Instance.enemyDeathEffect, transform.position, transform.rotation);
             }
 

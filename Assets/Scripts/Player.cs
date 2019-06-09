@@ -14,6 +14,8 @@ public class Player : GameObjectWithHealth
     Vector2 moveAmount;
     Animator anim;
 
+    public AudioClip deathSound;
+
     Slider healthSlider;
 
     // Start is called before the first frame update
@@ -47,7 +49,8 @@ public class Player : GameObjectWithHealth
         UpdateHealthUI();
         if (health <= 0)
         {
-            Destroy(healthSlider.gameObject, 1f);
+            takeDamageSource.clip = deathSound;
+            anim.SetTrigger("isDying");
         }
     }
 
@@ -55,5 +58,12 @@ public class Player : GameObjectWithHealth
     {
         if (healthSlider == null) { return; }
         healthSlider.value = health;
+    }
+
+    public void OnDeath()
+    {
+        takeDamageSource.Play();
+        Destroy(gameObject, 3f);
+        Destroy(healthSlider.gameObject, 1f);
     }
 }
