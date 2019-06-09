@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
+using AdvancedInspector;
 
+[AdvancedInspector]
 public class EnemyManager : MonoBehaviour
 {
+    [Inspect]
     public GameObject enemy;
     // we'll keep track of the enemies
     List<GameObject> enemies;
 
+    [Inspect]
     public float spawnTime = 5f;
 
-    [Tooltip("At which point to pause spawning.")]
-    [Range(0, 20)]
-    public int pause;
+    [Inspect, RangeValue(0, 20), Tooltip("At which point to pause spawning, and when to resume.")]
+    public AdvancedInspector.RangeInt resumePause = new AdvancedInspector.RangeInt(0, 20);
 
-    [Tooltip("Resume spawning when we reach this value")]
-    [Range(0, 20)]
-    public int resume;
-
-    [Tooltip("Are we allowed to re-spawn again")]
+    [Tooltip("Are we allowed to re-spawn once spawning is paused")]
+    [Inspect]
     public bool respawn = true;
     bool hasSpawned;
 
     Player player;
+
     private bool spawningPaused;
 
     // Start is called before the first frame update
@@ -81,7 +82,7 @@ public class EnemyManager : MonoBehaviour
 
         if (!respawn && hasSpawned) { return; }
 
-        if (enemies.Count >= pause)
+        if (enemies.Count >= resumePause.max)
         {
             // this will ensure we'll never re-spawn again
             // if this is a non-respawnable object
@@ -94,7 +95,7 @@ public class EnemyManager : MonoBehaviour
         // when we recover after having saturated the scene with enemies
         // wait until their number drops down to "resume" value
         // set resume >= pause to never re-spawn again
-        if(spawningPaused && enemies.Count >= resume)
+        if(spawningPaused && enemies.Count >= resumePause.min)
         {
             spawningPaused = false;
             return;
