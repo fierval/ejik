@@ -44,7 +44,6 @@ namespace Pathfinding {
 		/// </summary>
 		public float updateInterval;
 
-#if (!ASTAR_NO_RECAST_GRAPH || !ASTAR_NO_NAVMESH_GRAPH) && !AstarFree
 		/// <summary>Last time navmesh cuts were applied</summary>
 		float lastUpdateTime = float.NegativeInfinity;
 
@@ -279,14 +278,5 @@ namespace Pathfinding {
 				ListPool<NavmeshClipper>.Release(ref hasBeenUpdated);
 			}
 		}
-#else
-		internal class NavmeshUpdateSettings {
-			public NavmeshUpdateSettings(NavmeshBase graph) {}
-			public void OnRecalculatedTiles (NavmeshTile[] tiles) {}
-		}
-		internal void Update () {}
-		internal void OnEnable () {}
-		internal void OnDisable () {}
-#endif
 	}
 }

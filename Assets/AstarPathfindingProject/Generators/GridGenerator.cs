@@ -131,7 +131,7 @@ namespace Pathfinding {
 		}
 
 		public override int CountNodes () {
-			return nodes.Length;
+			return nodes != null ? nodes.Length : 0;
 		}
 
 		public override void GetNodes (System.Action<GraphNode> action) {
@@ -150,6 +150,21 @@ namespace Pathfinding {
 		/// </summary>
 		[JsonMember]
 		public InspectorGridMode inspectorGridMode = InspectorGridMode.Grid;
+
+		/// <summary>
+		/// Determines how the size of each hexagon is set in the inspector.
+		/// For hexagons the normal nodeSize field doesn't really correspond to anything specific on the hexagon's geometry, so this enum is used to give the user the opportunity to adjust more concrete dimensions of the hexagons
+		/// without having to pull out a calculator to calculate all the square roots and complicated conversion factors.
+		///
+		/// This field is only used in the graph inspector, the <see cref="nodeSize"/> field will always use the same internal units.
+		/// If you want to set the node size through code then you can use <see cref="ConvertHexagonSizeToNodeSize"/>.
+		///
+		/// See: <see cref="InspectorGridHexagonNodeSize"/>
+		/// See: <see cref="ConvertHexagonSizeToNodeSize"/>
+		/// See: <see cref="ConvertNodeSizeToHexagonSize"/>
+		/// </summary>
+		[JsonMember]
+		public InspectorGridHexagonNodeSize inspectorHexagonSizeMode = InspectorGridHexagonNodeSize.Width;
 
 		/// <summary>Width of the grid in nodes. See: SetDimensions</summary>
 		public int width;
@@ -549,6 +564,18 @@ namespace Pathfinding {
 		/// </summary>
 		public Int3 GraphPointToWorld (int x, int z, float height) {
 			return (Int3)transform.Transform(new Vector3(x+0.5f, height, z+0.5f));
+		}
+
+		public static float ConvertHexagonSizeToNodeSize (InspectorGridHexagonNodeSize mode, float value) {
+			if (mode == InspectorGridHexagonNodeSize.Diameter) value *= 1.5f/(float)System.Math.Sqrt(2.0f);
+			else if (mode == InspectorGridHexagonNodeSize.Width) value *= (float)System.Math.Sqrt(3.0f/2.0f);
+			return value;
+		}
+
+		public static float ConvertNodeSizeToHexagonSize (InspectorGridHexagonNodeSize mode, float value) {
+			if (mode == InspectorGridHexagonNodeSize.Diameter) value *= (float)System.Math.Sqrt(2.0f)/1.5f;
+			else if (mode == InspectorGridHexagonNodeSize.Width) value *= (float)System.Math.Sqrt(2.0f/3.0f);
+			return value;
 		}
 
 		public int Width {
@@ -1389,7 +1416,13 @@ namespace Pathfinding {
 			for (int i = 0; i < 8; i++) {
 				int nx = x + neighbourXOffsets[i];
 				int nz = z + neighbourZOffsets[i];
-				CalculateConnections(nx, nz);
+
+				// Check if the new position is inside the grid
+				// Bitwise AND (&) is measurably faster than &&
+				// (not much, but this code is hot)
+				if (nx >= 0 & nz >= 0 & nx < width & nz < depth) {
+					CalculateConnections(nx, nz);
+				}
 			}
 		}
 

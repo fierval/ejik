@@ -1308,7 +1308,16 @@ namespace Pathfinding {
 				helper.builder.DrawWireCube(CalculateTransform(), bounds, Color.white);
 			}
 
-			if (tiles != null) {
+			if (tiles != null && (showMeshSurface || showMeshOutline || showNodeConnections)) {
+				var baseHasher = new RetainedGizmos.Hasher(active);
+				baseHasher.AddHash(showMeshOutline ? 1 : 0);
+				baseHasher.AddHash(showMeshSurface ? 1 : 0);
+				baseHasher.AddHash(showNodeConnections ? 1 : 0);
+
+				int startTileIndex = 0;
+				var hasher = baseHasher;
+				var hashedNodes = 0;
+
 				// Update navmesh vizualizations for
 				// the tiles that have been changed
 				for (int i = 0; i < tiles.Length; i++) {
@@ -1318,30 +1327,44 @@ namespace Pathfinding {
 					if (tiles[i] == null) continue;
 
 					// Calculate a hash of the tile
-					var hasher = new RetainedGizmos.Hasher(active);
-					hasher.AddHash(showMeshOutline ? 1 : 0);
-					hasher.AddHash(showMeshSurface ? 1 : 0);
-					hasher.AddHash(showNodeConnections ? 1 : 0);
-
 					var nodes = tiles[i].nodes;
 					for (int j = 0; j < nodes.Length; j++) {
 						hasher.HashNode(nodes[j]);
 					}
+					hashedNodes += nodes.Length;
 
-					if (!gizmos.Draw(hasher)) {
-						using (var helper = gizmos.GetGizmoHelper(active, hasher)) {
-							if (showMeshSurface || showMeshOutline) CreateNavmeshSurfaceVisualization(tiles[i], helper);
-							if (showMeshSurface || showMeshOutline) CreateNavmeshOutlineVisualization(tiles[i], helper);
+					// Note: do not batch more than some large number of nodes at a time.
+					// Also do not batch more than a single "row" of the graph at once
+					// because otherwise a small change in one part of the graph could invalidate
+					// the caches almost everywhere else.
+					// When restricting the caches to row by row a change in a row
+					// will never invalidate the cache in another row.
+					if (hashedNodes > 1024 || (i % tileXCount) == tileXCount - 1 || i == tiles.Length - 1) {
+						if (!gizmos.Draw(hasher)) {
+							using (var helper = gizmos.GetGizmoHelper(active, hasher)) {
+								if (showMeshSurface || showMeshOutline) {
+									CreateNavmeshSurfaceVisualization(tiles, startTileIndex, i + 1, helper);
+									CreateNavmeshOutlineVisualization(tiles, startTileIndex, i + 1, helper);
+								}
 
-							if (showNodeConnections) {
-								for (int j = 0; j < nodes.Length; j++) {
-									helper.DrawConnections(nodes[j]);
+								if (showNodeConnections) {
+									for (int ti = startTileIndex; ti <= i; ti++) {
+										if (tiles[ti] == null) continue;
+
+										var tileNodes = tiles[ti].nodes;
+										for (int j = 0; j < tileNodes.Length; j++) {
+											helper.DrawConnections(tileNodes[j]);
+										}
+									}
 								}
 							}
 						}
-					}
+						gizmos.Draw(hasher);
 
-					gizmos.Draw(hasher);
+						startTileIndex = i + 1;
+						hasher = baseHasher;
+						hashedNodes = 0;
+					}
 				}
 			}
 
@@ -1349,25 +1372,36 @@ namespace Pathfinding {
 		}
 
 		/// <summary>Creates a mesh of the surfaces of the navmesh for use in OnDrawGizmos in the editor</summary>
-		void CreateNavmeshSurfaceVisualization (NavmeshTile tile, GraphGizmoHelper helper) {
+		void CreateNavmeshSurfaceVisualization (NavmeshTile[] tiles, int startTile, int endTile, GraphGizmoHelper helper) {
+			int numNodes = 0;
+
+			for (int i = startTile; i < endTile; i++) if (tiles[i] != null) numNodes += tiles[i].nodes.Length;
+
 			// Vertex array might be a bit larger than necessary, but that's ok
-			var vertices = ArrayPool<Vector3>.Claim(tile.nodes.Length*3);
-			var colors = ArrayPool<Color>.Claim(tile.nodes.Length*3);
+			var vertices = ArrayPool<Vector3>.Claim(numNodes*3);
+			var colors = ArrayPool<Color>.Claim(numNodes*3);
+			int offset = 0;
+			for (int i = startTile; i < endTile; i++) {
+				var tile = tiles[i];
+				if (tile == null) continue;
 
-			for (int j = 0; j < tile.nodes.Length; j++) {
-				var node = tile.nodes[j];
-				Int3 v0, v1, v2;
-				node.GetVertices(out v0, out v1, out v2);
-				vertices[j*3 + 0] = (Vector3)v0;
-				vertices[j*3 + 1] = (Vector3)v1;
-				vertices[j*3 + 2] = (Vector3)v2;
+				for (int j = 0; j < tile.nodes.Length; j++) {
+					var node = tile.nodes[j];
+					Int3 v0, v1, v2;
+					node.GetVertices(out v0, out v1, out v2);
+					int index = offset + j*3;
+					vertices[index + 0] = (Vector3)v0;
+					vertices[index + 1] = (Vector3)v1;
+					vertices[index + 2] = (Vector3)v2;
 
-				var color = helper.NodeColor(node);
-				colors[j*3 + 0] = colors[j*3 + 1] = colors[j*3 + 2] = color;
+					var color = helper.NodeColor(node);
+					colors[index + 0] = colors[index + 1] = colors[index + 2] = color;
+				}
+				offset += tile.nodes.Length * 3;
 			}
 
-			if (showMeshSurface) helper.DrawTriangles(vertices, colors, tile.nodes.Length);
-			if (showMeshOutline) helper.DrawWireTriangles(vertices, colors, tile.nodes.Length);
+			if (showMeshSurface) helper.DrawTriangles(vertices, colors, numNodes);
+			if (showMeshOutline) helper.DrawWireTriangles(vertices, colors, numNodes);
 
 			// Return lists to the pool
 			ArrayPool<Vector3>.Release(ref vertices);
@@ -1375,35 +1409,40 @@ namespace Pathfinding {
 		}
 
 		/// <summary>Creates an outline of the navmesh for use in OnDrawGizmos in the editor</summary>
-		static void CreateNavmeshOutlineVisualization (NavmeshTile tile, GraphGizmoHelper helper) {
+		static void CreateNavmeshOutlineVisualization (NavmeshTile[] tiles, int startTile, int endTile, GraphGizmoHelper helper) {
 			var sharedEdges = new bool[3];
 
-			for (int j = 0; j < tile.nodes.Length; j++) {
-				sharedEdges[0] = sharedEdges[1] = sharedEdges[2] = false;
+			for (int i = startTile; i < endTile; i++) {
+				var tile = tiles[i];
+				if (tile == null) continue;
 
-				var node = tile.nodes[j];
-				for (int c = 0; c < node.connections.Length; c++) {
-					var other = node.connections[c].node as TriangleMeshNode;
+				for (int j = 0; j < tile.nodes.Length; j++) {
+					sharedEdges[0] = sharedEdges[1] = sharedEdges[2] = false;
 
-					// Loop through neighbours to figure out which edges are shared
-					if (other != null && other.GraphIndex == node.GraphIndex) {
-						for (int v = 0; v < 3; v++) {
-							for (int v2 = 0; v2 < 3; v2++) {
-								if (node.GetVertexIndex(v) == other.GetVertexIndex((v2+1)%3) && node.GetVertexIndex((v+1)%3) == other.GetVertexIndex(v2)) {
-									// Found a shared edge with the other node
-									sharedEdges[v] = true;
-									v = 3;
-									break;
+					var node = tile.nodes[j];
+					for (int c = 0; c < node.connections.Length; c++) {
+						var other = node.connections[c].node as TriangleMeshNode;
+
+						// Loop through neighbours to figure out which edges are shared
+						if (other != null && other.GraphIndex == node.GraphIndex) {
+							for (int v = 0; v < 3; v++) {
+								for (int v2 = 0; v2 < 3; v2++) {
+									if (node.GetVertexIndex(v) == other.GetVertexIndex((v2+1)%3) && node.GetVertexIndex((v+1)%3) == other.GetVertexIndex(v2)) {
+										// Found a shared edge with the other node
+										sharedEdges[v] = true;
+										v = 3;
+										break;
+									}
 								}
 							}
 						}
 					}
-				}
 
-				var color = helper.NodeColor(node);
-				for (int v = 0; v < 3; v++) {
-					if (!sharedEdges[v]) {
-						helper.builder.DrawLine((Vector3)node.GetVertex(v), (Vector3)node.GetVertex((v+1)%3), color);
+					var color = helper.NodeColor(node);
+					for (int v = 0; v < 3; v++) {
+						if (!sharedEdges[v]) {
+							helper.builder.DrawLine((Vector3)node.GetVertex(v), (Vector3)node.GetVertex((v+1)%3), color);
+						}
 					}
 				}
 			}

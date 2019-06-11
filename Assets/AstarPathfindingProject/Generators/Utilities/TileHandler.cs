@@ -1,4 +1,4 @@
-#if !ASTAR_NO_RECAST_GRAPH || !ASTAR_NO_NAVMESH_GRAPH
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -1222,4 +1222,3 @@ namespace Pathfinding.Util {
 		}
 	}
 }
-#endif

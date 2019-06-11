@@ -136,6 +136,12 @@ namespace Pathfinding {
 			}
 		}
 
+		GUIContent[] hexagonSizeContents = {
+			new GUIContent("Hexagon Width", "Distance between two opposing sides on the hexagon"),
+			new GUIContent("Hexagon Diameter", "Distance between two opposing vertices on the hexagon"),
+			new GUIContent("Node Size", "Raw node size value, this doesn't correspond to anything particular on the hexagon."),
+		};
+
 		void DrawFirstSection (GridGraph graph) {
 			float prevRatio = graph.aspectRatio;
 
@@ -149,7 +155,17 @@ namespace Pathfinding {
 
 			DrawWidthDepthFields(graph, out newWidth, out newDepth);
 
-			var newNodeSize = EditorGUILayout.FloatField(new GUIContent("Node size", "The size of a single node. The size is the side of the node square in world units"), graph.nodeSize);
+			EditorGUI.BeginChangeCheck();
+			float newNodeSize;
+			if (graph.inspectorGridMode == InspectorGridMode.Hexagonal) {
+				graph.inspectorHexagonSizeMode = (InspectorGridHexagonNodeSize)EditorGUILayout.EnumPopup(new GUIContent("Hexagon dimension"), graph.inspectorHexagonSizeMode);
+				float hexagonSize = GridGraph.ConvertNodeSizeToHexagonSize(graph.inspectorHexagonSizeMode, graph.nodeSize);
+				hexagonSize = (float)System.Math.Round(hexagonSize, 5);
+				newNodeSize = GridGraph.ConvertHexagonSizeToNodeSize(graph.inspectorHexagonSizeMode, EditorGUILayout.FloatField(hexagonSizeContents[(int)graph.inspectorHexagonSizeMode], hexagonSize));
+			} else {
+				newNodeSize = EditorGUILayout.FloatField(new GUIContent("Node size", "The size of a single node. The size is the side of the node square in world units"), graph.nodeSize);
+			}
+			bool nodeSizeChanged = EditorGUI.EndChangeCheck();
 
 			newNodeSize = newNodeSize <= 0.01F ? 0.01F : newNodeSize;
 
@@ -159,7 +175,7 @@ namespace Pathfinding {
 				DrawIsometricField(graph);
 			}
 
-			if ((graph.nodeSize != newNodeSize && locked) || (newWidth != graph.width || newDepth != graph.depth) || prevRatio != graph.aspectRatio) {
+			if ((nodeSizeChanged && locked) || (newWidth != graph.width || newDepth != graph.depth) || prevRatio != graph.aspectRatio) {
 				graph.nodeSize = newNodeSize;
 				graph.SetDimensions(newWidth, newDepth, newNodeSize);
 
@@ -172,7 +188,7 @@ namespace Pathfinding {
 				AutoScan();
 			}
 
-			if ((graph.nodeSize != newNodeSize && !locked)) {
+			if ((nodeSizeChanged && !locked)) {
 				graph.nodeSize = newNodeSize;
 				graph.UpdateTransform();
 			}

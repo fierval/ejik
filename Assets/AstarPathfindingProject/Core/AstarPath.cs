@@ -26,13 +26,13 @@ using Thread = System.Threading.Thread;
 [HelpURL("http://arongranberg.com/astar/docs/class_astar_path.php")]
 public class AstarPath : VersionedMonoBehaviour {
 	/// <summary>The version number for the A* %Pathfinding Project</summary>
-	public static readonly System.Version Version = new System.Version(4, 2, 2);
+	public static readonly System.Version Version = new System.Version(4, 2, 8);
 
 	/// <summary>Information about where the package was downloaded</summary>
 	public enum AstarDistribution { WebsiteDownload, AssetStore };
 
 	/// <summary>Used by the editor to guide the user to the correct place to download updates</summary>
-	public static readonly AstarDistribution Distribution = AstarDistribution.AssetStore;
+	public static readonly AstarDistribution Distribution = AstarDistribution.WebsiteDownload;
 
 	/// <summary>
 	/// Which branch of the A* %Pathfinding Project is this release.
@@ -750,8 +750,6 @@ public class AstarPath : VersionedMonoBehaviour {
 
 	Pathfinding.Util.RetainedGizmos gizmos = new Pathfinding.Util.RetainedGizmos();
 
-	int lastRenderedFrame = -1;
-
 	/// <summary>Calls OnDrawGizmos on graph generators</summary>
 	private void OnDrawGizmos () {
 		// Make sure the singleton pattern holds
@@ -778,7 +776,7 @@ public class AstarPath : VersionedMonoBehaviour {
 
 		AstarProfiler.StartProfile("OnDrawGizmos");
 
-		if (workItems.workItemsInProgress || isScanning || Time.renderedFrameCount == lastRenderedFrame) {
+		if (workItems.workItemsInProgress || isScanning) {
 			// If updating graphs, graph info might not be valid right now
 			// so just draw the same thing as last frame.
 			// Also if the scene has multiple cameras (or in the editor if we have a scene view and a game view) we
@@ -804,7 +802,6 @@ public class AstarPath : VersionedMonoBehaviour {
 			}
 		}
 
-		lastRenderedFrame = Time.renderedFrameCount;
 		gizmos.FinalizeDraw();
 
 		AstarProfiler.EndProfile("OnDrawGizmos");

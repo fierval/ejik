@@ -40,7 +40,11 @@ namespace Pathfinding {
 			(BuildTargetGroup)24, /* WiiU */
 #endif
 #if UNITY_2018_2_OR_NEWER
-			(BuildTargetGroup)17, /// <summary>Tizen</summary>
+			(BuildTargetGroup)17, /* Tizen */
+#endif
+#if UNITY_2018_3_OR_NEWER
+			(BuildTargetGroup)18, /* PSP2 */
+			(BuildTargetGroup)23, /* Nintendo3DS */
 #endif
 		};
 

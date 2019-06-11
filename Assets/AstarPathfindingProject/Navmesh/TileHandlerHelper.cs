@@ -2,7 +2,6 @@ using Pathfinding.Util;
 using UnityEngine;
 
 namespace Pathfinding {
-#if !ASTAR_NO_RECAST_GRAPH || !ASTAR_NO_NAVMESH_GRAPH
 	/// <summary>
 	/// Helper for navmesh cut objects.
 	///
@@ -33,5 +32,4 @@ namespace Pathfinding {
 			AstarPath.active.navmeshUpdates.ForceUpdate();
 		}
 	}
-#endif
 }

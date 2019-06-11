@@ -336,19 +336,6 @@ namespace Pathfinding.Voxels {
 				maxDist = System.Math.Max(src[i], maxDist);
 			}
 
-#if ASTAR_DEBUGREPLAY && FALSE
-			DebugReplay.BeginGroup("Distance Field");
-			for (int z = wd-voxelArea.width; z >= 0; z -= voxelArea.width) {
-				for (int x = voxelArea.width-1; x >= 0; x--) {
-					CompactVoxelCell c = voxelArea.compactCells[x+z];
-
-					for (int i = (int)c.index, ci = (int)(c.index+c.count); i < ci; i++) {
-						DebugReplay.DrawCube(CompactSpanToVector(x, z/voxelArea.width, i), Vector3.one*cellSize, new Color((float)src[i]/maxDist, (float)src[i]/maxDist, (float)src[i]/maxDist));
-					}
-				}
-			}
-			DebugReplay.EndGroup();
-#endif
 
 			return maxDist;
 		}

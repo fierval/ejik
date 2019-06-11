@@ -261,9 +261,7 @@ namespace Pathfinding {
 			}
 
 			if (useGraphRaycasting) {
-#if !AstarFree && !ASTAR_NO_GRID_GRAPH
 				bool betweenNodeCenters = n1 != null && n2 != null;
-#endif
 				if (n1 == null) n1 = AstarPath.active.GetNearest(v1).node;
 				if (n2 == null) n2 = AstarPath.active.GetNearest(v2).node;
 
@@ -277,7 +275,6 @@ namespace Pathfinding {
 					}
 
 					var rayGraph = graph as IRaycastableGraph;
-#if !AstarFree && !ASTAR_NO_GRID_GRAPH
 					GridGraph gg = graph as GridGraph;
 					if (betweenNodeCenters && gg != null) {
 						// If the linecast is exactly between the centers of two nodes on a grid graph then a more optimized linecast can be used.
@@ -286,7 +283,6 @@ namespace Pathfinding {
 						// however this method never detect it as an obstacle (and that is very good for this component as it improves the simplification).
 						return !gg.Linecast(n1 as GridNodeBase, n2 as GridNodeBase);
 					} else
-#endif
 					if (rayGraph != null) {
 						return !rayGraph.Linecast(v1, v2, n1);
 					}

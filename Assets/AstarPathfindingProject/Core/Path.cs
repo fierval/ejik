@@ -63,7 +63,7 @@ namespace Pathfinding {
 		public OnPathDelegate immediateCallback;
 
 		/// <summary>Returns the state of the path in the pathfinding pipeline</summary>
-		internal PathState PipelineState { get; private set; }
+		public PathState PipelineState { get; private set; }
 		System.Object stateLock = new object ();
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace Pathfinding {
 		protected PathNode currentR;
 
 		/// <summary>How long it took to calculate this path in milliseconds</summary>
-		internal float duration;
+		public float duration;
 
 		/// <summary>Number of nodes this path has searched</summary>
 		internal int searchedNodes;
@@ -168,7 +168,7 @@ namespace Pathfinding {
 		public float heuristicScale = 1F;
 
 		/// <summary>ID of this path. Used to distinguish between different paths</summary>
-		internal ushort pathID { get; private set; }
+		public ushort pathID { get; private set; }
 
 		/// <summary>Target to use for H score calculation. Used alongside <see cref="hTarget"/>.</summary>
 		protected GraphNode hTargetNode;
@@ -351,7 +351,7 @@ namespace Pathfinding {
 
 		/// <summary>Returns penalty for the given tag.</summary>
 		/// <param name="tag">A value between 0 (inclusive) and 32 (exclusive).</param>
-		internal uint GetTagPenalty (int tag) {
+		public uint GetTagPenalty (int tag) {
 			return (uint)internalTagPenalties[tag];
 		}
 

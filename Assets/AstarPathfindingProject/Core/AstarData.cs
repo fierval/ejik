@@ -393,7 +393,8 @@ namespace Pathfinding {
 			// the graphs with the correct graph indexes
 			sr.SetGraphIndexOffset(gr.Count);
 
-			gr.AddRange(sr.DeserializeGraphs());
+			if (graphTypes == null) FindGraphTypes();
+			gr.AddRange(sr.DeserializeGraphs(graphTypes));
 			graphs = gr.ToArray();
 
 			sr.DeserializeEditorSettingsCompatibility();
@@ -429,7 +430,14 @@ namespace Pathfinding {
 #if !ASTAR_FAST_NO_EXCEPTIONS && !UNITY_WINRT && !UNITY_WEBGL
 			var graphList = new List<System.Type>();
 			foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies()) {
-				var types = assembly.GetTypes();
+				System.Type[] types = null;
+				try {
+					types = assembly.GetTypes();
+				} catch {
+					// Ignore type load exceptions and things like that.
+					// We might not be able to read all assemblies for some reason, but hopefully the relevant types exist in the assemblies that we can read
+					continue;
+				}
 
 				foreach (var type in types) {
 #if NETFX_CORE && !UNITY_EDITOR
@@ -535,7 +543,10 @@ namespace Pathfinding {
 			return graph;
 		}
 
-		/// <summary>Adds a graph of type type to the <see cref="graphs"/> array</summary>
+		/// <summary>
+		/// Adds a graph of type type to the <see cref="graphs"/> array.
+		/// See: runtime-graphs (view in online documentation for working links)
+		/// </summary>
 		public NavGraph AddGraph (System.Type type) {
 			NavGraph graph = null;
 

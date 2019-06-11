@@ -153,7 +153,7 @@ namespace Pathfinding {
 				if (orientation != OrientationMode.YAxisForward) {
 					// Check if the destination is above the head of the character or far below the feet of it
 					float yDifference;
-					movementPlane.ToPlane(destination, out yDifference);
+					movementPlane.ToPlane(destination - position, out yDifference);
 					var h = tr.localScale.y * height;
 					if (yDifference > h || yDifference < -h*0.5) return false;
 				}
@@ -185,9 +185,6 @@ namespace Pathfinding {
 
 		/// <summary>\copydoc Pathfinding::IAstarAI::canMove</summary>
 		bool IAstarAI.canMove { get { return canMove; } set { canMove = value; } }
-
-		/// <summary>\copydoc Pathfinding::IAstarAI::position</summary>
-		Vector3 IAstarAI.position { get { return tr.position; } }
 
 		/// <summary>
 		/// True if approaching the last waypoint in the current part of the path.
