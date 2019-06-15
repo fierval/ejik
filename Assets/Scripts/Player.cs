@@ -62,6 +62,7 @@ public class Player : GameObjectWithHealth
 
     public void OnDeath()
     {
+        Destroy(gameObject.GetComponentInChildren<Weapon>().gameObject);
         takeDamageSource.Play();
         Destroy(gameObject, 3f);
         Destroy(healthSlider.gameObject, 1f);
