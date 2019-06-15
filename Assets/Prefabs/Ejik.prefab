@@ -1,5 +1,88 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &693987803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 693987804}
+  - component: {fileID: 693987806}
+  - component: {fileID: 693987805}
+  m_Layer: 8
+  m_Name: Ejik Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &693987804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693987803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5836981518115633367}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &693987806
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693987803}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 2
+    height: 2
+  near clip plane: 0.3
+  far clip plane: 1
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5.7744017
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &693987805
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693987803}
+  m_Enabled: 1
 --- !u!1 &5836981516721872918
 GameObject:
   m_ObjectHideFlags: 0
@@ -25,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981516721872918}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.414134, y: 0.9318021, z: 0}
+  m_LocalPosition: {x: 0.46413395, y: 0.951802, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5836981518115633367}
@@ -105,7 +188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981517178592293}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.336484, y: 0.8929772, z: 0}
+  m_LocalPosition: {x: -0.28648403, y: 0.9129771, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5836981518115633367}
@@ -185,7 +268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981517337055505}
   m_LocalRotation: {x: -0, y: -0, z: -0.00095183856, w: 0.9999996}
-  m_LocalPosition: {x: 1.567154, y: -0.08953631, z: 0}
+  m_LocalPosition: {x: 1.617154, y: -0.28000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5836981518115633367}
@@ -264,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981517802644601}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.33, y: -0.9, z: 0}
+  m_LocalPosition: {x: -1.2800001, y: -0.88000005, z: 0}
   m_LocalScale: {x: 1.2244, y: 1.2244, z: 1.2244}
   m_Children: []
   m_Father: {fileID: 5836981518115633367}
@@ -344,7 +427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981517842085228}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.74, y: -2.3300002, z: 0}
+  m_LocalPosition: {x: 0.78999996, y: -2.3100002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5836981518115633367}
@@ -424,7 +507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981518080728776}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.049999952, y: 0.01999994, z: 0}
   m_LocalScale: {x: 0.96414, y: 0.96414, z: 0.96414}
   m_Children: []
   m_Father: {fileID: 5836981518115633367}
@@ -493,6 +576,7 @@ GameObject:
   - component: {fileID: 5836981518115633365}
   - component: {fileID: 5836981518115633361}
   - component: {fileID: 1249913334}
+  - component: {fileID: 1249913329}
   m_Layer: 8
   m_Name: Ejik
   m_TagString: Player
@@ -520,6 +604,7 @@ Transform:
   - {fileID: 5836981516721872919}
   - {fileID: 5836981518261156868}
   - {fileID: 5836981518551384566}
+  - {fileID: 693987804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -538,6 +623,8 @@ MonoBehaviour:
   health: 5
   takeDamageSound: {fileID: 8300000, guid: e4526951e00a26a498672018ddc3d746, type: 3}
   speed: 5
+  enemyRadius: 5.7814984
+  deathSound: {fileID: 8300000, guid: b9a5127607f767b4eb13c1d93c2edccb, type: 3}
 --- !u!50 &5836981518115633360
 Rigidbody2D:
   serializedVersion: 4
@@ -624,7 +711,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.8521918
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -700,6 +787,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1249913329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5836981518115633364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5a15028426e054280394ecffadf913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
+  agentParameters:
+    agentCameras:
+    - {fileID: 693987806}
+    agentRenderTextures: []
+    maxStep: 1000
+    resetOnDone: 1
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 1
 --- !u!1 &5836981518261156923
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981518646094421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.37, y: -2.41, z: 0}
+  m_LocalPosition: {x: -0.32, y: -2.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5836981518115633367}
@@ -879,12 +987,12 @@ PrefabInstance:
     - target: {fileID: 2084626702689614262, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.11
+      value: 2.1599998
       objectReference: {fileID: 0}
     - target: {fileID: 2084626702689614262, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.18
+      value: 0.19999994
       objectReference: {fileID: 0}
     - target: {fileID: 2084626702689614262, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}
@@ -954,6 +1062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084626702689614261, guid: 729c2e3fc5c0ce04e97864293db45908,
+        type: 3}
+      propertyPath: swingDamage
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2084626702767587618, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}
