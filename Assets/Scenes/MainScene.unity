@@ -1683,6 +1683,20 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5836981516865720612}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1249913336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249913328}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227f983571c573c4a8ea89f556c64432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resWidth: 700
+  resHeight: 400
 --- !u!1 &1587782909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,22 +2081,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
+        type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
       propertyPath: agentParameters.numberOfActionsBetweenDecisions
-      value: 8
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: agentParameters.maxStep
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 693987806, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: far clip plane
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 693987806, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
       propertyPath: orthographic size
-      value: 5.6662245
+      value: 5.588266
       objectReference: {fileID: 0}
-    - target: {fileID: 693987806, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: m_HDR
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 693987806, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: m_AllowMSAA
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 693987805, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}

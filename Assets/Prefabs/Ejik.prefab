@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 693987804}
   - component: {fileID: 693987806}
-  - component: {fileID: 693987805}
   m_Layer: 8
   m_Name: Ejik Camera
   m_TagString: Untagged
@@ -59,7 +58,7 @@ Camera:
   far clip plane: 1
   field of view: 60
   orthographic: 1
-  orthographic size: 5.7744017
+  orthographic size: 5.6662245
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -68,21 +67,13 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &693987805
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693987803}
-  m_Enabled: 1
 --- !u!1 &5836981516721872918
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +616,8 @@ MonoBehaviour:
   speed: 5
   enemyRadius: 5.7814984
   deathSound: {fileID: 8300000, guid: b9a5127607f767b4eb13c1d93c2edccb, type: 3}
+  isMLRun: 0
+  damageCoeff: 1
 --- !u!50 &5836981518115633360
 Rigidbody2D:
   serializedVersion: 4
@@ -807,7 +800,7 @@ MonoBehaviour:
     maxStep: 1000
     resetOnDone: 1
     onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
+    numberOfActionsBetweenDecisions: 8
 --- !u!1 &5836981518261156923
 GameObject:
   m_ObjectHideFlags: 0
