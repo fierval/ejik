@@ -11,14 +11,15 @@ public class EjikAgent : Agent
     // Start is called before the first frame update
     void Start()
     {
-        academy = FindObjectOfType<EjikAcademy>();
-        ejik = GetComponent<Player>();      
+        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
+        ejik = PlayerManager.Instance.player.GetComponent<Player>();      
     }
 
     public override void AgentReset()
     {
-        ejik.gameObject.transform.position = Vector3.zero;
-        academy.AcademyReset();
+        ejik.transform.position = Vector3.zero;
+        ejik.damageCoeff = academy.resetParameters["damageCoeff"];
+        ejik.health = academy.resetParameters["health"];
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)

@@ -39,7 +39,6 @@ public class Player : GameObjectWithHealth
         healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();
         healthSlider.maxValue = health;
         healthSlider.value = health;
-
     }
 
     // Update is called once per frame
