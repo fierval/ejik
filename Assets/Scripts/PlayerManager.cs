@@ -26,4 +26,5 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject player;
     public GameObject enemyDeathEffect;
+    public GameObject academy;
 }

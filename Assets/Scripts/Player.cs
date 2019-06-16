@@ -33,7 +33,7 @@ public class Player : GameObjectWithHealth
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        academy = FindObjectOfType<EjikAcademy>();
+        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
         isMLRun = academy != null && academy.isActiveAndEnabled;
 
         healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();

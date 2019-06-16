@@ -12,6 +12,15 @@ public class Weapon : MonoBehaviour
     float shotTime = 0;
     public GameObject explosion;
 
+    EjikAcademy academy;
+    bool isMLRun = false;
+
+    private void Start()
+    {
+        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
+        isMLRun = academy != null && academy.isActiveAndEnabled;
+    }
+
     // Update is called once per frame
     void Update()
     {
