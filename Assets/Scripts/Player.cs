@@ -12,6 +12,7 @@ public class Player : GameObjectWithHealth
     public float enemyRadius = 1;
 
     Rigidbody2D rb;
+
     Vector2 moveAmount;
     Animator anim;
 
@@ -44,10 +45,23 @@ public class Player : GameObjectWithHealth
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        moveAmount = moveInput.normalized * speed;
+        if (!isMLRun)
+        {
+            SetMoveAmount(CaptureInput());
+        }
+        anim.SetBool("isRunning", moveAmount != Vector2.zero);
+    }
 
-        anim.SetBool("isRunning", moveInput != Vector2.zero);
+    Vector2 CaptureInput()
+    {
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        return moveInput;
+    }
+
+
+    public void SetMoveAmount(Vector2 moveInput)
+    {
+        moveAmount = moveInput.normalized * speed;
     }
 
     private void FixedUpdate()

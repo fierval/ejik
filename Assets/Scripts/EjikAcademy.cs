@@ -20,6 +20,11 @@ public class EjikAcademy : Academy
             manager.resumePause.max = (int)resetParameters[$"max{manager.enemy.name}"];
         }
 
+    }
+
+    public override void AcademyReset()
+    {
+        base.AcademyReset();
         var ejik = player.GetComponent<Player>();
         ejik.damageCoeff = resetParameters["damageCoeff"];
         ejik.health = resetParameters["health"];
