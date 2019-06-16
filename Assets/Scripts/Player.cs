@@ -18,11 +18,12 @@ public class Player : GameObjectWithHealth
     public AudioClip deathSound;
 
     Slider healthSlider;
+
     EjikAcademy academy;
     [HideInInspector]
     public bool isMLRun;
-
-    float damageCoeff = 1f;
+    [HideInInspector]
+    public float damageCoeff = 1f;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -38,11 +39,6 @@ public class Player : GameObjectWithHealth
         healthSlider.maxValue = health;
         healthSlider.value = health;
 
-        if (isMLRun)
-        {
-            health = academy.resetParameters["health"];
-            damageCoeff = academy.resetParameters["damageCoeff"];
-        }
     }
 
     // Update is called once per frame

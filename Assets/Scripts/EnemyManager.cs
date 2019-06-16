@@ -37,35 +37,9 @@ public class EnemyManager : MonoBehaviour
 
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 
-        var academy = FindObjectOfType<EjikAcademy>();
-        bool isMLRun = academy != null && academy.isActiveAndEnabled;
-
-        float startTime = isMLRun ? 0 : spawnTime;
-
-        InvokeRepeating("Spawn", startTime, spawnTime);
+        InvokeRepeating("Spawn", 0, spawnTime);
 
         string minEnemy = string.Empty, maxEnemy = string.Empty;
-
-        // if we are in Unity environment allow 
-        // external control over the number of enemies
-        if (isMLRun)
-        {
-            switch (gameObject.name)
-            {
-                case "Horse":
-                    minEnemy = "minHorse";
-                    maxEnemy = "maxHorse";
-                    break;
-                case "Raven":
-                    minEnemy = "minRaven";
-                    maxEnemy = "maxRaven";
-                    break;
-            }
-
-            resumePause.min = (int)academy.resetParameters[minEnemy];
-            resumePause.max = (int)academy.resetParameters[maxEnemy];
-        }
-
     }
 
     private Vector2 GenerateRandomSpawnPoint()
