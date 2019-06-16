@@ -1816,6 +1816,14 @@ MonoBehaviour:
       value: 0.01
     - key: playerDeadReward
       value: -1
+    - key: minRaven
+      value: 3
+    - key: maxRaven
+      value: 6
+    - key: minHorse
+      value: 0
+    - key: maxHorse
+      value: 1
 --- !u!4 &1726231531
 Transform:
   m_ObjectHideFlags: 0
