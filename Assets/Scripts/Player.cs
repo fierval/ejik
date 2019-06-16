@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MLAgents;
 
 public class Player : GameObjectWithHealth
 {
@@ -17,6 +18,10 @@ public class Player : GameObjectWithHealth
     public AudioClip deathSound;
 
     Slider healthSlider;
+    EjikAcademy academy;
+    bool isMLRun;
+
+    float damageCoeff = 1f;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -24,9 +29,19 @@ public class Player : GameObjectWithHealth
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        academy = FindObjectOfType<EjikAcademy>();
+        isMLRun = academy != null;
+
         healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();
         healthSlider.maxValue = health;
         healthSlider.value = health;
+
+        if (isMLRun)
+        {
+            health = academy.resetParameters["health"];
+            damageCoeff = academy.resetParameters["damageCoeff"];
+        }
     }
 
     // Update is called once per frame
@@ -43,11 +58,13 @@ public class Player : GameObjectWithHealth
         rb.MovePosition(rb.position + moveAmount * Time.fixedDeltaTime);
     }
 
-    public override void TakeDamage(int damageAmount)
+    public override void TakeDamage(int damageAmount, float damageMult = 1f)
     {
-        base.TakeDamage(damageAmount);
+        base.TakeDamage(damageAmount, damageCoeff);
         UpdateHealthUI();
-        if (health <= 0)
+
+        // no theatrics if this is not an ML run
+        if (health <= 0 && !isMLRun)
         {
             takeDamageSource.clip = deathSound;
             anim.SetTrigger("isDying");
@@ -62,7 +79,10 @@ public class Player : GameObjectWithHealth
 
     public void OnDeath()
     {
-        Destroy(gameObject.GetComponentInChildren<Weapon>().gameObject);
+        // we don't just die if this is an ml run
+        if (isMLRun) { return; }
+
+        gameObject.GetComponentInChildren<Weapon>().gameObject.SetActive(false);
         takeDamageSource.Play();
         Destroy(gameObject, 3f);
         Destroy(healthSlider.gameObject, 1f);

@@ -17,11 +17,11 @@ public class GameObjectWithHealth : MonoBehaviour
         takeDamageSource.clip = takeDamageSound;
     }
 
-    public virtual void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount, float damageCoeff = 1f)
     {
         bool deathEffect = gameObject.tag == "Enemy";
         
-        health -= damageAmount;
+        health -= damageAmount * damageCoeff;
         if (health <= 0)
         {
             if (deathEffect)
