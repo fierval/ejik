@@ -19,7 +19,8 @@ public class Player : GameObjectWithHealth
 
     Slider healthSlider;
     EjikAcademy academy;
-    bool isMLRun;
+    [HideInInspector]
+    public bool isMLRun;
 
     float damageCoeff = 1f;
 
@@ -31,7 +32,7 @@ public class Player : GameObjectWithHealth
         anim = GetComponent<Animator>();
 
         academy = FindObjectOfType<EjikAcademy>();
-        isMLRun = academy != null;
+        isMLRun = academy != null && academy.isActiveAndEnabled;
 
         healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();
         healthSlider.maxValue = health;

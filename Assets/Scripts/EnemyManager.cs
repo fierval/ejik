@@ -37,7 +37,35 @@ public class EnemyManager : MonoBehaviour
 
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 
-        InvokeRepeating("Spawn", spawnTime, spawnTime);
+        var academy = FindObjectOfType<EjikAcademy>();
+        bool isMLRun = academy != null && academy.isActiveAndEnabled;
+
+        float startTime = isMLRun ? 0 : spawnTime;
+
+        InvokeRepeating("Spawn", startTime, spawnTime);
+
+        string minEnemy = string.Empty, maxEnemy = string.Empty;
+
+        // if we are in Unity environment allow 
+        // external control over the number of enemies
+        if (isMLRun)
+        {
+            switch (gameObject.name)
+            {
+                case "Horse":
+                    minEnemy = "minHorse";
+                    maxEnemy = "maxHorse";
+                    break;
+                case "Raven":
+                    minEnemy = "minRaven";
+                    maxEnemy = "maxRaven";
+                    break;
+            }
+
+            resumePause.min = (int)academy.resetParameters[minEnemy];
+            resumePause.max = (int)academy.resetParameters[maxEnemy];
+        }
+
     }
 
     private Vector2 GenerateRandomSpawnPoint()
@@ -95,7 +123,7 @@ public class EnemyManager : MonoBehaviour
         // when we recover after having saturated the scene with enemies
         // wait until their number drops down to "resume" value
         // set resume >= pause to never re-spawn again
-        if(spawningPaused && enemies.Count >= resumePause.min)
+        if (spawningPaused && enemies.Count >= resumePause.min)
         {
             spawningPaused = false;
             return;
