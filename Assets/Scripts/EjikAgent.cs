@@ -17,11 +17,15 @@ public class EjikAgent : Agent
         weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
     }
 
+    public override void InitializeAgent()
+    {
+        base.InitializeAgent();
+        ejik.damageCoeff = academy.resetParameters["damageCoeff"];
+    }
 
     public override void AgentReset()
     {
         ejik.transform.position = Vector3.zero;
-        ejik.damageCoeff = academy.resetParameters["damageCoeff"];
         ejik.health = academy.resetParameters["health"];
     }
 

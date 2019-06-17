@@ -34,7 +34,6 @@ public class Enemy : GameObjectWithHealth
         }
         catch (Exception)
         {
-            Debug.Log("No AI defined");
             aiPath = null;
         }
     }

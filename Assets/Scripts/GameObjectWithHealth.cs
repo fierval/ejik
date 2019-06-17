@@ -10,11 +10,22 @@ public class GameObjectWithHealth : MonoBehaviour
     public float health;
     public AudioClip takeDamageSound;
     protected AudioSource takeDamageSource;
+    float playerDeadReward;
+    float enemyDeadReward;
+    EjikAgent agent;
+    EjikAcademy academy;
 
     protected virtual void Start()
     {
         takeDamageSource = GetComponent<AudioSource>();
         takeDamageSource.clip = takeDamageSound;
+
+        var academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
+        bool isMLRun = academy != null && academy.isActiveAndEnabled;
+
+        playerDeadReward = academy.resetParameters["playerDeadReward"];
+        enemyDeadReward = academy.resetParameters["enemyDeadReward"];
+        agent = isMLRun ? PlayerManager.Instance.player.GetComponent<EjikAgent>() : null;
     }
 
     public virtual void TakeDamage(int damageAmount, float damageCoeff = 1f)
@@ -28,6 +39,16 @@ public class GameObjectWithHealth : MonoBehaviour
             {
                 Destroy(gameObject);
                 Instantiate(PlayerManager.Instance.enemyDeathEffect, transform.position, transform.rotation);
+
+                if (agent != null)
+                {
+                    agent.AddReward(enemyDeadReward);
+                }
+            }
+            else if(agent != null)
+            {
+                agent.AddReward(playerDeadReward);
+                agent.Done();
             }
 
         }
