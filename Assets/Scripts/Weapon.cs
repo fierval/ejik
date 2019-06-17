@@ -24,14 +24,31 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        // shooting and swinging is handled by the Agent in case of ML
+        if(isMLRun) { return; }
+        
+        SetShotDirection(GetShotDirection());
 
         if ((Input.GetMouseButton(0) || Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && Time.time >= shotTime)
         {
-            Instantiate(projectile, shotPoint.position, transform.rotation);
+            Fire();
             shotTime = Time.time + timeBetweenShots;
         }
+    }
+
+    public void Fire()
+    {
+        Instantiate(projectile, shotPoint.position, transform.rotation);
+    }
+
+    Vector3 GetShotDirection()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+    }
+
+    public void SetShotDirection(Vector3 direction)
+    {
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

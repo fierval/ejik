@@ -7,13 +7,16 @@ using MLAgents.CommunicatorObjects;
 public class EjikAgent : Agent
 {
     Player ejik;
+    Weapon weapon;
     EjikAcademy academy;
     // Start is called before the first frame update
     void Start()
     {
         academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
-        ejik = PlayerManager.Instance.player.GetComponent<Player>();      
+        ejik = GetComponent<Player>();
+        weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
     }
+
 
     public override void AgentReset()
     {
@@ -24,13 +27,27 @@ public class EjikAgent : Agent
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
+        // retrieve raw actions
         (float moveAction, float swingAction, float shootAction) =
             (vectorAction[0], vectorAction[1], vectorAction[2]);
 
-        ejik.SetMoveAmount(new Vector2(Mathf.Cos(moveAction), Mathf.Sin(moveAction)));
+        // prepare Ejik to move its rigid body
+        // actions are normalized -1 to 1, need to be -180 to 180 degrees
+        ejik.SetMoveAmount(PositionFromAngle(moveAction * 180));
 
-        var swingDegree = swingAction * 180;
-        var isShooting = MapDiscreteRange(shootAction, 0, 2);
+        var directionSwing = PositionFromAngle(swingAction * 180) - weapon.transform.position;
+        weapon.SetShotDirection(directionSwing);
+
+        var isShooting = MapDiscreteRange(shootAction, 0, 2) > 0;
+        if(isShooting)
+        {
+            weapon.Fire();
+        }
+    }
+
+    Vector3 PositionFromAngle(float angle)
+    {
+        return new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
     int MapDiscreteRange(float val, float mapMin, float mapMax, float origMin = -1, float origMax = 1)
