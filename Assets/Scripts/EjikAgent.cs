@@ -20,7 +20,10 @@ public class EjikAgent : Agent
     public override void InitializeAgent()
     {
         base.InitializeAgent();
-        ejik.damageCoeff = academy.resetParameters["damageCoeff"];
+        if (academy != null)
+        {
+            ejik.damageCoeff = academy.resetParameters["damageCoeff"];
+        }
     }
 
     public override void AgentReset()

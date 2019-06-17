@@ -55,10 +55,10 @@ Camera:
     width: 2
     height: 2
   near clip plane: 0.3
-  far clip plane: 1
+  far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 5.6662245
+  orthographic size: 5.588266
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 5836981518115633361}
   - component: {fileID: 1249913334}
   - component: {fileID: 1249913329}
+  - component: {fileID: 1249913336}
   m_Layer: 8
   m_Name: Ejik
   m_TagString: Player
@@ -611,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98f8a0c61be90c4a913a1128de8cfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 20
   takeDamageSound: {fileID: 8300000, guid: e4526951e00a26a498672018ddc3d746, type: 3}
   speed: 5
   enemyRadius: 5.7814984
@@ -797,10 +798,24 @@ MonoBehaviour:
     agentCameras:
     - {fileID: 693987806}
     agentRenderTextures: []
-    maxStep: 1000
+    maxStep: 500
     resetOnDone: 1
     onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 8
+    numberOfActionsBetweenDecisions: 4
+--- !u!114 &1249913336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5836981518115633364}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227f983571c573c4a8ea89f556c64432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resWidth: 700
+  resHeight: 400
 --- !u!1 &5836981518261156923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,6 +1046,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277090715, guid: 729c2e3fc5c0ce04e97864293db45908, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.077
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277090715, guid: 729c2e3fc5c0ce04e97864293db45908, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.919
       objectReference: {fileID: 0}
     - target: {fileID: -8170200137989760774, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}
