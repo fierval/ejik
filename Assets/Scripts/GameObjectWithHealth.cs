@@ -30,12 +30,12 @@ public class GameObjectWithHealth : MonoBehaviour
 
     public virtual void TakeDamage(int damageAmount, float damageCoeff = 1f)
     {
-        bool deathEffect = gameObject.tag == "Enemy";
+        bool isEnemy = gameObject.tag == "Enemy";
         
         health -= damageAmount * damageCoeff;
         if (health <= 0)
         {
-            if (deathEffect)
+            if (isEnemy)
             {
                 Destroy(gameObject);
                 Instantiate(PlayerManager.Instance.enemyDeathEffect, transform.position, transform.rotation);
@@ -55,6 +55,11 @@ public class GameObjectWithHealth : MonoBehaviour
         else
         {
             takeDamageSource.Play();
+            // if this is a player - add negative reward
+            if(!isEnemy && agent != null)
+            {
+                agent.AddReward(damageCoeff);
+            }
         }
     }
 
