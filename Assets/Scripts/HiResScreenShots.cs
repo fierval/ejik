@@ -38,7 +38,8 @@ public class HiResScreenShots : MonoBehaviour
             RenderTexture.active = camera.targetTexture;
             camera.Render();
             screenShot.ReadPixels(new Rect(0, 0, resWidth, resHeight), 0, 0);
-            RenderTexture.active = Camera.main.targetTexture; // JC: added to avoid errors
+            
+            RenderTexture.active = Camera.main.targetTexture; 
 
             byte[] bytes = screenShot.EncodeToPNG();
             string filename = ScreenShotName(resWidth, resHeight);
