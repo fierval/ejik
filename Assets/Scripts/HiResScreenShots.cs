@@ -3,8 +3,8 @@ using System.Collections;
 
 public class HiResScreenShots : MonoBehaviour
 {
-    public int resWidth = 500;
-    public int resHeight = 400;
+    int resWidth = 500;
+    int resHeight = 400;
 
     private bool takeHiResShot = false;
     new Camera camera;
@@ -12,6 +12,8 @@ public class HiResScreenShots : MonoBehaviour
     private void Start()
     {
         camera = gameObject.GetComponentInChildren<Camera>();
+        resWidth = camera.targetTexture.width;
+        resHeight = camera.targetTexture.height;
     }
 
     public static string ScreenShotName(int width, int height)
@@ -32,22 +34,17 @@ public class HiResScreenShots : MonoBehaviour
         takeHiResShot |= Input.GetKeyDown("k");
         if (takeHiResShot)
         {
-            camera.gameObject.SetActive(true);
-            RenderTexture rt = new RenderTexture(resWidth, resHeight, 24);
-            camera.targetTexture = rt;
             Texture2D screenShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
+            RenderTexture.active = camera.targetTexture;
             camera.Render();
-            RenderTexture.active = rt;
             screenShot.ReadPixels(new Rect(0, 0, resWidth, resHeight), 0, 0);
-            camera.targetTexture = null;
             RenderTexture.active = Camera.main.targetTexture; // JC: added to avoid errors
-            Destroy(rt);
+
             byte[] bytes = screenShot.EncodeToPNG();
             string filename = ScreenShotName(resWidth, resHeight);
             System.IO.File.WriteAllBytes(filename, bytes);
             Debug.Log(string.Format("Took screenshot to: {0}", filename));
             takeHiResShot = false;
-            camera.gameObject.SetActive(false);
         }
     }
 }
