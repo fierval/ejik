@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{bb11c2c4-c571-4908-831c-6b10beecff5d}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>driver.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>CondaEnv|CondaEnv|ejik</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="images\advantage.png" />
+    <Content Include="images\advantage_formula.png" />
+    <Content Include="images\algorithm.png" />
+    <Content Include="images\network.png" />
+    <Content Include="images\objective.png" />
+    <Content Include="images\ps-objective.png" />
+    <Content Include="images\rewards.png" />
+    <Content Include="images\surrogate.png" />
+    <Content Include="PPO\tensorboard.png" />
+    <Content Include="PPO_1\tensorboard.png" />
+    <Content Include="Tennis_Win\Tennis_Data\MonoBleedingEdge\etc\mono\browscap.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="driver.py" />
+    <Compile Include="PPO\agent.py" />
+    <Compile Include="PPO\driver.py" />
+    <Compile Include="PPO\model.py" />
+    <Compile Include="PPO\trajectories.py" />
+    <Compile Include="PPO\utils.py" />
+    <Compile Include="PPO\__init__.py" />
+    <Compile Include="PPO_1\agent.py" />
+    <Compile Include="PPO_1\driver.py" />
+    <Compile Include="PPO_1\model.py" />
+    <Compile Include="PPO_1\trajectories.py" />
+    <Compile Include="PPO_1\utils.py" />
+    <Compile Include="PPO_1\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images" />
+    <Folder Include="PPO" />
+    <Folder Include="PPO_1" />
+    <Folder Include="Tennis_Win\" />
+    <Folder Include="Tennis_Win\Tennis_Data\" />
+    <Folder Include="Tennis_Win\Tennis_Data\MonoBleedingEdge\" />
+    <Folder Include="Tennis_Win\Tennis_Data\MonoBleedingEdge\etc\" />
+    <Folder Include="Tennis_Win\Tennis_Data\MonoBleedingEdge\etc\mono" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|ejik" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

@@ -380,3 +380,5 @@ Temp/
 /Assets/AdvancedInspector/Examples
 /chameleon
 /Assets/screenshots
+.ipynb_checkpoints/
+__pycache__/

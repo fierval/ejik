@@ -8,28 +8,16 @@ public class EjikAgent : Agent
 {
     Player ejik;
     Weapon weapon;
-    EjikAcademy academy;
-    // Start is called before the first frame update
-    void Start()
-    {
-        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
-        ejik = GetComponent<Player>();
-        weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
-    }
 
     public override void InitializeAgent()
     {
-        base.InitializeAgent();
-        if (academy != null)
-        {
-            ejik.damageCoeff = academy.resetParameters["damageCoeff"];
-        }
+        ejik = GetComponent<Player>();
+        weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
     }
 
     public override void AgentReset()
     {
         ejik.transform.position = Vector3.zero;
-        ejik.health = academy.resetParameters["health"];
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
