@@ -31,5 +31,8 @@ if __name__ == "__main__":
     states = env_info.visual_observations[0][0]
     state_size = states.shape
 
+    plt.imshow(states)
+    plt.show()
+
     
     

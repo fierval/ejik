@@ -8,16 +8,19 @@ public class EjikAgent : Agent
 {
     Player ejik;
     Weapon weapon;
+    Camera renderCamera;
 
     public override void InitializeAgent()
     {
         ejik = GetComponent<Player>();
-        weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
+        renderCamera = gameObject.GetComponentInChildren<Camera>();
     }
 
     public override void AgentReset()
     {
         ejik.transform.position = Vector3.zero;
+        weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
+        RenderTexture();
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -53,5 +56,22 @@ public class EjikAgent : Agent
         }
 
         return  (int)(mapMin + (val - origMin) * (mapMax - mapMin) / (origMax - origMin));
+    }
+
+    /// <summary>
+    /// Since we are rendering to texture we need to do it ourselves
+    /// </summary>
+    public void FixedUpdate()
+    {
+        RenderTexture();
+    }
+
+    void RenderTexture()
+    {
+        if (renderCamera != null)
+        {
+            renderCamera.Render();
+        }
+
     }
 }
