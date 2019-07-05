@@ -26,12 +26,12 @@ public class EjikAgent : Agent
     public override void AgentAction(float[] vectorAction, string textAction)
     {
         // retrieve raw actions
-        (float moveAction, float swingAction, float shootAction) =
-            (vectorAction[0], vectorAction[1], vectorAction[2]);
+        (float x, float y, float swingAction, float shootAction) =
+            (vectorAction[0], vectorAction[1], vectorAction[2], vectorAction[3]);
 
         // prepare Ejik to move its rigid body
         // actions are normalized -1 to 1, need to be -180 to 180 degrees
-        ejik.SetMoveAmount(PositionFromAngle(moveAction * 180));
+        ejik.SetMoveAmount(new Vector2(x, y));
 
         var directionSwing = PositionFromAngle(swingAction * 180) - weapon.transform.position;
         weapon.SetShotDirection(directionSwing);
