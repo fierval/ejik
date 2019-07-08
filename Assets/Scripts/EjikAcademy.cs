@@ -13,7 +13,6 @@ public class EjikAcademy : Academy
         enemyManager = GameObject.Find("EnemyManager");
         ejik = PlayerManager.Instance.player.GetComponent<Player>();
         ejik.health = resetParameters["health"];
-        ejik.damageCoeff = resetParameters["damageCoeff"];
     }
 
     public override void AcademyReset()
@@ -22,7 +21,6 @@ public class EjikAcademy : Academy
         var managers = enemyManager.GetComponents<EnemyManager>();
 
         ejik.health = resetParameters["health"];
-        ejik.damageCoeff = resetParameters["damageCoeff"];
 
         foreach (var manager in managers)
         {

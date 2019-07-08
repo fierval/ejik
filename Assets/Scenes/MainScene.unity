@@ -1801,11 +1801,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
     _brainsToControl:
     - {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
-  maxSteps: 5000
+  maxSteps: 6000
   trainingConfiguration:
     width: 300
     height: 200
-    qualityLevel: 0
+    qualityLevel: 1
     timeScale: 20
     targetFrameRate: 60
   inferenceConfiguration:
@@ -1818,8 +1818,8 @@ MonoBehaviour:
     resetParameters:
     - key: health
       value: 1
-    - key: damageCoeff
-      value: 0.1
+    - key: playerDamageReward
+      value: -0.1
     - key: enemyDeadReward
       value: 0.01
     - key: playerDeadReward
@@ -2088,6 +2088,14 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: 8c4a2be6a27797a46bb0be563b7219b8, type: 2}
     - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
       propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: agentParameters.maxStep
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: agentParameters.onDemandDecision
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1249913336, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}

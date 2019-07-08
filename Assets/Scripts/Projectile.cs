@@ -6,14 +6,23 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float lifetime;
-    public int damage;
+    public float damage;
 
     public GameObject explosion;
     public GameObject emittedSound;
-    
+    EjikAcademy academy;
+    bool isMLRun;
+
     // Start is called before the first frame update
     void Start()
     {
+        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
+        isMLRun = academy != null && academy.isActiveAndEnabled;
+        if (academy != null)
+        {
+            damage *= -academy.resetParameters["playerDamageReward"];
+        }
+
         Invoke("DestroyProjectile", lifetime);
         Instantiate(emittedSound, transform.position, transform.rotation);
     }

@@ -20,9 +20,6 @@ public class Player : GameObjectWithHealth
 
     Slider healthSlider;
 
-    [HideInInspector]
-    public float damageCoeff = 1f;
-
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -62,9 +59,9 @@ public class Player : GameObjectWithHealth
         rb.MovePosition(rb.position + moveAmount * Time.fixedDeltaTime);
     }
 
-    public override void TakeDamage(int damageAmount, float damageMult = 1f)
+    public override void TakeDamage(float damageAmount)
     {
-        base.TakeDamage(damageAmount, damageCoeff);
+        base.TakeDamage(damageAmount);
         UpdateHealthUI();
 
         // no theatrics if this is not an ML run

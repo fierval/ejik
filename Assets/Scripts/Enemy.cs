@@ -16,7 +16,7 @@ public class Enemy : GameObjectWithHealth
 
     public float timeBetweenAttacks;
 
-    public int damage;
+    public float damage;
     bool facedPlayer = false;
     protected AIPath aiPath;
 
@@ -25,7 +25,10 @@ public class Enemy : GameObjectWithHealth
     {
         base.Start();
         player = PlayerManager.Instance.player.transform;
-
+        if (academy != null)
+        {
+            damage *= -playerDamageReward;
+        }
         try
         {
             GetComponent<AIDestinationSetter>().target = player.transform;

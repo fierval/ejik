@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     public Transform shotPoint;
     public float timeBetweenShots;
 
-    public int swingDamage;
+    public float swingDamage;
     float shotTime = 0;
     public GameObject explosion;
 
@@ -19,6 +19,10 @@ public class Weapon : MonoBehaviour
     {
         academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
         isMLRun = academy != null && academy.isActiveAndEnabled;
+        if(academy != null)
+        {
+            swingDamage *= -academy.resetParameters["playerDamageReward"];
+        }
     }
 
     // Update is called once per frame
