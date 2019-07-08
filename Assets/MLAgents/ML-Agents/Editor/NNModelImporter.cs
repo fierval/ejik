@@ -9,7 +9,7 @@ namespace MLAgents
     /// <summary>
     /// Asset Importer of barracuda models.
     /// </summary>
-    [ScriptedImporter(1, new[] {"nn"})]
+    //[ScriptedImporter(1, new[] {"nn"})]
     public class NNModelImporter : ScriptedImporter {
         private const string IconPath = "Assets/ML-Agents/Resources/NNModelIcon.png";
 

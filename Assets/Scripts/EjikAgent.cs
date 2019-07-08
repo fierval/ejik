@@ -25,6 +25,14 @@ public class EjikAgent : Agent
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
+        // don't take any action if textAction is set to something
+        // this is done so we can accumulate visual observations
+        // before performing any action
+        if (!string.IsNullOrEmpty(textAction))
+        {
+            return;
+        }
+
         // retrieve raw actions
         (float x, float y, float swingAction, float shootAction) =
             (vectorAction[0], vectorAction[1], vectorAction[2], vectorAction[3]);
@@ -33,8 +41,8 @@ public class EjikAgent : Agent
         // actions are normalized -1 to 1, need to be -180 to 180 degrees
         ejik.SetMoveAmount(new Vector2(x, y));
 
-        var directionSwing = PositionFromAngle(swingAction * 180) - weapon.transform.position;
-        weapon.SetShotDirection(directionSwing);
+        var directionSwing = swingAction * 180;
+        weapon.transform.rotation = Quaternion.AngleAxis(swingAction, Vector3.forward);
 
         var isShooting = MapDiscreteRange(shootAction, 0, 2) > 0;
         if(isShooting)
