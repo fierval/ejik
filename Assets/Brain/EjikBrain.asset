@@ -19,7 +19,7 @@ MonoBehaviour:
     cameraResolutions:
     - width: 300
       height: 200
-      blackAndWhite: 0
+      blackAndWhite: 1
     vectorActionDescriptions:
     - x
     - y
