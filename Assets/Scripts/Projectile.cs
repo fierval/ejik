@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     {
         academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
         isMLRun = academy != null && academy.isActiveAndEnabled;
-        if (academy != null)
+        if (isMLRun)
         {
             damage *= -academy.resetParameters["playerDamageReward"];
         }

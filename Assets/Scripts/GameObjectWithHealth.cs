@@ -25,7 +25,7 @@ public class GameObjectWithHealth : MonoBehaviour
 
         var academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
         isMLRun = academy != null && academy.isActiveAndEnabled;
-        if (academy != null)
+        if (isMLRun)
         {
             playerDeadReward = academy.resetParameters["playerDeadReward"];
             enemyDeadReward = academy.resetParameters["enemyDeadReward"];

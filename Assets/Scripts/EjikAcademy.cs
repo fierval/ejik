@@ -12,7 +12,6 @@ public class EjikAcademy : Academy
     {
         enemyManager = GameObject.Find("EnemyManager");
         ejik = PlayerManager.Instance.player.GetComponent<Player>();
-        ejik.health = resetParameters["health"];
     }
 
     public override void AcademyReset()
