@@ -44,7 +44,7 @@ public class EjikAgent : Agent
         var directionSwing = swingAction * 180;
         weapon.transform.rotation = Quaternion.AngleAxis(swingAction, Vector3.forward);
 
-        var isShooting = MapDiscreteRange(shootAction, 0, 2) > 0;
+        var isShooting = MapDiscreteRange(shootAction, 0, 2) > 1;
         if(isShooting)
         {
             weapon.Fire();
@@ -63,7 +63,7 @@ public class EjikAgent : Agent
             val -= (origMax - origMin) / Mathf.Pow((mapMax - mapMin), 2f);
         }
 
-        return  (int)(mapMin + (val - origMin) * (mapMax - mapMin) / (origMax - origMin));
+        return  Mathf.RoundToInt(mapMin + (val - origMin) * (mapMax - mapMin) / (origMax - origMin));
     }
 
     /// <summary>
