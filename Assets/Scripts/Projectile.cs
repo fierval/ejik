@@ -18,10 +18,6 @@ public class Projectile : MonoBehaviour
     {
         academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
         isMLRun = academy != null && academy.isActiveAndEnabled;
-        if (isMLRun)
-        {
-            damage *= -academy.resetParameters["playerDamageReward"];
-        }
 
         Invoke("DestroyProjectile", lifetime);
         Instantiate(emittedSound, transform.position, transform.rotation);

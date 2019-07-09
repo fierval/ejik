@@ -20,6 +20,7 @@ public class EjikAcademy : Academy
         var managers = enemyManager.GetComponents<EnemyManager>();
 
         ejik.health = resetParameters["health"];
+        ejik.playerDeadReward = resetParameters["playerDeadReward"];
 
         foreach (var manager in managers)
         {

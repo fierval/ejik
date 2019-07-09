@@ -98,12 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e12a6017640264e9e0df16ac7ee985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 0.5
   takeDamageSound: {fileID: 8300000, guid: 37b0c2e980549224ca90c8f8b97ac79e, type: 3}
   player: {fileID: 0}
   attackSpeed: 0
-  timeBetweenAttacks: 2
-  damage: 1
+  timeBetweenAttacks: 1
+  damage: 0.1
   minX: -17
   maxX: 17
   minY: -5

@@ -38,7 +38,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693987803}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -58,13 +58,13 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 5.588266
+  orthographic size: 5.382875
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 8c4a2be6a27797a46bb0be563b7219b8, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -612,13 +612,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98f8a0c61be90c4a913a1128de8cfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 1
   takeDamageSound: {fileID: 8300000, guid: e4526951e00a26a498672018ddc3d746, type: 3}
+  enemyDeadReward: 0.01
+  playerDeadReward: 0
   speed: 5
-  enemyRadius: 5.7814984
+  enemyRadius: 4.158663
   deathSound: {fileID: 8300000, guid: b9a5127607f767b4eb13c1d93c2edccb, type: 3}
-  isMLRun: 0
-  damageCoeff: 1
 --- !u!50 &5836981518115633360
 Rigidbody2D:
   serializedVersion: 4
@@ -795,13 +795,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brain: {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
   agentParameters:
-    agentCameras:
-    - {fileID: 693987806}
-    agentRenderTextures: []
-    maxStep: 500
+    agentCameras: []
+    agentRenderTextures:
+    - {fileID: 8400000, guid: 8c4a2be6a27797a46bb0be563b7219b8, type: 2}
+    maxStep: 2000
     resetOnDone: 1
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 4
+    onDemandDecision: 1
+    numberOfActionsBetweenDecisions: 1
 --- !u!114 &1249913336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,13 +809,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836981518115633364}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 227f983571c573c4a8ea89f556c64432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resWidth: 700
-  resHeight: 400
 --- !u!1 &5836981518261156923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,11 +1076,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2084626702689614261, guid: 729c2e3fc5c0ce04e97864293db45908,
-        type: 3}
-      propertyPath: swingDamage
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2084626702767587618, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}

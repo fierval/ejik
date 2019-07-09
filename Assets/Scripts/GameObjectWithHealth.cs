@@ -9,31 +9,27 @@ public class GameObjectWithHealth : MonoBehaviour
 {
     public float health;
     public AudioClip takeDamageSound;
+    public float enemyDeadReward;
+
     protected AudioSource takeDamageSource;
-    protected float playerDeadReward = 0f;
-    protected float enemyDeadReward = 0f;
-    protected float playerDamageReward = 0f;
+
+    [HideInInspector]
+    public float playerDeadReward = 0f;
 
     protected EjikAgent agent;
     protected EjikAcademy academy;
     protected bool isMLRun;
+    Player ejik;
 
     protected virtual void Start()
     {
         takeDamageSource = GetComponent<AudioSource>();
         takeDamageSource.clip = takeDamageSound;
+        ejik = PlayerManager.Instance.player.GetComponent<Player>();
 
         var academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
         isMLRun = academy != null && academy.isActiveAndEnabled;
-        if (isMLRun)
-        {
-            playerDeadReward = academy.resetParameters["playerDeadReward"];
-            enemyDeadReward = academy.resetParameters["enemyDeadReward"];
-            playerDamageReward = academy.resetParameters["playerDamageReward"];
 
-            // everything gets scaled by this reward for all actors
-            health *= -playerDamageReward;
-        }
         agent = isMLRun ? PlayerManager.Instance.player.GetComponent<EjikAgent>() : null;
     }
 
@@ -48,15 +44,16 @@ public class GameObjectWithHealth : MonoBehaviour
             {
                 Destroy(gameObject);
                 Instantiate(PlayerManager.Instance.enemyDeathEffect, transform.position, transform.rotation);
+                ejik.health += enemyDeadReward;
 
                 if (agent != null)
                 {
-                    agent.AddReward(enemyDeadReward);
+                    agent.AddReward(ejik.enemyDeadReward);
                 }
             }
             else if (agent != null)
             {
-                agent.AddReward(playerDeadReward);
+                agent.AddReward(ejik.playerDeadReward);
                 agent.Done();
             }
 
@@ -67,7 +64,7 @@ public class GameObjectWithHealth : MonoBehaviour
             // if this is a player - add negative reward
             if (!isEnemy && agent != null)
             {
-                agent.AddReward(playerDamageReward);
+                agent.AddReward(-damageAmount);
             }
         }
     }

@@ -161,7 +161,7 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 1277090715}
   timeBetweenShots: 0.5
-  swingDamage: 2
+  swingDamage: 0.1
   explosion: {fileID: 4646980594309443587, guid: 818040096994f504580ef9dc16bf0971,
     type: 3}
 --- !u!70 &-8170200137989760774

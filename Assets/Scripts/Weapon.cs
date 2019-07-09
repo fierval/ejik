@@ -19,10 +19,6 @@ public class Weapon : MonoBehaviour
     {
         academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
         isMLRun = academy != null && academy.isActiveAndEnabled;
-        if(isMLRun)
-        {
-            swingDamage *= -academy.resetParameters["playerDamageReward"];
-        }
     }
 
     // Update is called once per frame

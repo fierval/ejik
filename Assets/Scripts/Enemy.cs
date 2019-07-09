@@ -25,10 +25,7 @@ public class Enemy : GameObjectWithHealth
     {
         base.Start();
         player = PlayerManager.Instance.player.transform;
-        if (academy != null)
-        {
-            damage *= -playerDamageReward;
-        }
+
         try
         {
             GetComponent<AIDestinationSetter>().target = player.transform;

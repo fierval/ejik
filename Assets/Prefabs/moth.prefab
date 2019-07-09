@@ -100,12 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6836ce23c7a50c747bcf15a2a868286a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 0.1
   takeDamageSound: {fileID: 8300000, guid: 37b0c2e980549224ca90c8f8b97ac79e, type: 3}
   player: {fileID: 0}
   attackSpeed: 2
   timeBetweenAttacks: 2
-  damage: 1
+  damage: 0.1
 --- !u!50 &4350367051229051393
 Rigidbody2D:
   serializedVersion: 4
@@ -200,7 +200,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.411
   m_Pitch: 1
   Loop: 0
