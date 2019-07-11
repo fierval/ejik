@@ -1803,8 +1803,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
   maxSteps: 60000
   trainingConfiguration:
-    width: 300
-    height: 200
+    width: 800
+    height: 400
     qualityLevel: 0
     timeScale: 10
     targetFrameRate: 60
