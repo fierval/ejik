@@ -41,7 +41,7 @@ public class EjikAgent : Agent
         // actions are normalized -1 to 1, need to be -180 to 180 degrees
         ejik.SetMoveAmount(new Vector3(x, y));
 
-        var directionSwing = swingAction * 180;
+        var directionSwing = -swingAction * 180;
         weapon.transform.rotation = Quaternion.AngleAxis(directionSwing, Vector3.forward);
 
         // shootAction is [-1, 1]
