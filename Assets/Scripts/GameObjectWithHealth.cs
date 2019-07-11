@@ -44,27 +44,25 @@ public class GameObjectWithHealth : MonoBehaviour
             {
                 Destroy(gameObject);
                 Instantiate(PlayerManager.Instance.enemyDeathEffect, transform.position, transform.rotation);
+
                 ejik.health += enemyDeadReward;
-
-                if (agent != null)
-                {
-                    agent.AddReward(ejik.enemyDeadReward);
-                }
             }
-            else if (agent != null)
+            else 
             {
-                agent.AddReward(ejik.playerDeadReward);
-                agent.Done();
+                ejik.health += playerDeadReward;
             }
-
         }
         else
         {
             takeDamageSource.Play();
-            // if this is a player - add negative reward
-            if (!isEnemy && agent != null)
+        }
+
+        if(agent != null)
+        {
+            agent.SetReward(ejik.health);
+            if(agent.GetReward() < 0f)
             {
-                agent.AddReward(-damageAmount);
+                agent.Done();
             }
         }
     }

@@ -21,7 +21,7 @@ public class EjikAcademy : Academy
 
         ejik.health = resetParameters["health"];
         ejik.playerDeadReward = resetParameters["playerDeadReward"];
-
+        
         //mute all sounds if we are running the environment
         AudioListener.volume = 0;
 

@@ -9,6 +9,8 @@ public class EjikAgent : Agent
     Player ejik;
     Weapon weapon;
     Camera renderCamera;
+    EjikAcademy academy;
+    GameObject enemyManager;
 
     public override void InitializeAgent()
     {
@@ -18,8 +20,8 @@ public class EjikAgent : Agent
 
     public override void AgentReset()
     {
-        ejik.transform.position = Vector3.zero;
         weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
+        SetReward(ejik.health);
         RenderTexture();
     }
 
