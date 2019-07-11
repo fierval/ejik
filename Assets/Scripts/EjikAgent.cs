@@ -21,6 +21,7 @@ public class EjikAgent : Agent
     public override void AgentReset()
     {
         weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
+        ResetReward();
         SetReward(ejik.health);
         RenderTexture();
     }
