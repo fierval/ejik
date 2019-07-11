@@ -15,7 +15,7 @@ class TrajectoryCollector:
             "values", "advantages", "returns"
         ]
 
-    def __init__(self, env, policy, num_agents, tmax=3, gamma = 0.99, gae_lambda = 0.96, debug = False):
+    def __init__(self, env, policy, num_agents, tmax=3, gamma = 0.99, gae_lambda = 0.96, is_visual = False, visual_state_size=1, debug = False):
         self.env = env
         self.policy = policy
 
@@ -28,25 +28,54 @@ class TrajectoryCollector:
 
         self.debug = debug
 
+        self.is_visual = is_visual
+        self.visual_state_size = visual_state_size
+
         self.rewards = None
         self.scores_by_episode = []
-        self.brain_name = None
+
+        self.brain_name = self.env.brain_names[0]
+        self.action_space_size = self.env.brains[self.brain_name].vector_action_space_size[0]
+
         self.last_states = None
         self.reset()
-        
+
     @staticmethod
     def to_tensor(x, dtype=np.float32):
         return torch.from_numpy(np.array(x).astype(dtype)).to(device)
 
-    def add_agents_to_state(self, state):
-        return state
-        # return torch.cat((state, 0.001 * self.idx_me), dim=1)
+    def collect_visual_observation(self, env_info, initial=False):
+        observations = [self.to_tensor(env_info.visual_observations[0][0])]
+        if initial:
+            observations = observations * self.visual_state_size
+        else:
+            for _ in range(self.visual_state_size - 1):
+                env_info = self.env.step(vector_actions=None, text_actions="skip")[self.brain_name]                
+                obs = self.to_tensor(env_info.visual_observations[0][0])
+                observations.append(obs)
+
+        return torch.cat(observations, dim=2)
+       
 
     def reset(self):
-        self.brain_name = self.env.brain_names[0]
         env_info = self.env.reset(train_mode=True)[self.brain_name]
-        self.last_states = self.to_tensor(env_info.vector_observations)
-        self.last_states = self.add_agents_to_state(self.last_states)
+
+        # for visual observations we are doing the stacking
+        if self.is_visual:
+            self.last_states = self.collect_visual_observation(env_info, initial=True)
+        else:
+            self.last_states = self.to_tensor(env_info.vector_observations)
+
+    def next_observation(self, actions):
+        env_info = self.env.step(actions)[self.brain_name]
+        rewards = self.to_tensor(env_info.rewards)
+        dones = self.to_tensor(env_info.local_done, dtype=np.uint8)
+            
+        if self.is_visual:
+            next_states = self.collect_visual_observation(env_info)
+        else:            
+            next_states = self.to_tensor(env_info.vector_observations)
+        return env_info, next_states, rewards, dones
 
     def calc_returns(self, rewards, values, dones, last_values):
         n_step, n_agent = rewards.shape
@@ -100,10 +129,8 @@ class TrajectoryCollector:
 
             # one step forward
             actions_np = memory["actions"].cpu().numpy()
-            env_info = self.env.step(actions_np)[self.brain_name]
-            memory["next_states"] = self.to_tensor(env_info.vector_observations)
-            memory["rewards"] = self.to_tensor(env_info.rewards)
-            memory["dones"] = self.to_tensor(env_info.local_done, dtype=np.uint8)
+           
+            env_info, memory["next_states"], memory["rewards"], memory["dones"] = self.next_observation(actions_np)
 
             # stack one step memory to buffer
             for k, v in memory.items():
