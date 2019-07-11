@@ -44,13 +44,14 @@ class TrajectoryCollector:
     def to_tensor(x, dtype=np.float32):
         return torch.from_numpy(np.array(x).astype(dtype)).to(device)
 
-    def collect_visual_observation(self, env_info, initial=False):
+    def collect_visual_observation(self, env_info, actions=None, initial=False):
         observations = [self.to_tensor(env_info.visual_observations[0][0])]
         if initial:
             observations = observations * self.visual_state_size
         else:
             for _ in range(self.visual_state_size - 1):
-                env_info = self.env.step(vector_actions=None, text_actions="skip")[self.brain_name]                
+                # keep advancing with the current actions
+                env_info = self.env.step(vector_actions=actions)[self.brain_name]                
                 obs = self.to_tensor(env_info.visual_observations[0][0])
                 observations.append(obs)
 

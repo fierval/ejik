@@ -42,7 +42,7 @@ public class EjikAgent : Agent
         ejik.SetMoveAmount(new Vector3(x, y));
 
         var directionSwing = swingAction * 180;
-        weapon.transform.rotation = Quaternion.AngleAxis(swingAction, Vector3.forward);
+        weapon.transform.rotation = Quaternion.AngleAxis(directionSwing, Vector3.forward);
 
         // shootAction is [-1, 1]
         // simply cut it down the middle to decide to shoot
