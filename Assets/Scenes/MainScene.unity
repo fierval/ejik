@@ -679,8 +679,8 @@ GameObject:
   m_Component:
   - component: {fileID: 504318049}
   - component: {fileID: 504318051}
-  - component: {fileID: 504318050}
   - component: {fileID: 504318052}
+  - component: {fileID: 504318050}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2069,6 +2069,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249913334, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
       propertyPath: agentParameters.resetOnDone
