@@ -34,18 +34,19 @@ public class EjikAgent : Agent
         }
 
         // retrieve raw actions
-        (float direction, float swingAction, float shootAction) =
-            (vectorAction[0], vectorAction[1], vectorAction[2]);
+        (float x, float y, float swingAction, float shootAction) =
+            (vectorAction[0], vectorAction[1], vectorAction[2], vectorAction[3]);
 
         // prepare Ejik to move its rigid body
         // actions are normalized -1 to 1, need to be -180 to 180 degrees
-        ejik.SetMoveAmount(PositionFromAngle(direction * 180f));
+        ejik.SetMoveAmount(new Vector3(x, y));
 
         var directionSwing = swingAction * 180;
         weapon.transform.rotation = Quaternion.AngleAxis(swingAction, Vector3.forward);
 
-        var isShooting = MapDiscreteRange(shootAction, 0, 2) > 1;
-        if(isShooting)
+        // shootAction is [-1, 1]
+        // simply cut it down the middle to decide to shoot
+        if(shootAction > 0)
         {
             weapon.Fire();
         }

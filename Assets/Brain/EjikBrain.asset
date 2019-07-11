@@ -15,13 +15,14 @@ MonoBehaviour:
   brainParameters:
     vectorObservationSize: 0
     numStackedVectorObservations: 1
-    vectorActionSize: 03000000
+    vectorActionSize: 04000000
     cameraResolutions:
     - width: 300
       height: 200
       blackAndWhite: 1
     vectorActionDescriptions:
-    - direction
+    - x
+    - y
     - swing
     - shoot
     vectorActionSpaceType: 1
