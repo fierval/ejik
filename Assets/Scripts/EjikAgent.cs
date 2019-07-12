@@ -87,7 +87,6 @@ public class EjikAgent : Agent
 
     public void Display()
     {
-        Monitor.Log("Reward", GetCumulativeReward(), transform);
+        Monitor.Log("Reward", GetCumulativeReward().ToString("F3"), transform);
     }
-
 }
