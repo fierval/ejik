@@ -30,5 +30,7 @@ public class EjikAcademy : Academy
             manager.resumePause.min = (int)resetParameters[$"min{manager.enemy.name}"];
             manager.resumePause.max = (int)resetParameters[$"max{manager.enemy.name}"];
         }
+
+        Monitor.SetActive(true);
     }
 }

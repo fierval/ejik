@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using MLAgents;
 using MLAgents.CommunicatorObjects;
@@ -9,8 +9,6 @@ public class EjikAgent : Agent
     Player ejik;
     Weapon weapon;
     Camera renderCamera;
-    EjikAcademy academy;
-    GameObject enemyManager;
 
     public override void InitializeAgent()
     {
@@ -21,9 +19,9 @@ public class EjikAgent : Agent
     public override void AgentReset()
     {
         weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
-        ResetReward();
-        SetReward(ejik.health);
+
         RenderTexture();
+        Display();
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -86,4 +84,10 @@ public class EjikAgent : Agent
         }
 
     }
+
+    public void Display()
+    {
+        Monitor.Log("Reward", GetCumulativeReward(), transform);
+    }
+
 }

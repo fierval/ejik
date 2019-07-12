@@ -799,9 +799,9 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 8c4a2be6a27797a46bb0be563b7219b8, type: 2}
     maxStep: 2000
-    resetOnDone: 1
-    onDemandDecision: 1
-    numberOfActionsBetweenDecisions: 1
+    resetOnDone: 0
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 5
 --- !u!114 &1249913336
 MonoBehaviour:
   m_ObjectHideFlags: 0
