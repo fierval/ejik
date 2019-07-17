@@ -1,11 +1,8 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import numpy as np
 
-HID_SIZE = 512
-
-def xavier(sequential):
+def xavier(layer):
     if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear):
         nn.init.xavier_uniform_(layer.weight)
 
