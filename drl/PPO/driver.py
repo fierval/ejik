@@ -1,11 +1,11 @@
-from model import GaussianPolicyActorCritic
 import torch
 import numpy as np
 import time
 import os
 import sys
+from model import ActorCritic
 
-from unityagents import UnityEnvironment
+from mlagents.envs import UnityEnvironment
 from agent import PPOAgent
 import tensorboardX
 from utils import RewardTracker, TBMeanTracker
@@ -17,7 +17,7 @@ LR = 1e-03              # learing rate
 EPSILON = 0.1           # action clipping param: [1-EPSILON, 1+EPSILON]
 BETA = 0.01             # regularization parameter for entropy term
 EPOCHS = 20              # train for this number of epochs at a time
-TMAX = 1024              # maximum trajectory length
+TMAX = 100              # maximum trajectory length
 AVG_WIN = 100           # moving average over...
 SEED = 12                # leave everything to chance
 BATCH_SIZE = 128         # number of tgajectories to collect for learning
@@ -25,6 +25,7 @@ SOLVED_SCORE = 0.5      # score at which we are done
 STEP_DECAY = 2000       # when to decay learning rate
 GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
+NUM_CONSEQ_FRAMES = 4   # number of consequtive frames that make up a state
 
 debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -35,10 +36,11 @@ if __name__ == "__main__":
     if root_path == '':
         root_path = os.path.abspath("..")
 
+    env_path = "../env/ejik"
     if sys.platform == 'linux':
-        env = UnityEnvironment(file_name=os.path.join(root_path, "Tennis_Linux/Tennis.x86_64"))
+        env = UnityEnvironment(file_name=os.path.join(root_path, env_path))
     else:
-        env = UnityEnvironment(file_name=os.path.join(root_path, "Tennis_Win/Tennis"))
+        env = UnityEnvironment(file_name=os.path.join(root_path, env_path), )
     
     brain_name = env.brain_names[0]
     brain = env.brains[brain_name]
@@ -49,22 +51,23 @@ if __name__ == "__main__":
     print('Number of agents:', num_agents)
 
     # size of each action
-    action_size = brain.vector_action_space_size
+    action_size = brain.vector_action_space_size[0]
     print('Size of each action:', action_size)
 
     # examine the state space 
-    states = env_info.vector_observations
-    state_size = states.shape[1]
+    states = env_info.visual_observations
+    state_size = list(states[0][0].transpose(2, 0, 1).shape)
+    state_size[0] *= NUM_CONSEQ_FRAMES
     
     # torch.manual_seed(SEED)
     # np.random.seed(SEED)
 
     # create policy to be trained & optimizer
-    policy = GaussianPolicyActorCritic(state_size, action_size).to(device)
+    policy = ActorCritic(state_size, action_size).to(device)
 
     writer = tensorboardX.SummaryWriter(comment=f"-mappo_{SEED}")
     
-    trajectory_collector = TrajectoryCollector(env, policy, num_agents, tmax=TMAX, gamma=GAMMA, gae_lambda=GAE_LAMBDA, debug=debug)
+    trajectory_collector = TrajectoryCollector(env, policy, num_agents, tmax=TMAX, gamma=GAMMA, gae_lambda=GAE_LAMBDA, debug=debug, is_visual=True)
     tb_tracker = TBMeanTracker(writer, EPOCHS)
 
     agent = PPOAgent(policy, tb_tracker, LR, EPSILON, BETA)

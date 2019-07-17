@@ -20,7 +20,6 @@ class TrajectoryCollector:
         self.policy = policy
 
         self.num_agents = num_agents
-        self.idx_me = torch.tensor([index+1 for index in range(num_agents)], dtype=torch.float).unsqueeze(1).to(device)
 
         self.tmax = tmax
         self.gae_lambda = gae_lambda
@@ -45,6 +44,7 @@ class TrajectoryCollector:
         return torch.from_numpy(np.array(x).astype(dtype)).to(device)
 
     def collect_visual_observation(self, env_info, actions=None, initial=False):
+        # frames are in CHW format, they come back from unity in HWC
         observations = [self.to_tensor(env_info.visual_observations[0][0])]
         if initial:
             observations = observations * self.visual_state_size
@@ -55,7 +55,7 @@ class TrajectoryCollector:
                 obs = self.to_tensor(env_info.visual_observations[0][0])
                 observations.append(obs)
 
-        return torch.cat(observations, dim=2)
+        return torch.cat(observations, dim=2).permute(2, 0, 1)
        
 
     def reset(self):
