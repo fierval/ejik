@@ -23,8 +23,17 @@ class ActorCritic(nn.Module):
         self.state_dim = obs_size
         
         conv_size = self.get_conv_out()
-        fc_critic = self.hidden_layers() + [Flatten(), nn.Linear(conv_size, 1)]
-        fc_actor = self.hidden_layers() + [Flatten(), nn.LeakyReLU(), nn.Linear(conv_size, self.action_dim), nn.Tanh()]
+        fc_critic = self.hidden_layers() \
+            + [Flatten(), 
+                nn.Linear(conv_size, conv_size // 2), 
+                nn.LeakyReLU(), 
+                nn.Linear(conv_size // 2, 1)]
+
+        fc_actor = self.hidden_layers() \
+            + [Flatten(), 
+                nn.LeakyReLU(), 
+                nn.Linear(conv_size, self.action_dim), 
+                nn.Tanh()]
         
         self.actor = nn.Sequential(*fc_actor)
         self.critic = nn.Sequential(*fc_critic)
@@ -39,9 +48,11 @@ class ActorCritic(nn.Module):
 
     def hidden_layers(self):
         return [
-            nn.Conv2d(self.state_dim[0], 16, 8, stride=8),
+            nn.Conv2d(self.state_dim[0], 16, 4, stride=4),
             nn.LeakyReLU(),
-            nn.Conv2d(16, 32, 4, stride=4),
+            nn.Conv2d(16, 32, 4, stride=2),
+            nn.LeakyReLU(),
+            nn.Conv2d(32, 64, 3, stride=2),
         ]
 
     def get_conv_out(self):
