@@ -67,7 +67,8 @@ if __name__ == "__main__":
 
     writer = tensorboardX.SummaryWriter(comment=f"-mappo_{SEED}")
     
-    trajectory_collector = TrajectoryCollector(env, policy, num_agents, tmax=TMAX, gamma=GAMMA, gae_lambda=GAE_LAMBDA, debug=debug, is_visual=True)
+    trajectory_collector = TrajectoryCollector(env, policy, num_agents, tmax=TMAX, gamma=GAMMA, gae_lambda=GAE_LAMBDA, debug=debug, is_visual=True, visual_state_size=NUM_CONSEQ_FRAMES)
+
     tb_tracker = TBMeanTracker(writer, EPOCHS)
 
     agent = PPOAgent(policy, tb_tracker, LR, EPSILON, BETA)

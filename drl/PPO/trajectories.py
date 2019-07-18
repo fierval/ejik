@@ -55,7 +55,7 @@ class TrajectoryCollector:
                 obs = self.to_tensor(env_info.visual_observations[0][0])
                 observations.append(obs)
 
-        return torch.cat(observations, dim=2).permute(2, 0, 1)
+        return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0)
        
 
     def reset(self):
