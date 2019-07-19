@@ -21,7 +21,7 @@ TMAX = 512              # maximum trajectory length
 AVG_WIN = 100           # moving average over...
 SEED = 12                # leave everything to chance
 BATCH_SIZE = 128         # number of tgajectories to collect for learning
-SOLVED_SCORE = 0.5      # score at which we are done
+SOLVED_SCORE = 0.8      # score at which we are done
 STEP_DECAY = 2000       # when to decay learning rate
 GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
@@ -36,12 +36,18 @@ if __name__ == "__main__":
     if root_path == '':
         root_path = os.path.abspath("..")
 
-    env_path = "../env/ejik"
-    
+    # where the environment file is located
+    env_path = os.path.join(root_path, "../env/ejik")
+    # where to save the model
+    ckpt_path = os.path.join(root_path, "saved_model")
+
+    if not os.path.exists(ckpt_path):
+        os.makedirs(ckpt_path)
+
     if debug:
         env = UnityEnvironment(file_name=None)
     else:
-        env = UnityEnvironment(file_name=os.path.join(root_path, env_path))
+        env = UnityEnvironment(file_name=env_path)
         
     brain_name = env.brain_names[0]
     brain = env.brains[brain_name]
@@ -66,7 +72,7 @@ if __name__ == "__main__":
     # create policy to be trained & optimizer
     policy = ActorCritic(state_size, action_size).to(device)
 
-    writer = tensorboardX.SummaryWriter(comment=f"-mappo_{SEED}")
+    writer = tensorboardX.SummaryWriter(comment=f"-ejik{SEED}")
     
     trajectory_collector = TrajectoryCollector(env, policy, num_agents, tmax=TMAX, gamma=GAMMA, gae_lambda=GAE_LAMBDA, debug=debug, is_visual=True, visual_state_size=NUM_CONSEQ_FRAMES)
 
@@ -109,11 +115,11 @@ if __name__ == "__main__":
 
                 # keep current spectacular scores
                 if reward > max_score:
-                    torch.save(policy.state_dict(), os.path.join(root_path, f'checkpoint_actor_{reward:.03f}.pth'))
+                    torch.save(policy.state_dict(), os.path.join(ckpt_path, f'checkpoint_actor_{reward:.03f}.pth'))
                     max_score = reward
 
                 if mean_reward is not None and mean_reward >= SOLVED_SCORE:
-                    torch.save(policy.state_dict(), os.path.join(root_path, f'checkpoint_actor_{mean_reward:.03f}.pth'))
+                    torch.save(policy.state_dict(), os.path.join(ckpt_path, f'checkpoint_actor_{mean_reward:.03f}.pth'))
                     solved_episode = n_episodes + idx_r - AVG_WIN - 1
                     print(f"Solved in {solved_episode if solved_episode > 0 else n_episodes + idx_r} episodes")
                     solved = True
