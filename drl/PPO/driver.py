@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-import time
+import time, datetime
 import os
 import sys
 from model import ActorCritic
@@ -90,6 +90,9 @@ if __name__ == "__main__":
     start = None
 
     with RewardTracker(writer, mean_window=AVG_WIN, print_every=AVG_WIN // 2) as reward_tracker:
+        d = datetime.datetime.today()
+
+        print(f"Started training run: at {d.strftime('%d-%m-%Y %H:%M:%S')}")
 
         while True:
             
