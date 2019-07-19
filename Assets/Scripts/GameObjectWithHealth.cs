@@ -51,7 +51,6 @@ public class GameObjectWithHealth : MonoBehaviour
             }
             else 
             {
-                ejik.health += playerDeadReward;
                 reward = playerDeadReward;
             }
         }
@@ -63,7 +62,7 @@ public class GameObjectWithHealth : MonoBehaviour
         if(agent != null)
         {
             agent.AddReward(reward);
-            if(agent.GetCumulativeReward() <= -academy.resetParameters["health"])
+            if(!isEnemy && health <=0)
             {
                 agent.Done();
             }
