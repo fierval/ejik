@@ -386,3 +386,4 @@ __pycache__/
 /env
 .vscode/
 runs/
+*.pth

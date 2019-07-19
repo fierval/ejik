@@ -29,10 +29,8 @@ public class EjikAgent : Agent
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        // don't take any action if textAction is set to something
-        // this is done so we can accumulate visual observations
-        // before performing any action
-        if (!string.IsNullOrEmpty(textAction))
+        // if a default action is coming in we should not listen
+        if (string.IsNullOrEmpty(textAction))
         {
             return;
         }

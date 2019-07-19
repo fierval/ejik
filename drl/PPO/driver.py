@@ -17,7 +17,7 @@ LR = 1e-03              # learing rate
 EPSILON = 0.1           # action clipping param: [1-EPSILON, 1+EPSILON]
 BETA = 0.01             # regularization parameter for entropy term
 EPOCHS = 20              # train for this number of epochs at a time
-TMAX = 500              # maximum trajectory length
+TMAX = 512              # maximum trajectory length
 AVG_WIN = 100           # moving average over...
 SEED = 12                # leave everything to chance
 BATCH_SIZE = 128         # number of tgajectories to collect for learning
@@ -27,7 +27,7 @@ GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
 NUM_CONSEQ_FRAMES = 4   # number of consequtive frames that make up a state
 
-debug = True
+debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 if __name__ == "__main__":
@@ -90,7 +90,7 @@ if __name__ == "__main__":
             trajectories = trajectory_collector.create_trajectories()
             
             n_samples = trajectories['actions'].shape[0]
-            n_batches = int((n_samples + 1) / BATCH_SIZE)
+            n_batches = int((n_samples + BATCH_SIZE - 1) / BATCH_SIZE)
 
             idx = np.arange(n_samples)
             np.random.shuffle(idx)

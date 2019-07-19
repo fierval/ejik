@@ -55,7 +55,7 @@ class TrajectoryCollector:
                 obs = self.to_tensor(env_info.visual_observations[0][0])
                 observations.append(obs)
 
-        return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0)
+        return env_info, torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0)
        
 
     def reset(self):
@@ -63,17 +63,19 @@ class TrajectoryCollector:
 
         # for visual observations we are doing the stacking
         if self.is_visual:
-            self.last_states = self.collect_visual_observation(env_info, initial=True)
+            _, self.last_states = self.collect_visual_observation(env_info, initial=True)
         else:
             self.last_states = self.to_tensor(env_info.vector_observations)
 
     def next_observation(self, actions):
-        env_info = self.env.step(actions)[self.brain_name]
+        # agent will act on the action vector where everything is set to "0"
+        # signal it to ignore these actions and only listent to us
+        env_info = self.env.step(actions, text_action="act")[self.brain_name]
         rewards = self.to_tensor(env_info.rewards)
         dones = self.to_tensor(env_info.local_done, dtype=np.uint8)
             
         if self.is_visual:
-            next_states = self.collect_visual_observation(env_info)
+            env_info, next_states = self.collect_visual_observation(env_info)
         else:            
             next_states = self.to_tensor(env_info.vector_observations)
         return env_info, next_states, rewards, dones
@@ -163,7 +165,9 @@ class TrajectoryCollector:
 
         for k, v in buffer.items():
             # flatten everything.
-            if len(v.shape) == 3:
+            if len(v.shape) == 5: # images
+                buffer[k] = v.squeeze(1)
+            elif len(v.shape) == 3:
                 buffer[k] = v.reshape([-1, v.shape[-1]])
             else:
                 buffer[k] = v.reshape([-1])

@@ -59,18 +59,23 @@ class ActorCritic(nn.Module):
         o = nn.Sequential(*self.hidden_layers())(torch.zeros(1, *self.state_dim))
         return int(np.prod(o.size()))
 
-    def forward(self, x):
-        value = self.critic(x)
+    def forward(self, x, actions=None):
+        value = self.critic(x).squeeze(-1)
         mu = self.actor(x)
 
         std = self.log_std.exp().expand_as(mu)
         dist = torch.distributions.Normal(mu, std)
 
         # actions are [-1, 1]
-        actions = torch.clamp(dist.sample(), -1, 1)
+        if actions is None:
+            actions = torch.clamp(dist.sample(), -1, 1)
 
-        log_prob = dist.log_prob(actions).mean()
-        entropy = dist.entropy().mean()
+        log_prob = dist.log_prob(actions)
+        entropy = dist.entropy()
+
+        log_prob = torch.sum(log_prob, dim=-1)
+        entropy = torch.sum(dist.entropy(), dim=-1)
+
         return actions, log_prob, entropy, value
 
     def state_values(self, states):
