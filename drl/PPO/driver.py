@@ -13,14 +13,14 @@ from trajectories import TrajectoryCollector
 import torch.optim.lr_scheduler as lr_scheduler
 
 
-LR = 1e-04              # learing rate
+LR = 1e-03              # learing rate
 EPSILON = 0.1           # action clipping param: [1-EPSILON, 1+EPSILON]
 BETA = 0.01             # regularization parameter for entropy term
 EPOCHS = 100              # train for this number of epochs at a time
-TMAX = 1024              # maximum trajectory length
+TMAX = 512              # maximum trajectory length
 AVG_WIN = 100           # moving average over...
 SEED = 12                # leave everything to chance
-BATCH_SIZE = 256         # number of tgajectories to collect for learning
+BATCH_SIZE = 128         # number of tgajectories to collect for learning
 SOLVED_SCORE = 0.8      # score at which we are done
 STEP_DECAY = 2000       # when to decay learning rate
 GAMMA = 0.99            # discount factor
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     agent = PPOAgent(policy, tb_tracker, LR, EPSILON, BETA)
     
     #scheduler = lr_scheduler.LambdaLR(agent.optimizer, lambda ep: 0.1 if ep == STEP_DECAY else 1)
-    scheduler = lr_scheduler.StepLR(agent.optimizer, step_size=1000, gamma=0.95)
+    scheduler = lr_scheduler.StepLR(agent.optimizer, step_size=STEP_DECAY, gamma=GAMMA)
     n_episodes = 0
     max_score = - np.Inf
 

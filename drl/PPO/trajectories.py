@@ -147,7 +147,7 @@ class TrajectoryCollector:
                 self.rewards = np.r_[self.rewards, r]
 
             if memory["dones"].any():
-                rewards_mean = self.rewards.sum(axis=0).max()
+                rewards_mean = self.rewards.sum(axis=0).mean()
                 self.scores_by_episode.append(rewards_mean)
                 self.rewards = None
                 self.reset()
