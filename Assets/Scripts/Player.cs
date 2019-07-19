@@ -20,6 +20,8 @@ public class Player : GameObjectWithHealth
 
     Slider healthSlider;
 
+    [HideInInspector]
+    public float initialHealth;
     // Start is called before the first frame update
     protected override void Start()
     {

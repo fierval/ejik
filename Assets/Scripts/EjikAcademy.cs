@@ -20,6 +20,7 @@ public class EjikAcademy : Academy
         var managers = enemyManager.GetComponents<EnemyManager>();
 
         ejik.health = resetParameters["health"];
+        ejik.initialHealth = ejik.health;
         ejik.playerDeadReward = resetParameters["playerDeadReward"];
         
         //mute all sounds if we are running the environment

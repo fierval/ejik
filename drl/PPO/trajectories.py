@@ -51,7 +51,7 @@ class TrajectoryCollector:
         else:
             for _ in range(self.visual_state_size - 1):
                 # keep advancing with the current actions
-                env_info = self.env.step(vector_actions=actions)[self.brain_name]                
+                env_info = self.env.step(actions)[self.brain_name]                
                 obs = self.to_tensor(env_info.visual_observations[0][0])
                 observations.append(obs)
 

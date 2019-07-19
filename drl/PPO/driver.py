@@ -17,7 +17,7 @@ LR = 1e-03              # learing rate
 EPSILON = 0.1           # action clipping param: [1-EPSILON, 1+EPSILON]
 BETA = 0.01             # regularization parameter for entropy term
 EPOCHS = 20              # train for this number of epochs at a time
-TMAX = 100              # maximum trajectory length
+TMAX = 500              # maximum trajectory length
 AVG_WIN = 100           # moving average over...
 SEED = 12                # leave everything to chance
 BATCH_SIZE = 128         # number of tgajectories to collect for learning
@@ -27,7 +27,7 @@ GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
 NUM_CONSEQ_FRAMES = 4   # number of consequtive frames that make up a state
 
-debug = False
+debug = True
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 if __name__ == "__main__":
@@ -37,11 +37,12 @@ if __name__ == "__main__":
         root_path = os.path.abspath("..")
 
     env_path = "../env/ejik"
-    if sys.platform == 'linux':
-        env = UnityEnvironment(file_name=os.path.join(root_path, env_path))
-    else:
-        env = UnityEnvironment(file_name=os.path.join(root_path, env_path), )
     
+    if debug:
+        env = UnityEnvironment(file_name=None)
+    else:
+        env = UnityEnvironment(file_name=os.path.join(root_path, env_path))
+        
     brain_name = env.brain_names[0]
     brain = env.brains[brain_name]
 
@@ -107,7 +108,7 @@ if __name__ == "__main__":
                 scheduler.step()
 
                 # keep current spectacular scores
-                if reward > max_score and reward > 1:
+                if reward > max_score:
                     torch.save(policy.state_dict(), os.path.join(root_path, f'checkpoint_actor_{reward:.03f}.pth'))
                     max_score = reward
 

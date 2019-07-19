@@ -20,6 +20,9 @@ public class EjikAgent : Agent
     {
         weapon = PlayerManager.Instance.weapon.GetComponent<Weapon>();
 
+        // restore health
+        ejik.health = ejik.initialHealth;
+        ejik.transform.position = new Vector3(0f, 0f, 0f);
         RenderTexture();
         Display();
     }

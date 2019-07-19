@@ -66,7 +66,6 @@ public class GameObjectWithHealth : MonoBehaviour
             if(agent.GetCumulativeReward() <= -academy.resetParameters["health"])
             {
                 agent.Done();
-                agent.ResetReward();
             }
             agent.Display();
         }

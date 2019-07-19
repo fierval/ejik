@@ -40,7 +40,7 @@ class ActorCritic(nn.Module):
 
         self.init_weights()
 
-        self.log_std = nn.Parameter(torch.zeros(act_size))
+        self.log_std = nn.Parameter(torch.zeros(1, act_size))
 
     def init_weights(self):
         self.actor.apply(xavier)
