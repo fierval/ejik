@@ -612,13 +612,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98f8a0c61be90c4a913a1128de8cfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 0.1
   takeDamageSound: {fileID: 8300000, guid: e4526951e00a26a498672018ddc3d746, type: 3}
-  enemyDeadReward: 0.01
+  enemyDeadReward: 0.1
   playerDeadReward: 0
   speed: 5
   enemyRadius: 4.158663
   deathSound: {fileID: 8300000, guid: b9a5127607f767b4eb13c1d93c2edccb, type: 3}
+  initialHealth: 0
 --- !u!50 &5836981518115633360
 Rigidbody2D:
   serializedVersion: 4
@@ -798,8 +799,8 @@ MonoBehaviour:
     agentCameras: []
     agentRenderTextures:
     - {fileID: 8400000, guid: 8c4a2be6a27797a46bb0be563b7219b8, type: 2}
-    maxStep: 2000
-    resetOnDone: 0
+    maxStep: 50000
+    resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 5
 --- !u!114 &1249913336

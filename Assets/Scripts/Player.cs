@@ -30,7 +30,7 @@ public class Player : GameObjectWithHealth
         anim = GetComponent<Animator>();
 
         healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();
-        healthSlider.maxValue = health;
+        healthSlider.maxValue = isMLRun ? 2 : health;
         healthSlider.value = health;
     }
 
@@ -67,7 +67,7 @@ public class Player : GameObjectWithHealth
         UpdateHealthUI();
 
         // no theatrics if this is not an ML run
-        if (health <= 0 && !isMLRun)
+        if (IsDead() && !isMLRun)
         {
             takeDamageSource.clip = deathSound;
             anim.SetTrigger("isDying");

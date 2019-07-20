@@ -281,9 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba5364ed98113146871f64cf337287c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0.2
+  health: 0.1
   takeDamageSound: {fileID: 8300000, guid: 37b0c2e980549224ca90c8f8b97ac79e, type: 3}
-  enemyDeadReward: 0.1
+  enemyDeadReward: 0.02
   playerDeadReward: 0
   player: {fileID: 0}
   attackSpeed: 1

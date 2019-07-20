@@ -35,11 +35,11 @@ public class GameObjectWithHealth : MonoBehaviour
 
     public virtual void TakeDamage(float damageAmount)
     {
-        bool isEnemy = gameObject.tag == "Enemy";
+        bool isEnemy = IsEnemy();
         float reward = isEnemy? 0 : -damageAmount;
 
         health -= damageAmount;
-        if (health <= 0)
+        if (IsDead())
         {
             if (isEnemy)
             {
@@ -58,12 +58,22 @@ public class GameObjectWithHealth : MonoBehaviour
         if(agent != null)
         {
             agent.AddReward(reward);
-            if(!isEnemy && health <=0)
+            if(!isEnemy && IsDead())
             {
                 agent.Done();
             }
             agent.Display();
         }
+    }
+
+    public bool IsDead()
+    {
+        return health < 0;
+    }
+
+    protected bool IsEnemy()
+    {
+        return gameObject.tag == "Enemy";
     }
 
 }

@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-  m_AmplitudeGain: 1.3
+  m_AmplitudeGain: 0
   m_FrequencyGain: 2
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &786270577
@@ -1801,7 +1801,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
     _brainsToControl:
     - {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
-  maxSteps: 60000
+  maxSteps: 100000
   trainingConfiguration:
     width: 1280
     height: 720
@@ -1827,7 +1827,7 @@ MonoBehaviour:
     - key: maxHorse
       value: 1
     - key: health
-      value: 0.1
+      value: 0
 --- !u!4 &1726231531
 Transform:
   m_ObjectHideFlags: 0
@@ -2069,32 +2069,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249913334, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: agentParameters.resetOnDone
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: agentParameters.onDemandDecision
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: agentParameters.numberOfActionsBetweenDecisions
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
-        type: 3}
-      propertyPath: enemyDeadReward
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
-        type: 3}
-      propertyPath: health
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}

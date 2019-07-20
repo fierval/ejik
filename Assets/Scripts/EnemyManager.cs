@@ -80,7 +80,7 @@ public class EnemyManager : MonoBehaviour
         enemies = enemies.Where(e => e != null).ToList();
 
         // don't spawn if the player is dead or we have reached our limit
-        if (player.health <= 0f) { return; }
+        if (player.IsDead()) { return; }
 
         if (!respawn && hasSpawned) { return; }
 
