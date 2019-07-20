@@ -43,26 +43,39 @@ class TrajectoryCollector:
     def to_tensor(x, dtype=np.float32):
         return torch.from_numpy(np.array(x).astype(dtype)).to(device)
 
-    def collect_visual_observation(self, env_info, actions=None, initial=False):
+    def collect_visual_observation(self, actions=None, initial=False):
         # frames are in CHW format, they come back from unity in HWC
-        observations = [self.to_tensor(env_info.visual_observations[0][0])]
+        observations = []
+        rewards = []
+        dones = []
+        
         if initial:
-            observations *= self.visual_state_size
-        else:
-            for i in range(1, self.visual_state_size):
-                # keep advancing with the current actions
-                env_info = self.env.step(actions)[self.brain_name]                
-                observations.append(self.to_tensor(env_info.visual_observations[0][0]))
-                if any(env_info.local_done):
-                    break
+            env_info = self.env.step(actions)[self.brain_name]
+            observations = [self.to_tensor(env_info.visual_observations[0][0])] * self.visual_state_size
+            return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0)
 
-            # done early!
-            # simply copy remaining states
-            if i < self.visual_state_size - 1:
-                for j in range(i + 1, self.visual_state_size):
-                    observations.append(observations[-1])
+        for i in range(self.visual_state_size):
+            # keep advancing with the current actions
+            env_info = self.env.step(actions, text_action="act")[self.brain_name]            
+            observations.append(self.to_tensor(env_info.visual_observations[0][0]))
+            rewards.append(env_info.rewards)
+            dones.append(env_info.local_done)
 
-        return env_info, torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0)
+            if any(env_info.local_done):
+                break
+
+        # done early!
+        # simply copy remaining states
+        if i < self.visual_state_size - 1:
+            for j in range(i + 1, self.visual_state_size):
+                observations.append(observations[-1])
+                rewards.append(rewards[-1])
+
+        rewards = np.array(rewards)
+        rewards = rewards.sum(axis=0)
+        dones = np.array(dones).sum(axis=0)
+
+        return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0), self.to_tensor(rewards), self.to_tensor(dones, dtype=np.bool)
        
 
     def reset(self):
@@ -70,22 +83,23 @@ class TrajectoryCollector:
 
         # for visual observations we are doing the stacking
         if self.is_visual:
-            _, self.last_states = self.collect_visual_observation(env_info, initial=True)
+            self.last_states = self.collect_visual_observation(initial=True)
         else:
             self.last_states = self.to_tensor(env_info.vector_observations)
 
     def next_observation(self, actions):
-        # agent will act on the action vector where everything is set to "0"
-        # signal it to ignore these actions and only listent to us
-        env_info = self.env.step(actions, text_action="act")[self.brain_name]
-        rewards = self.to_tensor(env_info.rewards)
-        dones = self.to_tensor(env_info.local_done, dtype=np.uint8)
             
         if self.is_visual:
-            env_info, next_states = self.collect_visual_observation(env_info)
+            next_states, rewards, dones = self.collect_visual_observation(actions, initial=False)
         else:            
+            # agent will act on the action vector where everything is set to "0"
+            # signal it to ignore these actions and only listent to us
+            env_info = self.env.step(actions, text_action="act")[self.brain_name]
+            rewards = self.to_tensor(env_info.rewards)
+            dones = self.to_tensor(env_info.local_done, dtype=np.uint8)
+
             next_states = self.to_tensor(env_info.vector_observations)
-        return env_info, next_states, rewards, dones
+        return next_states, rewards, dones
 
     def calc_returns(self, rewards, values, dones, last_values):
         n_step, n_agent = rewards.shape
@@ -140,14 +154,14 @@ class TrajectoryCollector:
             # one step forward
             actions_np = memory["actions"].cpu().numpy()
            
-            env_info, memory["next_states"], memory["rewards"], memory["dones"] = self.next_observation(actions_np)
+            memory["next_states"], memory["rewards"], memory["dones"] = self.next_observation(actions_np)
 
             # stack one step memory to buffer
             for k, v in memory.items():
                 buffer[k].append(v.unsqueeze(0))
 
             self.last_states = memory["next_states"]
-            r = np.array(env_info.rewards)[None,:]
+            r = np.array(memory["rewards"].cpu().numpy())[None,:]
             if self.rewards is None:
                 self.rewards = r
             else:

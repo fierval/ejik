@@ -27,7 +27,7 @@ GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
 NUM_CONSEQ_FRAMES = 4   # number of consequtive frames that make up a state
 
-debug = True
+debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 if __name__ == "__main__":
