@@ -25,13 +25,10 @@ class ActorCritic(nn.Module):
         conv_size = self.get_conv_out()
         fc_critic = self.hidden_layers() \
             + [Flatten(), 
-                nn.Linear(conv_size, conv_size // 2), 
-                nn.LeakyReLU(), 
-                nn.Linear(conv_size // 2, 1)]
+                nn.Linear(conv_size, 1)]
 
         fc_actor = self.hidden_layers() \
             + [Flatten(), 
-                nn.LeakyReLU(), 
                 nn.Linear(conv_size, self.action_dim), 
                 nn.Tanh()]
         
@@ -68,7 +65,7 @@ class ActorCritic(nn.Module):
 
         # actions are [-1, 1]
         if actions is None:
-            actions = torch.clamp(dist.sample(), -1, 1)
+            actions = dist.sample()
 
         log_prob = dist.log_prob(actions)
         entropy = dist.entropy()
