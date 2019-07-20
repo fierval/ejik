@@ -29,16 +29,18 @@ public class Weapon : MonoBehaviour
         
         SetShotDirection(GetShotDirection());
 
-        if ((Input.GetMouseButton(0) || Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && Time.time >= shotTime)
+        if (Input.GetMouseButton(0) || Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
         {
             Fire();
-            shotTime = Time.time + timeBetweenShots;
         }
     }
 
     public void Fire()
     {
+        if(!CanShoot()) { return; }
+
         Instantiate(projectile, shotPoint.position, transform.rotation);
+        shotTime = Time.time + timeBetweenShots;
     }
 
     Vector3 GetShotDirection()
@@ -58,6 +60,11 @@ public class Weapon : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().TakeDamage(swingDamage);
             Instantiate(explosion, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
         }
+    }
+
+    public bool CanShoot()
+    {
+        return Time.time >= shotTime;
     }
 
 }
