@@ -47,13 +47,20 @@ class TrajectoryCollector:
         # frames are in CHW format, they come back from unity in HWC
         observations = [self.to_tensor(env_info.visual_observations[0][0])]
         if initial:
-            observations = observations * self.visual_state_size
+            observations *= self.visual_state_size
         else:
-            for _ in range(self.visual_state_size - 1):
+            for i in range(1, self.visual_state_size):
                 # keep advancing with the current actions
                 env_info = self.env.step(actions)[self.brain_name]                
-                obs = self.to_tensor(env_info.visual_observations[0][0])
-                observations.append(obs)
+                observations.append(self.to_tensor(env_info.visual_observations[0][0]))
+                if any(env_info.local_done):
+                    break
+
+            # done early!
+            # simply copy remaining states
+            if i < self.visual_state_size - 1:
+                for j in range(i + 1, self.visual_state_size):
+                    observations.append(observations[-1])
 
         return env_info, torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0)
        

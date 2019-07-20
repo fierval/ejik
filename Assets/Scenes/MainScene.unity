@@ -1827,7 +1827,7 @@ MonoBehaviour:
     - key: maxHorse
       value: 1
     - key: health
-      value: 0.3
+      value: 0.1
 --- !u!4 &1726231531
 Transform:
   m_ObjectHideFlags: 0
@@ -2089,6 +2089,11 @@ PrefabInstance:
     - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
       propertyPath: enemyDeadReward
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
+        type: 3}
+      propertyPath: health
       value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
