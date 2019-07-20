@@ -1803,8 +1803,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bd41e49a40669ad4091c7e75caec6ad7, type: 2}
   maxSteps: 60000
   trainingConfiguration:
-    width: 800
-    height: 400
+    width: 1280
+    height: 720
     qualityLevel: 0
     timeScale: 10
     targetFrameRate: 60
@@ -1827,7 +1827,7 @@ MonoBehaviour:
     - key: maxHorse
       value: 1
     - key: health
-      value: 1
+      value: 0.3
 --- !u!4 &1726231531
 Transform:
   m_ObjectHideFlags: 0

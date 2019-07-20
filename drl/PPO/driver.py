@@ -88,6 +88,7 @@ if __name__ == "__main__":
     traj_attributes = ["states", "actions", "log_probs", "advantages", "returns"]
     solved = False
     start = None
+    step = 0
 
     with RewardTracker(writer, mean_window=AVG_WIN, print_every=AVG_WIN // 2) as reward_tracker:
         d = datetime.datetime.today()
@@ -108,6 +109,10 @@ if __name__ == "__main__":
 
             # first see our rewards and then train
             rewards = trajectory_collector.scores_by_episode[n_episodes : ]
+
+            # record the number of "dones" per trajectory
+            writer.add_scalar("episodes_per_trajectory", len(rewards), step)
+            step += 1
 
             end_time = time.time()
             for idx_r, reward in enumerate(rewards):

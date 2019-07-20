@@ -100,7 +100,7 @@ class RewardTracker:
 
         if epsilon is not None:
             self.writer.add_scalar("epsilon", epsilon, frame)
-        self.writer.add_scalar("reward_100", mean_reward, frame)
+        self.writer.add_scalar(f"reward_{self.mean_window}", mean_reward, frame)
         self.writer.add_scalar("reward", reward, frame)
         self.writer.add_scalar("duration", duration, frame)
         
