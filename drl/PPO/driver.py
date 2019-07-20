@@ -72,7 +72,7 @@ if __name__ == "__main__":
     # create policy to be trained & optimizer
     policy = ActorCritic(state_size, action_size).to(device)
 
-    writer = tensorboardX.SummaryWriter(comment=f"-ejik{SEED}")
+    writer = tensorboardX.SummaryWriter(comment=f"-ejik")
     
     trajectory_collector = TrajectoryCollector(env, policy, num_agents, tmax=TMAX, gamma=GAMMA, gae_lambda=GAE_LAMBDA, debug=debug, is_visual=True, visual_state_size=NUM_CONSEQ_FRAMES)
 

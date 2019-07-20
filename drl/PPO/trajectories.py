@@ -75,7 +75,7 @@ class TrajectoryCollector:
         rewards = rewards.sum(axis=0)
         dones = np.array(dones).sum(axis=0)
 
-        return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0), self.to_tensor(rewards), self.to_tensor(dones, dtype=np.bool)
+        return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0), self.to_tensor(rewards), self.to_tensor(dones, dtype=np.uint8)
        
 
     def reset(self):
