@@ -1806,7 +1806,7 @@ MonoBehaviour:
     width: 1280
     height: 720
     qualityLevel: 0
-    timeScale: 3
+    timeScale: 10
     targetFrameRate: 60
   inferenceConfiguration:
     width: 1280
@@ -1817,7 +1817,7 @@ MonoBehaviour:
   resetParameters:
     resetParameters:
     - key: playerDeadReward
-      value: -1
+      value: -0.5
     - key: minRaven
       value: 1
     - key: maxRaven
@@ -2069,6 +2069,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: agentParameters.maxStep
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5836981518551384565, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}

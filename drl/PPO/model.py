@@ -23,11 +23,13 @@ class ActorCritic(nn.Module):
         self.state_dim = obs_size
         
         conv_size = self.get_conv_out()
-        fc_critic = self.hidden_layers() \
+        self.fc_hidden = self.hidden_layers()
+
+        fc_critic = self.fc_hidden \
             + [Flatten(), 
                 nn.Linear(conv_size, 1)]
 
-        fc_actor = self.hidden_layers() \
+        fc_actor = self.fc_hidden \
             + [Flatten(), 
                 nn.Linear(conv_size, self.action_dim), 
                 nn.Tanh()]

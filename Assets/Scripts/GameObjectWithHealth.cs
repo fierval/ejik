@@ -53,6 +53,7 @@ public class GameObjectWithHealth : MonoBehaviour
         else
         {
             takeDamageSource.Play();
+            reward = playerDeadReward;
         }
 
         if(agent != null)
