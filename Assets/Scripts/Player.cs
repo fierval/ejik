@@ -30,7 +30,7 @@ public class Player : GameObjectWithHealth
         anim = GetComponent<Animator>();
 
         healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();
-        healthSlider.maxValue = isMLRun ? 2 : health;
+        healthSlider.maxValue = isMLRun ? 1 : health;
         healthSlider.value = health;
     }
 

@@ -1806,7 +1806,7 @@ MonoBehaviour:
     width: 1280
     height: 720
     qualityLevel: 0
-    timeScale: 10
+    timeScale: 3
     targetFrameRate: 60
   inferenceConfiguration:
     width: 1280
@@ -1827,7 +1827,7 @@ MonoBehaviour:
     - key: maxHorse
       value: 1
     - key: health
-      value: 0
+      value: 0.5
 --- !u!4 &1726231531
 Transform:
   m_ObjectHideFlags: 0
@@ -2069,6 +2069,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836981518551384565, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
+        type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
