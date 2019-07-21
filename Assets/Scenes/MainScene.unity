@@ -1819,9 +1819,9 @@ MonoBehaviour:
     - key: playerDeadReward
       value: -1
     - key: minRaven
-      value: 3
+      value: 1
     - key: maxRaven
-      value: 6
+      value: 3
     - key: minHorse
       value: 0
     - key: maxHorse
