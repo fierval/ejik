@@ -52,6 +52,8 @@ class ActorCritic(nn.Module):
             nn.Conv2d(16, 32, 4, stride=2),
             nn.LeakyReLU(),
             nn.Conv2d(32, 64, 3, stride=2),
+            nn.LeakyReLU(),
+            nn.Conv2d(64, 64, 3, stride=1)
         ]
 
     def get_conv_out(self):
