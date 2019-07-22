@@ -43,6 +43,19 @@ class TrajectoryCollector:
     def to_tensor(x, dtype=np.float32):
         return torch.from_numpy(np.array(x).astype(dtype)).to(device)
 
+    @staticmethod
+    def get_agent_observations(env_info):
+        '''
+        Retrieve all visual observations for all agents
+        '''
+
+        obs = np.squeeze(np.array(env_info.visual_observations), axis=1)
+        return TrajectoryCollector.to_tensor(obs)
+
+    @staticmethod
+    def get_torch_obs(observations):
+        return torch.cat(observations, dim=3).permute(0, 3, 1, 2)
+
     def collect_visual_observation(self, actions=None, initial=False):
         # frames are in CHW format, they come back from unity in HWC
         observations = []
@@ -51,13 +64,17 @@ class TrajectoryCollector:
         
         if initial:
             env_info = self.env.step(actions)[self.brain_name]
-            observations = [self.to_tensor(env_info.visual_observations[0][0])] * self.visual_state_size
-            return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0)
+        
+            observations = [self.get_agent_observations(env_info)] * self.visual_state_size
+            return self.get_torch_obs(observations)
 
         for i in range(self.visual_state_size):
             # keep advancing with the current actions
             env_info = self.env.step(actions, text_action="act")[self.brain_name]            
-            observations.append(self.to_tensor(env_info.visual_observations[0][0]))
+
+            obs_per_agent = np.array(env_info.visual_observations)
+            observations.append(self.get_agent_observations(env_info))
+
             rewards.append(env_info.rewards)
             dones.append(env_info.local_done)
 
@@ -75,7 +92,7 @@ class TrajectoryCollector:
         rewards = rewards.sum(axis=0)
         dones = np.array(dones).sum(axis=0)
 
-        return torch.cat(observations, dim=2).permute(2, 0, 1).unsqueeze(0), self.to_tensor(rewards), self.to_tensor(dones, dtype=np.uint8)
+        return self.get_torch_obs(observations), self.to_tensor(rewards), self.to_tensor(dones, dtype=np.uint8)
        
 
     def reset(self):
