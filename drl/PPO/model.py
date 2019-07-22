@@ -41,6 +41,9 @@ class ActorCritic(nn.Module):
         self.actor = nn.Sequential(*fc_actor)
         self.critic = nn.Sequential(*fc_critic)
 
+        print(f"Actor: {self.actor}")
+        print(f"Critic: {self.critic}")
+
         self.init_weights()
 
         self.log_std = nn.Parameter(torch.zeros(1, act_size))
