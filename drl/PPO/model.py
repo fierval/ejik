@@ -27,11 +27,15 @@ class ActorCritic(nn.Module):
 
         fc_critic = self.fc_hidden \
             + [Flatten(), 
-                nn.Linear(conv_size, 1)]
+                nn.Linear(conv_size, conv_size // 2),
+                nn.LeakyReLU(),
+                nn.Linear(conv_size // 2, 1)]
 
         fc_actor = self.fc_hidden \
             + [Flatten(), 
-                nn.Linear(conv_size, self.action_dim), 
+                nn.Linear(conv_size, conv_size // 2),
+                nn.Tanh(),
+                nn.Linear(conv_size // 2, self.action_dim), 
                 nn.Tanh()]
         
         self.actor = nn.Sequential(*fc_actor)
