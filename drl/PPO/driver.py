@@ -13,7 +13,7 @@ from trajectories import TrajectoryCollector
 import torch.optim.lr_scheduler as lr_scheduler
 
 
-LR = 1e-03              # learing rate
+LR = 5e-04              # learing rate
 EPSILON = 0.1           # action clipping param: [1-EPSILON, 1+EPSILON]
 BETA = 0.01             # regularization parameter for entropy term
 EPOCHS = 100              # train for this number of epochs at a time
@@ -22,7 +22,7 @@ AVG_WIN = 100           # moving average over...
 SEED = 12                # leave everything to chance
 BATCH_SIZE = 128         # number of tgajectories to collect for learning
 SOLVED_SCORE = 0.5      # score at which we are done
-STEP_DECAY = 2000       # when to decay learning rate
+STEP_DECAY = 3000       # when to decay learning rate
 GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
 NUM_CONSEQ_FRAMES = 4   # number of consequtive frames that make up a state
