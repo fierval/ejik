@@ -35,8 +35,5 @@
   <ItemGroup>
     <Folder Include="PPO" />
   </ItemGroup>
-  <ItemGroup>
-    <InterpreterReference Include="CondaEnv|CondaEnv|ejik" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>
