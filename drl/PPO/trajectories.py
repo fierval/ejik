@@ -15,7 +15,7 @@ class TrajectoryCollector:
             "values", "advantages", "returns"
         ]
 
-    def __init__(self, env, policy, num_agents, tmax=3, gamma = 0.99, gae_lambda = 0.96, is_visual = False, visual_state_size=1, debug = False):
+    def __init__(self, env, policy, num_agents, tmax=3, gamma = 0.99, gae_lambda = 0.96, is_visual = False, visual_state_size=1, debug = False, is_training=True):
         self.env = env
         self.policy = policy
 
@@ -37,6 +37,7 @@ class TrajectoryCollector:
         self.action_space_size = self.env.brains[self.brain_name].vector_action_space_size[0]
 
         self.last_states = None
+        self.is_training = is_training
         self.reset()
 
     @staticmethod
@@ -96,7 +97,7 @@ class TrajectoryCollector:
        
 
     def reset(self):
-        env_info = self.env.reset(train_mode=True)[self.brain_name]
+        env_info = self.env.reset(train_mode=self.is_training)[self.brain_name]
 
         # for visual observations we are doing the stacking
         if self.is_visual:

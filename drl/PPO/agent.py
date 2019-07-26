@@ -9,7 +9,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class PPOAgent():
     """Interacts with and learns from the environment."""
 
-    def __init__(self, policy, tb_tracker, lr, epsilon, beta):
+    def __init__(self, policy, tb_tracker=None, lr=None, epsilon=None, beta=None):
         """Initialize an Agent object.
         
         Params
@@ -25,26 +25,22 @@ class PPOAgent():
         
         self.policy = policy
         self.tb_tracker = tb_tracker
-
-        self.optimizer = torch.optim.Adam(self.policy.parameters(), lr=lr)        
-        self.beta = beta
-        self.epsilon = epsilon
+        
+        if lr is not None:
+            self.optimizer = torch.optim.Adam(self.policy.parameters(), lr=lr)        
+            self.beta = beta
+            self.epsilon = epsilon
         
         # Initialize time step (for updating every UPDATE_EVERY steps)
         self.t_step = 0
 
-    def act(self, state, idx):
-        state = torch.from_numpy(state).float().unsqueeze(0).to(device)
-        idx = torch.tensor([idx], dtype=torch.float32, device=device).unsqueeze(0)
-
-        state = torch.cat((state, idx), dim=1)
-
+    def act(self, state):
         self.policy.eval()
         with torch.no_grad():
-            actions, _, _ = self.policy(state)
+            actions, _, _, _ = self.policy(state)
         self.policy.train()
 
-        return torch.clamp(actions, -1, 1)
+        return actions
 
     def learn(self, old_log_probs, states, actions, advantages, returns):
         """Learning step
