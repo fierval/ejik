@@ -25,7 +25,7 @@ SOLVED_SCORE = 0.5      # score at which we are done
 STEP_DECAY = 3000       # when to decay learning rate
 GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
-NUM_CONSEQ_FRAMES = 5   # number of consequtive frames that make up a state
+NUM_CONSEQ_FRAMES = 6   # number of consequtive frames that make up a state
 
 debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
