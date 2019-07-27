@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e27dd08e1449040a61e494688f3015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doesColorChangeOnHover: 1
+  doesColorChangeOnHover: 0
   hoverColor: {r: 1, g: 0.2352941, b: 0.88667095, a: 1}
 --- !u!1 &1762619449
 GameObject:
@@ -512,7 +512,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1762619451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 8.5625
+  m_padding: 0
   m_canvasRenderer: {fileID: 1762619452}
   m_TextComponent: {fileID: 1342888610}
   m_materialReferenceIndex: 1
@@ -620,12 +620,12 @@ PrefabInstance:
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -31.9
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 203
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
@@ -645,7 +645,7 @@ PrefabInstance:
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
@@ -655,7 +655,7 @@ PrefabInstance:
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
@@ -665,17 +665,17 @@ PrefabInstance:
     - target: {fileID: 4750997699565390099, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 163
+      value: 174
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 31
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
@@ -690,7 +690,7 @@ PrefabInstance:
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_text
-      value: 'Ejik AI
+      value: 'Ejik AI Playground
 
         by Boris Kogan
 
@@ -723,7 +723,7 @@ PrefabInstance:
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 30
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
@@ -744,6 +744,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.linkCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 731a92a7c6a31b44da7324c46b50b020, type: 3}
