@@ -12,7 +12,7 @@ class Flatten(nn.Module):
         return x.view(x.size()[0], -1)
 
 class ActorCritic(nn.Module):
-    def __init__(self, obs_size, act_size):
+    def __init__(self, obs_size, act_size, model_path=None):
         '''
         obs_size - (C, H, W) tuple of a visual observation
         act_size - action space size
@@ -40,13 +40,16 @@ class ActorCritic(nn.Module):
         
         self.actor = nn.Sequential(*fc_actor)
         self.critic = nn.Sequential(*fc_critic)
+        self.log_std = nn.Parameter(torch.zeros(1, act_size))
 
         print(f"Actor: {self.actor}")
         print(f"Critic: {self.critic}")
+        
+        if model_path is None:
+            self.init_weights()
+        else:
+            self.load_state_dict(torch.load(model_path))
 
-        self.init_weights()
-
-        self.log_std = nn.Parameter(torch.zeros(1, act_size))
 
     def init_weights(self):
         self.actor.apply(xavier)

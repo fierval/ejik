@@ -27,6 +27,7 @@
     <Compile Include="driver.py" />
     <Compile Include="PPO\agent.py" />
     <Compile Include="PPO\driver.py" />
+    <Compile Include="PPO\eval.py" />
     <Compile Include="PPO\model.py" />
     <Compile Include="PPO\trajectories.py" />
     <Compile Include="PPO\utils.py" />

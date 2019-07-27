@@ -56,8 +56,8 @@ if __name__ == "__main__":
     state_size = list(states[0][0].transpose(2, 0, 1).shape)
     state_size[0] *= NUM_CONSEQ_FRAMES
     
-    # create policy to be trained & optimizer
-    policy = ActorCritic(state_size, action_size).to(device)
+    # create policy
+    policy = ActorCritic(state_size, action_size, model_path=ckpt_path).to(device)
 
     trajectory_collector = TrajectoryCollector(env, policy, num_agents, is_visual=True, visual_state_size=NUM_CONSEQ_FRAMES, is_training=False)
 
@@ -65,6 +65,18 @@ if __name__ == "__main__":
     
     state = trajectory_collector.last_states
 
+    sum_reward = 0
     for ep in range(MAX_EPISODE_LENGTH):
         actions = agent.act(state).cpu().numpy()
-        next_states, rewards, _dones = ttrajectory_collector.next_observation()
+        next_states, rewards, dones = trajectory_collector.next_observation()
+
+        rewards = rewards.cpu().numpy()
+        dones = dones.cpu.numpy()
+        
+        sum_reward += rewards.sum()
+        
+        state = next_states
+        if np.any(dones):
+            print(f"{ep}: total reward: {sum_reward}")
+            break
+            
