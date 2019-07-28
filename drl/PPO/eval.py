@@ -19,7 +19,9 @@ debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 ax2 = ax1 = None
 
-def plot(num_episodes, rewards, episode_lengths, avg_episode_length, is_random):
+def plot(rewards, episode_lengths, is_random):
+    plt.figure(figsize=(10, 10))
+
     global ax1, ax2
 
     if ax1 is None:
@@ -109,5 +111,9 @@ if __name__ == "__main__":
                     break
 
         avg_episode_length = sum(episode_lengths) / NUM_RUNS
-        plot(NUM_RUNS, avg_rewards, episode_lengths, avg_episode_length, is_random)
+        print(f"Average episode length: {avg_episode_length:.2f}")
+
+        plot(avg_rewards, episode_lengths, is_random)
+
+    plt.savefig(r'c:\temp\comparison.png')
     plt.show()
