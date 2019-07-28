@@ -13,14 +13,14 @@ import matplotlib.pyplot as plt
 
 MAX_EPISODE_LENGTH = 2000
 NUM_CONSEQ_FRAMES = 6
-NUM_RUNS = 3
+NUM_RUNS = 100
 
 debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 ax2 = ax1 = None
+plt.figure(figsize=(20, 10))
 
 def plot(rewards, episode_lengths, is_random):
-    plt.figure(figsize=(10, 10))
 
     global ax1, ax2
 
@@ -116,4 +116,4 @@ if __name__ == "__main__":
         plot(avg_rewards, episode_lengths, is_random)
 
     plt.savefig(r'c:\temp\comparison.png')
-    plt.show()
+    #plt.show()
