@@ -2072,7 +2072,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
       propertyPath: agentParameters.maxStep
-      value: 2000
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: agentParameters.onDemandDecision
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5836981518551384565, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
