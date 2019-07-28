@@ -9,21 +9,40 @@ from mlagents.envs import UnityEnvironment
 from agent import PPOAgent
 from trajectories import TrajectoryCollector
 from argparse import ArgumentParser
+import matplotlib.pyplot as plt
 
 MAX_EPISODE_LENGTH = 2000
+NUM_CONSEQ_FRAMES = 6
+NUM_RUNS = 3
 
 debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+ax2 = ax1 = None
+
+def plot(num_episodes, rewards, episode_lengths, avg_episode_length, is_random):
+    global ax1, ax2
+
+    if ax1 is None:
+        ax1 = plt.subplot(121)
+        ax1.set_title(f'Average reward')
+    ax1.plot(rewards, label= "random" if is_random else "brain")
+    ax1.legend()
+    if ax2 is None:
+        ax2 = plt.subplot(122)
+        ax2.set_title("Episode length")
+    ax2.plot(episode_lengths, label= "random" if is_random else "brain")
+    ax2.legend()
 
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument("-m", "--model", default=None, help="full path to the model")
-
-    return parser
+    
+    args = parser.parse_args()
+    return args
 
 if __name__ == "__main__":
-
-    ckpt_path = parse_args.model
+    
+    ckpt_path = parse_args().model
 
     root_path = os.path.split(os.path.split(__file__)[0])[0]
     if root_path == '':
@@ -31,8 +50,6 @@ if __name__ == "__main__":
 
     # where the environment file is located
     env_path = os.path.join(root_path, "../env/ejik")
-    # where to save the model
-    ckpt_path = os.path.join(root_path, "saved_model")
 
     if debug:
         env = UnityEnvironment(file_name=None)
@@ -42,7 +59,7 @@ if __name__ == "__main__":
     brain_name = env.brain_names[0]
     brain = env.brains[brain_name]
 
-    env_info = env.reset(train_mode=True)[brain_name]
+    env_info = env.reset(train_mode=False)[brain_name]
 
     num_agents = len(env_info.agents)
     print('Number of agents:', num_agents)
@@ -64,19 +81,33 @@ if __name__ == "__main__":
     agent = PPOAgent(policy)
     
     state = trajectory_collector.last_states
+    is_random_run = [False, True]
 
-    sum_reward = 0
-    for ep in range(MAX_EPISODE_LENGTH):
-        actions = agent.act(state).cpu().numpy()
-        next_states, rewards, dones = trajectory_collector.next_observation()
+    for is_random in is_random_run:
+        print(f"Staring {'' if is_random else 'non' } random run...")
+        avg_rewards = []
+        avg_episode_length = 0
+        episode_lengths = []
+        for _ in range(NUM_RUNS):
+            sum_reward = 0
+            for ep in range(MAX_EPISODE_LENGTH):
+                if not is_random: 
+                    actions = agent.act(state).cpu().numpy()
+                else:
+                    actions = np.random.randn(4)
+                next_states, rewards, dones = trajectory_collector.next_observation(actions)
 
-        rewards = rewards.cpu().numpy()
-        dones = dones.cpu.numpy()
-        
-        sum_reward += rewards.sum()
-        
-        state = next_states
-        if np.any(dones):
-            print(f"{ep}: total reward: {sum_reward}")
-            break
-            
+                sum_reward += rewards.cpu().sum()
+
+                state = next_states
+                if np.any(dones.cpu().numpy()):
+                    trajectory_collector.reset()
+                    state = trajectory_collector.last_states
+                    avg_rewards.append(sum_reward / (ep + 1))
+                    episode_lengths.append(ep + 1)
+                    print(f"total time: {ep}: total reward: {sum_reward:.3f}: avg reward: {sum_reward / (ep + 1): .3f}")
+                    break
+
+        avg_episode_length = sum(episode_lengths) / NUM_RUNS
+        plot(NUM_RUNS, avg_rewards, episode_lengths, avg_episode_length, is_random)
+    plt.show()
