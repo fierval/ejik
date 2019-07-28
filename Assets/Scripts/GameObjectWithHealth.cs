@@ -49,11 +49,14 @@ public class GameObjectWithHealth : MonoBehaviour
                 ejik.health += enemyDeadReward;
                 reward = enemyDeadReward;
             }
+            else
+            {
+                reward = playerDeadReward;
+            }
         }
         else
         {
             takeDamageSource.Play();
-            reward = playerDeadReward;
         }
 
         if(agent != null)

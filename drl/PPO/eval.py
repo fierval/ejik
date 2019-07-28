@@ -10,10 +10,11 @@ from agent import PPOAgent
 from trajectories import TrajectoryCollector
 from argparse import ArgumentParser
 import matplotlib.pyplot as plt
+import pandas as pd
 
 MAX_EPISODE_LENGTH = 2000
 NUM_CONSEQ_FRAMES = 6
-NUM_RUNS = 100
+NUM_RUNS = 300
 
 debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -38,21 +39,29 @@ def plot(rewards, episode_lengths, is_random):
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument("-m", "--model", default=None, help="full path to the model")
-    
+    parser.add_argument("-o", "--out_dir", default=None, help="output directory")
+
     args = parser.parse_args()
     return args
 
 if __name__ == "__main__":
-    
-    ckpt_path = parse_args().model
 
+    debug = True
+    
+    args = parse_args()
+    ckpt_path = args.model
+    out_dir = args.out_dir
+    
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir)
+    
     root_path = os.path.split(os.path.split(__file__)[0])[0]
     if root_path == '':
         root_path = os.path.abspath("..")
 
     # where the environment file is located
     env_path = os.path.join(root_path, "../env/ejik")
-
+    
     if debug:
         env = UnityEnvironment(file_name=None)
     else:
@@ -87,33 +96,37 @@ if __name__ == "__main__":
 
     for is_random in is_random_run:
         print(f"Staring {'' if is_random else 'non' } random run...")
-        avg_rewards = []
+        total_rewards = []
         avg_episode_length = 0
         episode_lengths = []
-        for _ in range(NUM_RUNS):
+        for i_run in range(NUM_RUNS):
             sum_reward = 0
             for ep in range(MAX_EPISODE_LENGTH):
                 if not is_random: 
-                    actions = agent.act(state).cpu().numpy()
+                    actions = [0, 0, 0, 0] #agent.act(state).cpu().numpy()
                 else:
                     actions = np.random.randn(4)
                 next_states, rewards, dones = trajectory_collector.next_observation(actions)
 
-                sum_reward += rewards.cpu().sum()
+                sum_reward += rewards.cpu().numpy().sum()
 
                 state = next_states
                 if np.any(dones.cpu().numpy()):
                     trajectory_collector.reset()
                     state = trajectory_collector.last_states
-                    avg_rewards.append(sum_reward / (ep + 1))
+                    total_rewards.append(sum_reward)
                     episode_lengths.append(ep + 1)
-                    print(f"total time: {ep}: total reward: {sum_reward:.3f}: avg reward: {sum_reward / (ep + 1): .3f}")
+                    print(f"{i_run + 1} of {NUM_RUNS}: total time: {ep + 1}: total reward: {sum_reward:.3f}")
                     break
-
+        
+        df = pd.DataFrame(data = {"length": episode_lengths, "reward": total_rewards})
+        df.to_csv(os.path.join(out_dir, r'random.csv') if is_random else os.path.join(out_dir, r'brain.csv'), index=False)
         avg_episode_length = sum(episode_lengths) / NUM_RUNS
+
         print(f"Average episode length: {avg_episode_length:.2f}")
+        print(f"Average reward: {sum(total_rewards) / sum(episode_lengths):.3f}")
 
-        plot(avg_rewards, episode_lengths, is_random)
+        plot(total_rewards, episode_lengths, is_random)
 
-    plt.savefig(r'c:\temp\comparison.png')
+    plt.savefig(os.path.join(out_dir, r'comparison.png'))
     #plt.show()
