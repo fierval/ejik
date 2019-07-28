@@ -46,7 +46,7 @@ def parse_args():
 
 if __name__ == "__main__":
 
-    debug = True
+    debug = False
     
     args = parse_args()
     ckpt_path = args.model
@@ -103,7 +103,7 @@ if __name__ == "__main__":
             sum_reward = 0
             for ep in range(MAX_EPISODE_LENGTH):
                 if not is_random: 
-                    actions = [0, 0, 0, 0] #agent.act(state).cpu().numpy()
+                    actions = agent.act(state).cpu().numpy()
                 else:
                     actions = np.random.randn(4)
                 next_states, rewards, dones = trajectory_collector.next_observation(actions)
