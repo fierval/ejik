@@ -101,7 +101,7 @@ if __name__ == "__main__":
         episode_lengths = []
         for i_run in range(NUM_RUNS):
             sum_reward = 0
-            for ep in range(MAX_EPISODE_LENGTH):
+            while True:
                 if not is_random: 
                     actions = agent.act(state).cpu().numpy()
                 else:

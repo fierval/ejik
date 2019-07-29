@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{bb11c2c4-c571-4908-831c-6b10beecff5d}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>PPO\driver.py</StartupFile>
+    <StartupFile>PPO\eval.py</StartupFile>
     <SearchPath>PPO</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -14,7 +14,7 @@
     <InterpreterId>CondaEnv|CondaEnv|ejik</InterpreterId>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <IsWindowsApplication>False</IsWindowsApplication>
-    <CommandLineArguments>-m C:\git\unity\ejik\drl\saved_model\all_enemies_6frames_1.60.pth -o c:\temp\ejik</CommandLineArguments>
+    <CommandLineArguments>-m C:\git\unity\ejik\drl\saved_model\checkpoint_actor_0.790.pth -o C:\git\unity\ejik\drl\eval\6_frames_3_interval</CommandLineArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />

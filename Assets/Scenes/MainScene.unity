@@ -1811,8 +1811,8 @@ MonoBehaviour:
   inferenceConfiguration:
     width: 1280
     height: 720
-    qualityLevel: 2
-    timeScale: 1
+    qualityLevel: 0
+    timeScale: 10
     targetFrameRate: 60
   resetParameters:
     resetParameters:
