@@ -101,7 +101,9 @@ if __name__ == "__main__":
         episode_lengths = []
         for i_run in range(NUM_RUNS):
             sum_reward = 0
+            ep = 0
             while True:
+                ep += 1
                 if not is_random: 
                     actions = agent.act(state).cpu().numpy()
                 else:
@@ -115,8 +117,8 @@ if __name__ == "__main__":
                     trajectory_collector.reset()
                     state = trajectory_collector.last_states
                     total_rewards.append(sum_reward)
-                    episode_lengths.append(ep + 1)
-                    print(f"{i_run + 1} of {NUM_RUNS}: total time: {ep + 1}: total reward: {sum_reward:.3f}")
+                    episode_lengths.append(ep)
+                    print(f"{i_run + 1} of {NUM_RUNS}: total time: {ep}: total reward: {sum_reward:.3f}")
                     break
         
         df = pd.DataFrame(data = {"length": episode_lengths, "reward": total_rewards})
