@@ -57,11 +57,11 @@ class ActorCritic(nn.Module):
 
     def hidden_layers(self):
         return [
-            nn.Conv2d(self.state_dim[0], 32, 4, stride=4),
+            nn.Conv2d(self.state_dim[0], 16, 4, stride=4),
             nn.LeakyReLU(),
-            nn.Conv2d(32, 64, 4, stride=2),
+            nn.Conv2d(16, 32, 3, stride=2),
             nn.LeakyReLU(),
-            nn.Conv2d(64, 16, 3, stride=1),
+            nn.Conv2d(32, 64, 3, stride=2),
         ]
 
     def get_conv_out(self):
