@@ -87,7 +87,7 @@ class TrajectoryCollector:
         if i < self.visual_state_size - 1:
             for j in range(i + 1, self.visual_state_size):
                 observations.append(observations[-1])
-                rewards.append(0)
+                rewards.append(np.zeros_like(np.array(env_info.rewards)))
 
         rewards = np.array(rewards)
         rewards = rewards.sum(axis=0)

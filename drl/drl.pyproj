@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{bb11c2c4-c571-4908-831c-6b10beecff5d}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>PPO\driver.py</StartupFile>
+    <StartupFile>PPO\eval.py</StartupFile>
     <SearchPath>PPO</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
