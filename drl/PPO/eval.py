@@ -12,9 +12,8 @@ from argparse import ArgumentParser
 import matplotlib.pyplot as plt
 import pandas as pd
 
-MAX_EPISODE_LENGTH = 2000
 NUM_CONSEQ_FRAMES = 6
-NUM_RUNS = 300
+NUM_RUNS = 1000
 
 debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
