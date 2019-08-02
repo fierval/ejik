@@ -35,6 +35,9 @@ public class GameObjectWithHealth : MonoBehaviour
 
     public virtual void TakeDamage(float damageAmount)
     {
+        // may get attacked even after death
+        if (IsDead()) { return; }
+
         bool isEnemy = IsEnemy();
         float reward = isEnemy? 0 : -damageAmount;
 
