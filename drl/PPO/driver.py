@@ -27,6 +27,7 @@ GAMMA = 0.99            # discount factor
 GAE_LAMBDA = 0.96       # lambda-factor in the advantage estimator for PPO
 NUM_CONSEQ_FRAMES = 6   # number of consequtive frames that make up a state
 
+SAVE_EVERY = 1
 debug = False
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -122,7 +123,7 @@ if __name__ == "__main__":
                 scheduler.step()
 
                 # keep current spectacular scores
-                if reward > max_score:
+                if reward > max_score or (n_episodes + idx_r) % SAVE_EVERY == 0:
                     torch.save(policy.state_dict(), os.path.join(ckpt_path, f'checkpoint_actor_{reward:.03f}.pth'))
                     max_score = reward
 
