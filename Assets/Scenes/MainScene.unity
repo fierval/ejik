@@ -697,7 +697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504318048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.1969304, y: 0.05578056, z: -7.187498}
+  m_LocalPosition: {x: 6.1159277, y: 0.1161249, z: -7.187498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917690193}
@@ -911,7 +911,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610289986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.19693, y: 0.022952706, z: -7.187498}
+  m_LocalPosition: {x: 6.1159296, y: 0.1759527, z: -7.187498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 693736414}
@@ -1949,9 +1949,9 @@ MonoBehaviour:
     - key: playerDeadReward
       value: -0.5
     - key: minRaven
-      value: 2
+      value: 3
     - key: maxRaven
-      value: 8
+      value: 6
     - key: minHorse
       value: 0
     - key: maxHorse
@@ -2150,12 +2150,12 @@ PrefabInstance:
     - target: {fileID: 5836981518115633367, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.081
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5836981518115633367, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.153
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5836981518115633367, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
@@ -2202,27 +2202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: agentParameters.maxStep
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: agentParameters.onDemandDecision
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249913329, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}
-      propertyPath: agentParameters.numberOfActionsBetweenDecisions
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5836981518551384565, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
+    - target: {fileID: 4559919610560677598, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
         type: 3}
-      propertyPath: timeBetweenShots
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5836981518115633366, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4,
-        type: 3}
-      propertyPath: health
-      value: 0.5
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78cd4f946ec3bd14fa1ff45e9372a4a4, type: 3}

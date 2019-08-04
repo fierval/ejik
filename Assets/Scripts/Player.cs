@@ -11,6 +11,8 @@ public class Player : GameObjectWithHealth
     [Tooltip("Radius within which no enemy initially appears")]
     public float enemyRadius = 1;
 
+    public GameObject DeadText;
+
     Rigidbody2D rb;
 
     Vector2 moveAmount;
@@ -84,7 +86,17 @@ public class Player : GameObjectWithHealth
     public void OnDeath()
     {
         // we don't just die if this is an ml run
-        if (isMLRun) { return; }
+        if (isMLRun)
+        {
+            if (DeadText)
+            {
+                var dt = Instantiate(DeadText, transform);
+                Destroy(dt, 2f);
+            }
+
+            return;
+        }
+
 
         gameObject.GetComponentInChildren<Weapon>().gameObject.SetActive(false);
         takeDamageSource.Play();

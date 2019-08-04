@@ -69,12 +69,14 @@ public class GameObjectWithHealth : MonoBehaviour
             takeDamageSource.Play();
         }
 
+        //TODO: Move to the derived class
         if(agent != null)
         {
             agent.AddReward(reward);
             if(!isEnemy && IsDead())
             {
                 agent.Done();
+                ejik.OnDeath();
             }
             agent.Display();
         }

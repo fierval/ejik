@@ -130,6 +130,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -210,6 +211,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -290,6 +292,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -369,6 +372,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -449,6 +453,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -529,6 +534,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -612,12 +618,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98f8a0c61be90c4a913a1128de8cfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0.1
+  health: 0.5
   takeDamageSound: {fileID: 8300000, guid: e4526951e00a26a498672018ddc3d746, type: 3}
   enemyDeadReward: 0.1
   playerDeadReward: 0
   speed: 5
   enemyRadius: 4.158663
+  DeadText: {fileID: 7946893438561658132, guid: cf8aea2687256c94c9ea24df7f97fb89,
+    type: 3}
   deathSound: {fileID: 8300000, guid: b9a5127607f767b4eb13c1d93c2edccb, type: 3}
   initialHealth: 0
 --- !u!50 &5836981518115633360
@@ -799,10 +807,10 @@ MonoBehaviour:
     agentCameras: []
     agentRenderTextures:
     - {fileID: 8400000, guid: 8c4a2be6a27797a46bb0be563b7219b8, type: 2}
-    maxStep: 50000
+    maxStep: 3000
     resetOnDone: 1
     onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 5
+    numberOfActionsBetweenDecisions: 3
 --- !u!114 &1249913336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,6 +879,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -950,6 +959,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1077,6 +1087,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084626702689614261, guid: 729c2e3fc5c0ce04e97864293db45908,
+        type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2084626702767587618, guid: 729c2e3fc5c0ce04e97864293db45908,
         type: 3}
