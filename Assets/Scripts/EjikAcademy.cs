@@ -8,6 +8,8 @@ public class EjikAcademy : Academy
     GameObject enemyManager;
     Player ejik;
 
+    public bool backgroundMusic;
+
     public override void InitializeAcademy()
     {
         enemyManager = GameObject.Find("EnemyManager");
@@ -29,9 +31,13 @@ public class EjikAcademy : Academy
         ejik.health = resetParameters["health"];
         ejik.initialHealth = ejik.health;
         ejik.playerDeadReward = resetParameters["playerDeadReward"];
-        
+
+
         //mute all sounds if we are running the environment
-        AudioListener.volume = 0;
+        if (!backgroundMusic || !GetIsInference())
+        {
+            AudioListener.volume = 0;
+        }
 
         foreach (var manager in managers)
         {

@@ -18,12 +18,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void OnGUI()
-    {
-        GUI.skin.label.fontSize = 30;
-        GUI.Label(new Rect(20, 20, 100, 100), ((int)(1f / Time.smoothDeltaTime)).ToString());    
-    }
-
     public GameObject player;
     public GameObject enemyDeathEffect;
     public GameObject academy;
