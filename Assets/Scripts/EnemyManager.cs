@@ -31,13 +31,21 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = PlayerManager.Instance.player.GetComponent<Player>();
+        try
+        {
+            player = PlayerManager.Instance.player.GetComponent<Player>();
+        }
+        catch
+        {
+            player = null;
+        }
+
         enemies = new List<GameObject>();
         hasSpawned = false;
 
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 
-        InvokeRepeating("Spawn", 0, spawnTime);
+        InvokeRepeating("Spawn", 0.1f, spawnTime);
 
         string minEnemy = string.Empty, maxEnemy = string.Empty;
     }
@@ -77,6 +85,17 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn()
     {
+        try
+        {
+            player = PlayerManager.Instance.player.GetComponent<Player>();
+        }
+        catch
+        {
+            player = null;
+        }
+
+        if (player == null) { return; }
+
         enemies = enemies.Where(e => e != null).ToList();
 
         // don't spawn if the player is dead or we have reached our limit

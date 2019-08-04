@@ -14,7 +14,7 @@
     <InterpreterId>CondaEnv|CondaEnv|ejik</InterpreterId>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <IsWindowsApplication>False</IsWindowsApplication>
-    <CommandLineArguments>-m C:\git\unity\ejik\drl\saved_model\all_enemies_3_frames_net2_1.320.pth -o C:\git\unity\ejik\drl\eval\6_frames_3_interval_net2</CommandLineArguments>
+    <CommandLineArguments>-m C:\git\unity\ejik\drl\saved_model\all_enemies_3_frames_net2_1.320.pth -o C:\git\unity\ejik\drl\eval\6_frames_3_more_enemies</CommandLineArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />

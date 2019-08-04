@@ -27,10 +27,17 @@ public class GameObjectWithHealth : MonoBehaviour
         takeDamageSource.clip = takeDamageSound;
         ejik = PlayerManager.Instance.player.GetComponent<Player>();
 
-        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
-        isMLRun = academy != null && academy.isActiveAndEnabled;
+        try
+        {
+            academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
+            isMLRun = academy != null && academy.isActiveAndEnabled;
 
-        agent = isMLRun ? PlayerManager.Instance.player.GetComponent<EjikAgent>() : null;
+            agent = isMLRun ? PlayerManager.Instance.player.GetComponent<EjikAgent>() : null;
+        }
+        catch
+        {
+            isMLRun = false;
+        }
     }
 
     public virtual void TakeDamage(float damageAmount)

@@ -17,8 +17,15 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
-        isMLRun = academy != null && academy.isActiveAndEnabled;
+        try
+        {
+            academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
+            isMLRun = academy != null && academy.isActiveAndEnabled;
+        }
+        catch
+        {
+            isMLRun = false;
+        }
     }
 
     // Update is called once per frame

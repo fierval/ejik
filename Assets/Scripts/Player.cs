@@ -25,12 +25,13 @@ public class Player : GameObjectWithHealth
     // Start is called before the first frame update
     protected override void Start()
     {
+        PlayerManager.Instance.player = gameObject;
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
         healthSlider = GameObject.FindGameObjectWithTag("Player Health Slider").GetComponent<Slider>();
-        healthSlider.maxValue = isMLRun ? 1 : health;
+        healthSlider.maxValue = 1;
         healthSlider.value = health;
     }
 
@@ -87,7 +88,5 @@ public class Player : GameObjectWithHealth
 
         gameObject.GetComponentInChildren<Weapon>().gameObject.SetActive(false);
         takeDamageSource.Play();
-        Destroy(gameObject, 3f);
-        Destroy(healthSlider.gameObject, 1f);
     }
 }

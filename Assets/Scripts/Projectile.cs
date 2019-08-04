@@ -16,8 +16,16 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
-        isMLRun = academy != null && academy.isActiveAndEnabled;
+        try
+        {
+            academy = PlayerManager.Instance.academy.GetComponent<EjikAcademy>();
+            isMLRun = academy != null && academy.isActiveAndEnabled;
+
+        }
+        catch 
+        {
+            isMLRun = false;
+        }
 
         Invoke("DestroyProjectile", lifetime);
         Instantiate(emittedSound, transform.position, transform.rotation);

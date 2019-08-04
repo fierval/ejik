@@ -4,7 +4,8 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Events;
 
-public class CameraShakeInCinemachine : MonoBehaviour {
+public class CameraShakeInCinemachine : MonoBehaviour
+{
 
     public float ShakeDuration = 0.3f;          // Time the Camera Shake effect will last
     public float ShakeAmplitude = 1.2f;         // Cinemachine Noise Profile Parameter
@@ -26,10 +27,26 @@ public class CameraShakeInCinemachine : MonoBehaviour {
         {
             virtualCameraNoise = VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
-        player = PlayerManager.Instance.player;
-        playerHealth = player.GetComponent<Player>().health;
+
+        InvokeRepeating("GetPlayer", 0f, 0.1f);
     }
 
+    void GetPlayer()
+    {
+        if (player == null)
+        {
+            try
+            {
+                player = PlayerManager.Instance.player;
+                playerHealth = player.GetComponent<Player>().health;
+                CancelInvoke("GetPlayer");
+            }
+            catch
+            {
+                player = null;
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {

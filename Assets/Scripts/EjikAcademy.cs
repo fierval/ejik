@@ -11,7 +11,14 @@ public class EjikAcademy : Academy
     public override void InitializeAcademy()
     {
         enemyManager = GameObject.Find("EnemyManager");
-        ejik = PlayerManager.Instance.player.GetComponent<Player>();
+        try
+        {
+            ejik = PlayerManager.Instance.player.GetComponent<Player>();
+        }
+        catch
+        {
+            ejik = null;
+        }
     }
 
     public override void AcademyReset()
