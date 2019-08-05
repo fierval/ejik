@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MLAgents;
+using System;
 
 public class Player : GameObjectWithHealth
 {
@@ -12,6 +13,7 @@ public class Player : GameObjectWithHealth
     public float enemyRadius = 1;
 
     public GameObject DeadText;
+    public GameObject DoneText;
 
     Rigidbody2D rb;
 
@@ -100,5 +102,16 @@ public class Player : GameObjectWithHealth
 
         gameObject.GetComponentInChildren<Weapon>().gameObject.SetActive(false);
         takeDamageSource.Play();
+    }
+
+    internal void OnDone()
+    {
+        if (!isMLRun) { return; }
+
+        if (DoneText)
+        {
+            var dt = Instantiate(DoneText, transform);
+            Destroy(dt, 2f);
+        }
     }
 }

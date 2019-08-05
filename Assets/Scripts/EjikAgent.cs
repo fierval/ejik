@@ -75,6 +75,10 @@ public class EjikAgent : Agent
     public void FixedUpdate()
     {
         RenderTexture();
+        if(IsDone() && !ejik.IsDead())
+        {
+            ejik.OnDone();
+        }
     }
 
     void RenderTexture()
