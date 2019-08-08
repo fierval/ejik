@@ -387,5 +387,4 @@ __pycache__/
 .vscode/
 runs/
 *.pth
-/drl/eval/
 Music/
