@@ -582,7 +582,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0
+  m_padding: 8.5625
   m_canvasRenderer: {fileID: 1762619452}
   m_TextComponent: {fileID: 1342888610}
   m_materialReferenceIndex: 1
@@ -714,17 +714,17 @@ PrefabInstance:
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 202
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 39
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
@@ -737,6 +737,11 @@ PrefabInstance:
       value: 'Ejik AI Playground
 
         by Boris Kogan
+
+
+        based on characters
+
+        by Yuri Norstein
 
 
         Background by <link="https://opengameart.org/users/ramtam">ramtam</link> under
@@ -769,7 +774,7 @@ PrefabInstance:
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 38
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}

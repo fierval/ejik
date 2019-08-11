@@ -7,7 +7,7 @@ public class ListenQuit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.X))
         {
             SceneManager.LoadScene("StartMenu");
         }
