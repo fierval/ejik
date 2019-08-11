@@ -754,7 +754,7 @@ PrefabInstance:
 
         Space or Left Mouse Button to Shoot.
 
-        ESC to go back to Main Menu'
+        "X" to go back to Main Menu'
       objectReference: {fileID: 0}
     - target: {fileID: 4750997699565390096, guid: 731a92a7c6a31b44da7324c46b50b020,
         type: 3}
