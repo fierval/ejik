@@ -91,7 +91,7 @@ if __name__ == "__main__":
     agent = PPOAgent(policy)
     
     state = trajectory_collector.last_states
-    is_random_run = [False, True]
+    is_random_run = [0, 1, 2]
 
     for is_random in is_random_run:
         print(f"Staring {'' if is_random else 'non' } random run...")
@@ -103,10 +103,13 @@ if __name__ == "__main__":
             ep = 0
             while True:
                 ep += 1
-                if not is_random: 
+                if is_random == 1: 
                     actions = agent.act(state).cpu().numpy()
+                elif is_random == 2:
+                    actions = np.r_[np.random.randn(3), [0.5]]
                 else:
                     actions = np.random.randn(4)
+
                 next_states, rewards, dones = trajectory_collector.next_observation(actions)
 
                 sum_reward += rewards.cpu().numpy().sum()
@@ -121,7 +124,14 @@ if __name__ == "__main__":
                     break
         
         df = pd.DataFrame(data = {"length": episode_lengths, "reward": total_rewards})
-        df.to_csv(os.path.join(out_dir, r'random.csv') if is_random else os.path.join(out_dir, r'brain.csv'), index=False)
+        file_path = r'random.csv'
+
+        if is_random == 1:
+            file_path = r'brain.csv'
+        elif is_random == 2:
+            file_path = r'shooting.csv'
+
+        df.to_csv(os.path.join(out_dir, file_path), index=False)
         avg_episode_length = sum(episode_lengths) / NUM_RUNS
 
         print(f"Average episode length: {avg_episode_length:.2f}")
