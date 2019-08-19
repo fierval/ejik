@@ -85,6 +85,11 @@ public class Player : GameObjectWithHealth
         healthSlider.value = health;
     }
 
+    private void OnGUI()
+    {
+        UpdateHealthUI();
+    }
+
     public void OnDeath()
     {
         // we don't just die if this is an ml run
