@@ -344,6 +344,7 @@ Assets/AssetStoreTools*
 ExportedObj/
 .consulo/
 *.csproj
+*.pyproj
 *.unityproj
 *.sln
 *.suo
