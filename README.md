@@ -13,8 +13,8 @@ Clone the repo making sure LFS is enabled (should be by default in the newer Git
 
 Just build the `MainScene` in Unity for DRL experiments.
 
-`drl\driver.py` - to train
-`drl\eval.py` - to evaluate.
+`drl\PPO\driver.py` - to train
+`drl\PPO\eval.py` - to evaluate.
 
 ## Model Weights
 
