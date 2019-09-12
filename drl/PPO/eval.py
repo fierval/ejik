@@ -91,7 +91,7 @@ if __name__ == "__main__":
     agent = PPOAgent(policy)
     
     state = trajectory_collector.last_states
-    is_random_run = [0, 1, 2]
+    is_random_run = [1, 0, 2]
 
     for is_random in is_random_run:
         print(f"Staring {'' if is_random else 'non' } random run...")
