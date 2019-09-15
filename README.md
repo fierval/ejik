@@ -2,7 +2,7 @@
 
 ![ejik.jpg](images/ejik1.jpg)
 
-This is a game + [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents) environment that can be trained to teach the mean character survive multiple enemies.
+This is a game + [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents) environment the main character can be trained to survive multiple enemy attacks.
 
 ## Setup
 
